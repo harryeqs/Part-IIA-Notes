@@ -1,9 +1,7 @@
 
-# About this site
+# Harry's Part IIA revision notes
 Hello! This is Harry, an Engineer from Selwyn who matriculated in 2022.
-
-I created this site from [this](https://github.com/jobindjohn/obsidian-publish-mkdocs) great template using MkDocs.
-
+I created a site from [this](https://github.com/jobindjohn/obsidian-publish-mkdocs) great template using MkDocs. It can be accessed [here](https://harryeqs.github.io/Part-IIA-Notes/)
 Hope these notes can help with your revision :)
 
 ## My Michaelmas modules

@@ -19,7 +19,7 @@ a linear approximation yields $z=1+s T$ or
 $$
 s=\frac{z-1}{T}
 $$
-
+s
 We can replace every occurrence of $s$ in a continuous time system by $(z-1) / T$, e.g.,
 
 $$

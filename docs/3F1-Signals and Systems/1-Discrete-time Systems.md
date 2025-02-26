@@ -102,18 +102,21 @@ $$
 $$ 
 does not terminate
 
-- If $\{g_k\}_{k\geq0}$ is a semi-finite sequence, 
+- If $\{g_k\}_{k\geq0}$ is a semi-finite sequence,
 
 $$
 y_k = \sum^{\infty}_{n = 0}g_nu_{k-n}
 $$
+
 **the current output only depends on current and past inputs** $\Rightarrow$ The LTIS is **causal**
 
 ## II. The $z$ transform and the DTFT
 
 ### 1. Convolution and power series
 
-- Define a power series $$u(D) = u_0 + u_1D + u_2D^2 + u_3D^3 ...$$
+- Define a power series 
+$$u(D) = u_0 + u_1D + u_2D^2 + u_3D^3 ...
+$$
 - Convolution of semi-infinite sequences is equivalent to multiplication of power series:
 
 $$
