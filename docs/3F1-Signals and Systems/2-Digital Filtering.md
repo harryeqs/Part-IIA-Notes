@@ -1,3 +1,4 @@
+
 ## I. Continuous to discrete mappings and interfaces
 ### 1. Algebraic transformations
 #### Linear approximation
@@ -27,27 +28,34 @@ Cost of algebraic transformation: some **distortion** between the frequency resp
 $$H(z)=H_c(s)_{s=\psi(z)} \text{ where } \psi(\cdot) \text{ is given by
 }
 $$
-- Euler's method or Forward difference $$
+- Euler's method or Forward difference 
+$$
 s=\frac{z-1}{T} \quad \text { (intuition: linear approximation) }
 $$
-- Backward difference $$
+- Backward difference 
+$$
 s=\frac{1-z^{-1}}{T} \quad (\text{intuition: } \dot{x} \simeq \frac{x(t)-x(t-T)}{T})
 $$
-- Bilinear (Tustin's) transformation $$
+- Bilinear (Tustin's) transformation 
+$$
 s=\frac{2}{T} \frac{z-1}{z+1} \quad \text { (or simply } \frac{z-1}{z+1} \text { ) }
 $$
 - Motivation of Tustin transformation:
-	We can invert the expression $s=\frac{2}{T} \frac{z-1}{z+1}, s(z+1)=\frac{2}{T}(z-1)$, and hence $$
-z=\frac{1+\frac{s T}{2}}{1-\frac{s T}{2}} $$
-	For small $T$, we use the binomial theorem to write $$
+	We can invert the expression $s=\frac{2}{T} \frac{z-1}{z+1}, s(z+1)=\frac{2}{T}(z-1)$, and hence 
+$$
+z=\frac{1+\frac{s T}{2}}{1-\frac{s T}{2}} 
+$$
+- - For small $T$, we use the binomial theorem to write 
+$$
 \begin{aligned}
 z & =\left(1+\frac{s T}{2}\right)\left(1+\frac{s T}{2}+\frac{(s T)^2}{4}+o\left(T^3\right)\right) \\
 & =1+s T+\frac{(s T)^2}{2}+o\left(T^3\right)
 \end{aligned}
-$$this coincides with the quadratic expansion of $e^{s T}$
+$$
+this coincides with the quadratic expansion of $e^{s T}$
 
 Each of these transformations corresponds to a certain mapping between $s$-plane and $z$-plane
-![[s-z-mapping.png | center | 600]]
+![s-z-mapping](https://raw.githubusercontent.com/harryeqs/Part-IIA-Notes/main/docs/3F1-Signals%20and%20Systems%201/assets/Digital%20Filtering/s-z-mapping.png){ width=500 }
 Backward difference and Tustin transformation applied to stable continuous systems **result in** stable discrete time systems -- not necessarily true for Euler's method!
 
 Tustin transformation: stability is preserved (all the left plane poles get mapped into the unit disk)

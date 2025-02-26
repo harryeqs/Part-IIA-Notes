@@ -1,4 +1,6 @@
-site_name: obsidian-mkdocs template
+site_name: Harry's Part IIA Notes
+site_description: Notes for Part IIA Engineering at the University of Cambridge
+site_author: Harry Ye
 
 theme:
     name: 'material'
@@ -7,7 +9,7 @@ theme:
     # Light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: pink
+      primary: '#2960A5'
       accent: indigo
       toggle:
         icon: material/toggle-switch-off-outline
@@ -16,7 +18,7 @@ theme:
     # Dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: pink
+      primary: '#2960A5'
       accent: blue
       toggle:
         icon: material/toggle-switch
@@ -26,6 +28,9 @@ theme:
 markdown_extensions:
   - footnotes
   # - attr_list
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption 
   - pymdownx.arithmatex:
       generic: true
   # - pymdownx.superfences
