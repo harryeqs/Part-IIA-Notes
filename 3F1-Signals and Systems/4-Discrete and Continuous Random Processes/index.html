@@ -1,0 +1,1196 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Notes for Part IIA Engineering at the University of Cambridge">
+      
+      
+        <meta name="author" content="Harry Ye">
+      
+      
+      
+        <link rel="prev" href="../3-Discrete%20Fourier%20Transform/">
+      
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.5">
+    
+    
+      
+        <title>4 Discrete and Continuous Random Processes - Harry's Part IIA Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#2960A5" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Harry&#39;s Part IIA Notes" class="md-header__button md-logo" aria-label="Harry's Part IIA Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Harry's Part IIA Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4 Discrete and Continuous Random Processes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="#2960A5" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="#2960A5" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Harry&#39;s Part IIA Notes" class="md-nav__button md-logo" aria-label="Harry's Part IIA Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Harry's Part IIA Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About this site
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3F1 Signals and Systems
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            3F1 Signals and Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-Discrete-time%20Systems/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 Discrete time Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-Digital%20Filtering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 Digital Filtering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-Discrete%20Fourier%20Transform/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 Discrete Fourier Transform
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    4 Discrete and Continuous Random Processes
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    4 Discrete and Continuous Random Processes
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i-introduction-to-random-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Introduction to random processes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Introduction to random processes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-definition-of-a-random-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Definition of a random process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-linear-system-and-random-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Linear system and random processes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-responses-and-transfer-functions-with-random-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Responses and transfer functions with random processes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-expectations-of-a-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Expectations of a transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-properties-of-a-random-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Properties of a random process
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Properties of a random process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stationarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stationarity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wide-sense-stationarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wide-sense stationarity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ergodicity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ergodicity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-discrete-time-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Discrete-time white noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-the-psd-for-discrete-time-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. The PSD for discrete-time signals
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. The PSD for discrete-time signals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#derivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Derivation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#power-spectral-density-of-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Power spectral density of white noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#psd-through-a-linear-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      PSD through a linear system
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#power-spectral-density-vs-autocorrelation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Power spectral density vs autocorrelation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-correlation-and-cross-spectral-density" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-correlation and cross-spectral-density
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-the-psd-for-continuous-time-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. The PSD for continuous time signals
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. The PSD for continuous time signals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#continuous-time-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continuous-time white noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelling-the-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modelling the white noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#psd-through-a-linear-system_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      PSD through a linear system
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extra-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extra points
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i-introduction-to-random-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Introduction to random processes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Introduction to random processes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-definition-of-a-random-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Definition of a random process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-linear-system-and-random-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Linear system and random processes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-responses-and-transfer-functions-with-random-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Responses and transfer functions with random processes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-expectations-of-a-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Expectations of a transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-properties-of-a-random-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Properties of a random process
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Properties of a random process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stationarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stationarity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wide-sense-stationarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wide-sense stationarity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ergodicity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ergodicity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-discrete-time-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Discrete-time white noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-the-psd-for-discrete-time-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. The PSD for discrete-time signals
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. The PSD for discrete-time signals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#derivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Derivation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#power-spectral-density-of-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Power spectral density of white noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#psd-through-a-linear-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      PSD through a linear system
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#power-spectral-density-vs-autocorrelation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Power spectral density vs autocorrelation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-correlation-and-cross-spectral-density" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-correlation and cross-spectral-density
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-the-psd-for-continuous-time-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. The PSD for continuous time signals
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. The PSD for continuous time signals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#continuous-time-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continuous-time white noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelling-the-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modelling the white noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#psd-through-a-linear-system_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      PSD through a linear system
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extra-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extra points
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>4 Discrete and Continuous Random Processes</h1>
+
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<figure>
+<img alt="random-process-overview" src="../../assets/Discrete_and_Continuous%20Random%20Processes/random-process-overview.png" width="50%" />
+</figure>
+<h2 id="i-introduction-to-random-processes">I. Introduction to random processes<a class="headerlink" href="#i-introduction-to-random-processes" title="Permanent link">&para;</a></h2>
+<h3 id="1-definition-of-a-random-process">1. Definition of a random process<a class="headerlink" href="#1-definition-of-a-random-process" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A random process is a random signal (discrete or continuous) for which the joint density of any collection of any <span class="arithmatex">\(n\)</span> signal values <span class="arithmatex">\(\left(X_{t_1}, X_{t_2}, \ldots, X_{t_n}\right)\)</span> is known and well defined.</li>
+<li>Expectations <span class="arithmatex">\(E\left[f\left(X_{t_1}, X_{t_2}, \ldots, X_{t_n}\right)\right]\)</span> and other derived probabilistic quantities (e.g. entropy) are also well defined</li>
+</ul>
+<h3 id="2-linear-system-and-random-processes">2. Linear system and random processes<a class="headerlink" href="#2-linear-system-and-random-processes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>For <strong>deterministic</strong> processes, a linear system is a linear Ordinary Differential Equation (ODE) or linear Ordinary Differential Equation (in discrete time) with constant coefficients</li>
+<li>For <strong>random</strong> processes, a linear system is a linear Stochastic Differential Equation (SDE) or linear Stochastic Differential Equation (in discrete time) with constant coefficients</li>
+</ul>
+<h3 id="3-responses-and-transfer-functions-with-random-processes">3. Responses and transfer functions with random processes<a class="headerlink" href="#3-responses-and-transfer-functions-with-random-processes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>For random processes, the signals are "unknown": we can not simply take their Laplace/Fourier/<span class="arithmatex">\(z\)</span> transform/DTFT</li>
+<li>Since there is no known transform for the random processes, we can not apply the transfer functions on transforms</li>
+<li>However, we can take expectations of a transform</li>
+</ul>
+<h3 id="4-expectations-of-a-transform">4. Expectations of a transform<a class="headerlink" href="#4-expectations-of-a-transform" title="Permanent link">&para;</a></h3>
+<p>For a zero-mean input <span class="arithmatex">\(E\left[X_k\right]=0\)</span>, using a "sloppy" limit,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+E[\operatorname{DTFT}(X)] &amp;= E\left[\lim _{N \rightarrow \infty} \sum_{k=-N / 2}^{N / 2} X_k e^{-j \theta k}\right] \\ &amp; =\lim _{N \rightarrow \infty} E\left[\sum_{k=-N / 2}^{N / 2} X_k e^{-j \theta k}\right] \\
+&amp; =\lim _{N \rightarrow \infty} \sum_{k=-N / 2}^{N / 2} E\left[X_k\right] e^{-j \theta k}=0
+\end{aligned}
+\]</div>
+<p><span class="arithmatex">\(\longrightarrow\)</span> the expected DTFT of the input and output in the linear difference equation is zero.</p>
+<h3 id="5-properties-of-a-random-process">5. Properties of a random process<a class="headerlink" href="#5-properties-of-a-random-process" title="Permanent link">&para;</a></h3>
+<h4 id="stationarity">Stationarity<a class="headerlink" href="#stationarity" title="Permanent link">&para;</a></h4>
+<p>For any <span class="arithmatex">\(n\)</span> and any collection <span class="arithmatex">\(\left(t_1, t_2, \ldots, t_n\right)\)</span> of <span class="arithmatex">\(n\)</span> signal locations, and for any shift <span class="arithmatex">\(\tau\)</span> and for any values <span class="arithmatex">\(\left(x_1, x_2, \ldots, x_n\right)\)</span>, the signal is stationary if:</p>
+<div class="arithmatex">\[
+ f_{X_{t_1+\tau}, X_{t_2+\tau}, \ldots, X_{t_n+\tau}}\left(x_1, x_2, \ldots, x_n\right)=f_{X_{t_1}, x_{t_2}, \ldots, X_{t_n}}\left(x_1, x_2, \ldots, x_n\right)
+\]</div>
+<ul>
+<li>the signal statistics are <strong>shift-invariant</strong></li>
+<li>the signal statistics only depend on the relative positions of the signal locations, not on its absolute locations</li>
+</ul>
+<h4 id="wide-sense-stationarity">Wide-sense stationarity<a class="headerlink" href="#wide-sense-stationarity" title="Permanent link">&para;</a></h4>
+<p>A random process is wide-sense stationary if
+1. the mean <span class="arithmatex">\(E\left[X_t\right]\)</span> is independent of time
+2. the autocorrelation depends only on the relative interval</p>
+<div class="arithmatex">\[
+r_{X X}\left(t_1, t_2\right)=E\left[X_{t_1} X_{t_2}\right]=E\left[X_0 X_{t_2-t_1}\right]=r_{X X}\left(t_2-t_1\right)
+\]</div>
+<p>Motivation:
+"Only verify that the mean and the autocorrelation behave as they would if the process were stationary, unsure about the stationarity."</p>
+<h4 id="ergodicity">Ergodicity<a class="headerlink" href="#ergodicity" title="Permanent link">&para;</a></h4>
+<p>A stationary random process is ergodic if its statistics observed over time converge to its true probabilities ("ensemble statistics").
+In particular, a stationary process is "mean ergodic" if</p>
+<div class="arithmatex">\[
+E[X]=\lim _{N \rightarrow \infty} \frac{1}{N} \sum_{k=0}^{N-1} X_k
+\]</div>
+<p>and "autocorrelation ergodic" if</p>
+<div class="arithmatex">\[
+r_{X X}(k)=E\left[X_0 X_k\right]=\lim _{N \rightarrow \infty} \frac{1}{N} \sum_{k=0}^{N-1} X_0 X_k
+\]</div>
+<p>Mean ergodic and autocorrelation ergodic are to ergodic as wide sense stationary to stationary: "Only verify ergodicity for the mean and autocorrelation behaviour"</p>
+<h3 id="6-discrete-time-white-noise">6. Discrete-time white noise<a class="headerlink" href="#6-discrete-time-white-noise" title="Permanent link">&para;</a></h3>
+<p>The term "white noise" has been universally adopted to describe an independent and identically distributed (i.i.d.) discrete-time random process <span class="arithmatex">\(\left\{\ldots, X_{-1}, X_0, X_1, X_2, \ldots\right\}\)</span> with</p>
+<div class="arithmatex">\[
+f_{X_{k_1}, x_{k_2}, \ldots, x_{k_n}}\left(x_1, \ldots, x_n\right)=f_X\left(x_1\right) \cdot f_X\left(x_2\right) \cdots f_X\left(x_n\right)
+\]</div>
+<p>for any <span class="arithmatex">\(n\)</span>, any <span class="arithmatex">\(\left(k_1, \ldots, k_n\right)\)</span> and any <span class="arithmatex">\(\left(x_1, \ldots, x_n\right)\)</span>. 
+- <strong>White noise is stationary and ergodic</strong>
+- can be regarded as a synonym for "i.i.d."</p>
+<h2 id="ii-the-psd-for-discrete-time-signals">II. The PSD for discrete-time signals<a class="headerlink" href="#ii-the-psd-for-discrete-time-signals" title="Permanent link">&para;</a></h2>
+<h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
+<p>Consider the following scenario the system convolves its delta response with the input signal </p>
+<div class="arithmatex">\[ 
+\left\{Y_k\right\}=\left\{h_k\right\} \star\left\{X_k\right\} 
+\]</div>
+<p>The input is i.i.d. (white noise) with <span class="arithmatex">\(E\left[X_k\right]=0\)</span> and <span class="arithmatex">\(E\left[X_k^2\right]=1\)</span></p>
+<h3 id="derivation">Derivation<a class="headerlink" href="#derivation" title="Permanent link">&para;</a></h3>
+<p>To avoid taking "sloppy" limits, consider a signal <span class="arithmatex">\(X_k\)</span> consisting of i.i.d. random variables from time <span class="arithmatex">\(\lfloor-N / 2+1\rfloor\)</span> to time <span class="arithmatex">\(\lfloor N / 2\rfloor\)</span>, and zero elsewhere its DTFT is</p>
+<div class="arithmatex">\[
+X(\theta)=\sum_{k=-\lfloor N / 2+1\rfloor}^{\lfloor N / 2\rfloor} x_k e^{-j k \theta}
+\]</div>
+<p>Compute the <strong>expected squared DTFT magnitude</strong>:</p>
+<div class="arithmatex">\[
+\begin{aligned} \frac{1}{N} E\left[|X(\theta)|^2\right] &amp; =\frac{1}{N} E\left[X(\theta) X^*(\theta)\right] \\ &amp; =\frac{1}{N} E\left[\left(\sum_{k=-\lfloor N / 2+1\rfloor}^{\lfloor N / 2\rfloor} X_k e^{-j k \theta}\right)\left(\sum_{k=-\lfloor N / 2+1\rfloor}^{\lfloor N / 2\rfloor} X_k e^{j k \theta}\right)\right] \\ &amp; =\frac{1}{N} \sum_{k=-\lfloor N / 2+1\rfloor}^{\lfloor N / 2\rfloor}\left(E\left[X_k^2\right]+\sum_{m \neq k} E\left[X_k X_m\right] e^{j(m-k) \theta}\right) \\ &amp; =1 \text { for all } \theta\end{aligned}
+\]</div>
+<p>where <span class="arithmatex">\(E[X_kX_m] = E[X_k]E[X_m] = 0\)</span>.</p>
+<h3 id="power-spectral-density-of-white-noise">Power spectral density of white noise<a class="headerlink" href="#power-spectral-density-of-white-noise" title="Permanent link">&para;</a></h3>
+<p>The power spectral density (PSD) of white noise</p>
+<div class="arithmatex">\[
+S_{X X}(\theta)=\lim _{N \rightarrow \infty} \frac{1}{N}|X(\theta)|^2=1
+\]</div>
+<p>is <strong>constant for all</strong> <span class="arithmatex">\(\theta\)</span>. 
+In other words, all frequencies are present in equal measure in an i.i.d. signal
+<span class="arithmatex">\(\rightarrow\)</span> "white" in analogy with white light that can be obtained by mixing all colours.</p>
+<h3 id="psd-through-a-linear-system">PSD through a linear system<a class="headerlink" href="#psd-through-a-linear-system" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\begin{aligned} S_{Y Y}(\theta) &amp; =\lim _{N \rightarrow \infty} \frac{1}{N} E\left[|Y(\theta)|^2\right] \\ &amp; =\lim _{N \rightarrow \infty} \frac{1}{N} E\left[|H(\theta) X(\theta)|^2\right] \\ &amp; =|H(\theta)|^2 S_{X X}(\theta) \end{aligned}
+\]</div>
+<p>For any discrete stationary process.</p>
+<h3 id="power-spectral-density-vs-autocorrelation">Power spectral density vs autocorrelation<a class="headerlink" href="#power-spectral-density-vs-autocorrelation" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\begin{aligned} \frac{1}{N} E\left[|X(\theta)|^2\right] &amp; =\frac{1}{N} E\left[X(\theta) X^*(\theta)\right] \\ &amp; =\frac{1}{N} E\left[\left(\sum_k X_k e^{-j k \theta}\right)\left(\sum_k X_k e^{j k \theta}\right)\right] \\ &amp; =\frac{1}{N} \sum_k \sum_m E\left[X_k X_m\right] e^{-j k \theta} e^{j m \theta} \\ &amp; =\frac{1}{N} \sum_k \sum_n E\left[X_k X_{k-n}\right] e^{-j k \theta} e^{j(k-n) \theta} \quad(m=k-n) \\ &amp; =\frac{1}{N} \sum_k \sum_n r_{X X}(n) e^{-j n \theta}=\sum_n r_{X X}(n) e^{-j n \theta}\end{aligned}
+\]</div>
+<ul>
+<li>Hence, the power spectral density (PSD) is the DTFT of the autocorrelation function (ACF)</li>
+<li>The PSD is real by definition and the ACF is symmetric <span class="arithmatex">\(r_{xx}(n)=r_{xx}(-n)\)</span>
+The relation that in the frequency domain when filtering white noise through a linear system</li>
+</ul>
+<div class="arithmatex">\[
+\Phi_{Y Y}(\theta)=|H(\theta)|^2
+\]</div>
+<p>becomes in the time domain</p>
+<div class="arithmatex">\[
+r_{Y Y}(n)=\left\{h_k\right\} *\left\{h_{-k}\right\}
+\]</div>
+<h3 id="cross-correlation-and-cross-spectral-density">Cross-correlation and cross-spectral-density<a class="headerlink" href="#cross-correlation-and-cross-spectral-density" title="Permanent link">&para;</a></h3>
+<p>Cross-correlation between input and output</p>
+<div class="arithmatex">\[
+r_{X Y}(n)=E\left[X_k Y_{k+n}\right]
+\]</div>
+<p>with its DTFT being the cross-spectral density <span class="arithmatex">\(\Phi_{X Y}(\theta)\)</span> for which</p>
+<div class="arithmatex">\[
+S_{X Y}(\theta)=H(\theta) S_{X X}(\theta)
+\]</div>
+<h2 id="iii-the-psd-for-continuous-time-signals">III. The PSD for continuous time signals<a class="headerlink" href="#iii-the-psd-for-continuous-time-signals" title="Permanent link">&para;</a></h2>
+<h3 id="continuous-time-white-noise">Continuous-time white noise<a class="headerlink" href="#continuous-time-white-noise" title="Permanent link">&para;</a></h3>
+<ul>
+<li>In the real world, white noise can only be observed through a linear filter</li>
+<li>Any measurement device is a linear filter</li>
+<li>A continuous time device is <strong>unobservable</strong></li>
+</ul>
+<h3 id="modelling-the-white-noise">Modelling the white noise<a class="headerlink" href="#modelling-the-white-noise" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Think of continuous-time white noise as a limit of weighted pulses</li>
+<li>Construct a signal starting at <span class="arithmatex">\(-T / 2\)</span> and ending at <span class="arithmatex">\(T / 2\)</span>, consisting of pulses modulated with independent Gaussian random variables <span class="arithmatex">\(X_k \sim \mathcal{N}(0,1 / b)\)</span> of variance <span class="arithmatex">\(1 / b\)</span></li>
+</ul>
+<div class="arithmatex">\[
+X(t)=\sum_{k=\frac{-T}{2 b}}^{\frac{T}{2 b}-1} x_k p(t-k b)
+\]</div>
+<figure>
+<img alt="continuous-time-white-noise" src="../../assets/Discrete_and_Continuous%20Random%20Processes/continuous-time-white-noise.png" width="50%" />
+</figure>
+<h3 id="analysis">Analysis<a class="headerlink" href="#analysis" title="Permanent link">&para;</a></h3>
+<p>The Fourier transform of a unit step <span class="arithmatex">\(u(t)\)</span> is <span class="arithmatex">\(\pi \delta(\omega)+\frac{1}{j \omega}\)</span> (from Info data book)
+Since <span class="arithmatex">\(p(t)=u(t)-u(t-b)\)</span>, the Fourier transform of the rectangular pulse (using shift property of Fourier transform) is</p>
+<div class="arithmatex">\[
+P(\omega)=\left(\pi \delta(\omega)+\frac{1}{j \omega}\right)\left(1-e^{-j b \omega}\right)
+\]</div>
+<p>Hence the Fourier transform of the input signal is </p>
+<div class="arithmatex">\[
+X(\omega)=\sum_{k=\frac{-T}{2 b}}^{\frac{T}{2 b}-1} X_k\left(\pi \delta(\omega)+\frac{1}{j \omega}\right)\left(1-e^{-j b \omega}\right) e^{-j k b \omega}
+\]</div>
+<p>For <span class="arithmatex">\(\omega \neq 0\)</span>, ignore the pulse function in the expression to obtain</p>
+<div class="arithmatex">\[
+X(\omega)=\sum_{k=\frac{-T}{2 b}}^{\frac{T}{2 b}-1} x_k \frac{1-e^{-j b \omega}}{j \omega} e^{-j k b \omega}
+\]</div>
+<p>by analogy with the discrete case where we found that <span class="arithmatex">\(\mathcal{S}_{X X}(\theta)=\lim _{N \rightarrow \infty} \frac{1}{N} E\left[|X(\theta)|^2\right]\)</span>,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp; \frac{1}{T} E\left[|X(\omega)|^2\right]=\frac{1}{T} E\left[X(\omega) X^*(\omega)\right] \\
+&amp; =\frac{1}{T} E\left[\left(\sum_{k=\frac{-T}{2 b}}^{\frac{T}{2 b}-1} X_k \frac{1-e^{-j b \omega}}{j \omega} e^{-j k b \omega}\right)\left(\sum_{\ell=\frac{-T}{2 b}}^{\frac{T}{2 b}-1} X_{\ell} \frac{1-e^{j b \omega}}{-j \omega} e^{j \ell b \omega}\right)\right] \\
+&amp; =\frac{1}{T} \sum_{k=\frac{-T}{2 b}}^{\frac{T}{2 b}-1} E\left[X_k^2\right] \frac{2-2 \cos (b \omega)}{\omega^2} \text { since } E\left[X_k X_{\ell}\right]=0 \text { for } k \neq \ell
+\end{aligned}
+\]</div>
+<p>the expression does no depend on <span class="arithmatex">\(k\)</span> and recall that <span class="arithmatex">\(E\left[X_k^2\right]=1 / b\)</span> hence we have</p>
+<div class="arithmatex">\[
+\frac{1}{T} E\left[X(\omega) X^*(\omega)\right]=\frac{1}{T} \frac{T}{b} \frac{1}{b} \frac{2-2 \cos (b \omega)}{\omega^2}=\frac{1}{b^2} \frac{2-2 \cos (b \omega)}{\omega^2}
+\]</div>
+<p>we now take the limit as <span class="arithmatex">\(b \rightarrow 0\)</span> to obtain</p>
+<div class="arithmatex">\[
+\lim _{b \rightarrow 0} \frac{2-2 \cos (b \omega)}{b^2 \omega^2}=\lim _{b \rightarrow 0} \frac{2-2\left(1-\frac{b^2 \omega^2}{2}+O\left(b^4\right)\right)}{b^2 \omega^2}=1
+\]</div>
+<p>we have shown that, for <span class="arithmatex">\(\omega \neq 0\)</span>,</p>
+<div class="arithmatex">\[
+\mathcal{S}_{X X}(\omega)=\lim _{b \rightarrow 0} \frac{1}{T} E\left[|X(\omega)|^2\right]=1
+\]</div>
+<p>which is the same result we obtained in discrete time</p>
+<h3 id="psd-through-a-linear-system_1">PSD through a linear system<a class="headerlink" href="#psd-through-a-linear-system_1" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\begin{aligned} \mathcal{S}_{Y Y}(\omega) &amp; =\lim _{b \rightarrow 0} \frac{1}{T} E\left[|Y(\omega)|^2\right] \\ &amp; =\lim _{b \rightarrow 0} \frac{1}{T} E\left[|H(\omega) X(\omega)|^2\right] \\ &amp; =|H(\omega)|^2 \mathcal{S}_{X X}(\omega)\end{aligned}
+\]</div>
+<h3 id="extra-points">Extra points<a class="headerlink" href="#extra-points" title="Permanent link">&para;</a></h3>
+<ul>
+<li>for any continuous stationary ergodic random process <span class="arithmatex">\(X(t)\)</span>, the <span class="arithmatex">\(\operatorname{PSD} \mathcal{S}_{X X}(\omega)\)</span> is the Fourier transform of the auto-correlation function</li>
+</ul>
+<div class="arithmatex">\[
+r_{X X}(\tau)=E[X(t) X(t+\tau)]
+\]</div>
+<ul>
+<li>all the other properties regarding CSD <span class="arithmatex">\(S_{XY}(\omega)\)</span> are the same as for discrete time</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

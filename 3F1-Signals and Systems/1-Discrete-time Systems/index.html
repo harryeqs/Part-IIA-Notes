@@ -1,0 +1,2593 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Notes for Part IIA Engineering at the University of Cambridge">
+      
+      
+        <meta name="author" content="Harry Ye">
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../2-Digital%20Filtering/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.5">
+    
+    
+      
+        <title>1 Discrete time Systems - Harry's Part IIA Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#2960A5" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#i-introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Harry&#39;s Part IIA Notes" class="md-header__button md-logo" aria-label="Harry's Part IIA Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Harry's Part IIA Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1 Discrete time Systems
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="#2960A5" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="#2960A5" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Harry&#39;s Part IIA Notes" class="md-nav__button md-logo" aria-label="Harry's Part IIA Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Harry's Part IIA Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About this site
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3F1 Signals and Systems
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            3F1 Signals and Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    1 Discrete time Systems
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    1 Discrete time Systems
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-digital-vs-discrete-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Digital vs discrete-time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-continuous-to-discrete-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Continuous to discrete time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-discrete-time-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Discrete time signals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-normalised-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Normalised sampling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-discrete-time-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Discrete Time Systems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-the-kronecker-delta-signal" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. The Kronecker Delta signal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-discrete-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Discrete convolution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-properties-of-the-delta-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Properties of the Delta response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-the-z-transform-and-the-dtft" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. The \(z\) transform and the DTFT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. The \(z\) transform and the DTFT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-convolution-and-power-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Convolution and power series
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-z-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The \(z\) transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-region-of-convergence-roc" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Region of convergence (ROC)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-the-discrete-time-fourier-transform-dtft" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. The Discrete-Time Fourier Transform (DTFT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-linearity-of-the-z-transform-and-dtft" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Linearity of the \(z\) transform and DTFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-examples-of-the-z-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Examples of the \(z\) transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-time-shift-properties-of-the-dtft" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Time shift properties of the DTFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-time-shift-properties-of-the-z-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Time shift properties of the \(z\) transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-initial-value-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Initial Value Theorem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-convolution-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Convolution theorem
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-z-transform-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. \(z\) transform properties
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. \(z\) transform properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-conjugate-symmetry-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Conjugate symmetry property
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-reverse-symmetry-property-for-dtft-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Reverse symmetry property (for DTFT only)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-inverse-z-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Inverse \(z\) transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-the-dtft-vs-fourier-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. The DTFT vs Fourier series
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-the-laplace-transform-vs-the-z-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. The Laplace transform vs the \(z\) transform
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-system-transfer-function-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      IV. System transfer function &amp; stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IV. System transfer function & stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-z-transfer-function-of-an-ltis" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. \(z\)-transfer function of an LTIS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-fir-iir-in-the-z-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. FIR / IIR in the \(z\) domain
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-poles-and-zeros-of-the-z-transfer-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Poles and zeros of the \(z\)-transfer function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-delta-response-and-poles" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Delta response and poles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Delta response and poles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#damping-and-oscillation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Damping and Oscillation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-bibo-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. BIBO stability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-conditions-for-stability-of-a-discrete-time-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Conditions for stability of a discrete time system
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Conditions for stability of a discrete time system">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proof-for-part-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proof for part A
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof-for-part-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proof for part B
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof-for-part-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proof for part C
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-bode-diagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      V. Bode diagrams
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="V. Bode diagrams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-final-value-theorem-fvt" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Final Value Theorem (FVT)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Final Value Theorem (FVT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proof
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-steady-state-responses-to-various-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Steady-state responses to various inputs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-bode-diagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Bode diagrams
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Bode diagrams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decomposing-the-components-by-zeros-and-poles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decomposing the components by zeros and poles:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hints-on-bode-diagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hints on Bode diagrams
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-nyquist-stability-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      VI. Nyquist stability criterion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VI. Nyquist stability criterion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-closed-loop-control-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Closed loop control systems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-derivation-of-the-nyquist-stability-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Derivation of the Nyquist stability criterion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Derivation of the Nyquist stability criterion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nyquist-diagram-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nyquist diagram definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outline-of-the-proof-of-the-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outline of the proof of the criterion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-the-encirclement-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. The encirclement property
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-counting-encirclements" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Counting encirclements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-zeros-and-poles-of-1-kgz" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Zeros and poles of \(1 + KG(z)\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-polynomial-degrees" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Polynomial degrees
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-pole-arithmetic" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Pole arithmetic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-shifting-encirclements-to-1k" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Shifting encirclements to \(-1/K\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-finally-the-nyquist-stability-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Finally, the Nyquist stability criterion!
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-nyquist-stability-criterion-completions" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Nyquist stability criterion completions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Nyquist stability criterion completions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methodology
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-on-the-k-1b_0-case-excluded-in-the-previous-proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis on the \(K = -1/b_0\) case (excluded in the previous proof)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-on-the-location-of-poles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis on the location of poles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-on-the-open-loop-poles-on-the-unit-circle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis on the open loop poles on the unit circle
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-Digital%20Filtering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 Digital Filtering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-Discrete%20Fourier%20Transform/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 Discrete Fourier Transform
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-Discrete%20and%20Continuous%20Random%20Processes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 Discrete and Continuous Random Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-digital-vs-discrete-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Digital vs discrete-time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-continuous-to-discrete-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Continuous to discrete time
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-discrete-time-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Discrete time signals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-normalised-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Normalised sampling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-discrete-time-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Discrete Time Systems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-the-kronecker-delta-signal" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. The Kronecker Delta signal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-discrete-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Discrete convolution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-properties-of-the-delta-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Properties of the Delta response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-the-z-transform-and-the-dtft" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. The \(z\) transform and the DTFT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. The \(z\) transform and the DTFT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-convolution-and-power-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Convolution and power series
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-z-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The \(z\) transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-region-of-convergence-roc" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Region of convergence (ROC)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-the-discrete-time-fourier-transform-dtft" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. The Discrete-Time Fourier Transform (DTFT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-linearity-of-the-z-transform-and-dtft" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Linearity of the \(z\) transform and DTFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-examples-of-the-z-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Examples of the \(z\) transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-time-shift-properties-of-the-dtft" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Time shift properties of the DTFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-time-shift-properties-of-the-z-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Time shift properties of the \(z\) transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-initial-value-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Initial Value Theorem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-convolution-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Convolution theorem
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-z-transform-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. \(z\) transform properties
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. \(z\) transform properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-conjugate-symmetry-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Conjugate symmetry property
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-reverse-symmetry-property-for-dtft-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Reverse symmetry property (for DTFT only)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-inverse-z-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Inverse \(z\) transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-the-dtft-vs-fourier-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. The DTFT vs Fourier series
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-the-laplace-transform-vs-the-z-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. The Laplace transform vs the \(z\) transform
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-system-transfer-function-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      IV. System transfer function &amp; stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IV. System transfer function & stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-z-transfer-function-of-an-ltis" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. \(z\)-transfer function of an LTIS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-fir-iir-in-the-z-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. FIR / IIR in the \(z\) domain
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-poles-and-zeros-of-the-z-transfer-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Poles and zeros of the \(z\)-transfer function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-delta-response-and-poles" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Delta response and poles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Delta response and poles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#damping-and-oscillation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Damping and Oscillation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-bibo-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. BIBO stability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-conditions-for-stability-of-a-discrete-time-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Conditions for stability of a discrete time system
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Conditions for stability of a discrete time system">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proof-for-part-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proof for part A
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof-for-part-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proof for part B
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof-for-part-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proof for part C
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-bode-diagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      V. Bode diagrams
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="V. Bode diagrams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-final-value-theorem-fvt" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Final Value Theorem (FVT)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Final Value Theorem (FVT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proof
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-steady-state-responses-to-various-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Steady-state responses to various inputs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-bode-diagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Bode diagrams
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Bode diagrams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decomposing-the-components-by-zeros-and-poles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decomposing the components by zeros and poles:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hints-on-bode-diagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hints on Bode diagrams
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-nyquist-stability-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      VI. Nyquist stability criterion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VI. Nyquist stability criterion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-closed-loop-control-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Closed loop control systems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-derivation-of-the-nyquist-stability-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Derivation of the Nyquist stability criterion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Derivation of the Nyquist stability criterion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nyquist-diagram-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nyquist diagram definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outline-of-the-proof-of-the-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Outline of the proof of the criterion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-the-encirclement-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. The encirclement property
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-counting-encirclements" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Counting encirclements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-zeros-and-poles-of-1-kgz" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Zeros and poles of \(1 + KG(z)\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-polynomial-degrees" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Polynomial degrees
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-pole-arithmetic" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Pole arithmetic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-shifting-encirclements-to-1k" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Shifting encirclements to \(-1/K\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-finally-the-nyquist-stability-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Finally, the Nyquist stability criterion!
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-nyquist-stability-criterion-completions" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Nyquist stability criterion completions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Nyquist stability criterion completions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methodology" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methodology
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-on-the-k-1b_0-case-excluded-in-the-previous-proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis on the \(K = -1/b_0\) case (excluded in the previous proof)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-on-the-location-of-poles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis on the location of poles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-on-the-open-loop-poles-on-the-unit-circle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis on the open loop poles on the unit circle
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>1 Discrete time Systems</h1>
+
+<h2 id="i-introduction">I. Introduction<a class="headerlink" href="#i-introduction" title="Permanent link">&para;</a></h2>
+<h3 id="1-digital-vs-discrete-time">1. Digital vs discrete-time<a class="headerlink" href="#1-digital-vs-discrete-time" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Digital</strong>: discrete in time and amplitude - <strong>sample</strong> and <strong>quantised</strong></li>
+<li><strong>Discrete-time</strong>: discrete in time only - <strong>sample</strong> but <strong>not quantised</strong></li>
+</ul>
+<h3 id="2-continuous-to-discrete-time">2. Continuous to discrete time<a class="headerlink" href="#2-continuous-to-discrete-time" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Continuous time</th>
+<th>Discrete time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Signals</td>
+<td>Functions <span class="arithmatex">\(s(t)\)</span> of <span class="arithmatex">\(t\)</span></td>
+<td>Sequences <span class="arithmatex">\(s_k\)</span> indexed in <span class="arithmatex">\(k\)</span></td>
+</tr>
+<tr>
+<td>Systems</td>
+<td>Differential equations</td>
+<td>Difference equations</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-discrete-time-signals">3. Discrete time signals<a class="headerlink" href="#3-discrete-time-signals" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Right-sided signals: 
+<span class="arithmatex">\(\mathbf{s}= (s_m, s_{m+1}, s_{m+2}, ...). s_k =0 \text{ for } k &lt; m\)</span></li>
+<li>Left-sided signals: 
+<span class="arithmatex">\(s_k = 0 \text{ for } k &lt; m\)</span></li>
+<li>Right-sided signal starting at zero - <strong>semi-finite sequence</strong>
+<span class="arithmatex">\(\mathbf{s} = \{s_k\}_{k \geq 0} = s_0, s_1, s_2\)</span></li>
+</ul>
+<h3 id="4-normalised-sampling">4. Normalised sampling<a class="headerlink" href="#4-normalised-sampling" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Discrete time signal could be a sampled continuous signal:</li>
+</ul>
+<div class="arithmatex">\[
+s_k = s(kT)
+\]</div>
+<ul>
+<li>Normalised time and frequency:<ul>
+<li>Sampling period <span class="arithmatex">\(T = 1 \,\text{second}\)</span></li>
+<li>Sampling frequency <span class="arithmatex">\(f_s = 1\,\text{Hertz}\)</span></li>
+<li>Normalised frequency <span class="arithmatex">\({\theta_s} = 2 \pi \,\text{radians per second}\)</span></li>
+</ul>
+</li>
+<li>Normalised frequency <span class="arithmatex">\(\theta\)</span> -&gt;  true frequency</li>
+</ul>
+<div class="arithmatex">\[f = \frac{\theta}{2\pi}f_s\]</div>
+<h3 id="5-discrete-time-systems">5. Discrete Time Systems<a class="headerlink" href="#5-discrete-time-systems" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Discrete time signal in, discrete time signal out</li>
+<li>Definition of <strong>linear time-invariant (LTI)</strong> is the same as for continuous time systems</li>
+<li>Discrete LTI systems are governed by linear <strong>difference equations</strong></li>
+</ul>
+<h3 id="6-the-kronecker-delta-signal">6. The Kronecker Delta signal<a class="headerlink" href="#6-the-kronecker-delta-signal" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Defined as: </li>
+</ul>
+<div class="arithmatex">\[
+\{\delta_k\}_{k \geq 0} = \{1, 0, 0, ...\} \;\text{and}\; \delta_k = 0 \;\text{for}\; k &lt; 0
+\]</div>
+<ul>
+<li>Input signal <span class="arithmatex">\(\{u_k\}\)</span> to an LTIS can be written as </li>
+</ul>
+<div class="arithmatex">\[
+u_k = \sum^{\infty}_{n=-\infty}\delta_nu_{k-n} \;\text{for every}\; k
+\]</div>
+<ul>
+<li>By superposition principle (linearity + time invariance), the output signal <span class="arithmatex">\(\{y_k\}\)</span> satisfies: </li>
+</ul>
+<div class="arithmatex">\[
+y_k = \sum^{\infty}_{n = -\infty}g_nu_{k-n} \;\text{for
+ every}\; k
+\]</div>
+<p>where <span class="arithmatex">\(\{g_k\}\)</span> is the response of the LTIS to a delta input - the <strong>delta response</strong> of the LTIS -&gt; equivalent to the difference equation in describing the LTIS</p>
+<h3 id="7-discrete-convolution">7. Discrete convolution<a class="headerlink" href="#7-discrete-convolution" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Discrete convolution: </li>
+</ul>
+<div class="arithmatex">\[
+y_k = \sum^{\infty}_{n = -\infty}g_nu_{k-n} \;\text{for every}\; k
+\]</div>
+<ul>
+<li>Also denoted <span class="arithmatex">\(y = g * u\)</span></li>
+<li>Convolution is commutative: </li>
+</ul>
+<div class="arithmatex">\[
+y_k = \sum^{\infty}_{n = -\infty}g_nu_{k-n} = y_k = \sum^{\infty}_{n = -\infty}g_{k-n}u_{n}
+\]</div>
+<ul>
+<li>For semi-infinite sequences <span class="arithmatex">\(y = \{g_k\}_{k\geq0} * \{u_k\}_{k\geq0}\)</span> simplifies to </li>
+</ul>
+<div class="arithmatex">\[
+y_k = \sum^{k}_{n = 0}g_nu_{k-n}
+\]</div>
+<h3 id="8-properties-of-the-delta-response">8. Properties of the Delta response<a class="headerlink" href="#8-properties-of-the-delta-response" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Finite Impulse Response (FIR): </li>
+</ul>
+<div class="arithmatex">\[
+\{g_k\}_{k\geq0} = \{g_0, g_1, ... g_l, 0, 0, 0, ...\}
+\]</div>
+<ul>
+<li>Infinite Impulse Response (IIR): </li>
+</ul>
+<p>$$
+{g_k}_{k\geq0} = {g_0, g_1, g_2, g_3}
+$$ 
+does not terminate</p>
+<ul>
+<li>If <span class="arithmatex">\(\{g_k\}_{k\geq0}\)</span> is a semi-finite sequence,</li>
+</ul>
+<div class="arithmatex">\[
+y_k = \sum^{\infty}_{n = 0}g_nu_{k-n}
+\]</div>
+<p><strong>the current output only depends on current and past inputs</strong> <span class="arithmatex">\(\Rightarrow\)</span> The LTIS is <strong>causal</strong></p>
+<h2 id="ii-the-z-transform-and-the-dtft">II. The <span class="arithmatex">\(z\)</span> transform and the DTFT<a class="headerlink" href="#ii-the-z-transform-and-the-dtft" title="Permanent link">&para;</a></h2>
+<h3 id="1-convolution-and-power-series">1. Convolution and power series<a class="headerlink" href="#1-convolution-and-power-series" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define a power series 
+$$u(D) = u_0 + u_1D + u_2D^2 + u_3D^3 ...
+$$</li>
+<li>Convolution of semi-infinite sequences is equivalent to multiplication of power series:</li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned} c(D) u(D) &amp; =\left(\sum_{k=0}^{\infty} c_k D^k\right)\left(\sum_{m=0}^{\infty} u_m D^m\right) \\ &amp; =\sum_{k=0}^{\infty} \sum_{m=0}^{\infty} c_k u_m D^{k+m} \\ &amp; =\sum_{k=0}^{\infty} \sum_{n=k}^{\infty} c_k u_{n-k} D^n \text { where we substituted } n=k+m \\ &amp; =\sum_{n=0}^{\infty}\left(\sum_{k=0}^n c_k u_{n-k}\right) D^n \\ &amp; =\sum_{n=0}^{\infty} y_n D^n \text { where } y_n=\sum_{k=0}^n c_k u_{n-k}, \text { i.e., } y=c * u\end{aligned}
+\]</div>
+<h3 id="2-the-z-transform">2. The <span class="arithmatex">\(z\)</span> transform<a class="headerlink" href="#2-the-z-transform" title="Permanent link">&para;</a></h3>
+<ul>
+<li>For a signal <span class="arithmatex">\(\{u_k\}\)</span>, the <span class="arithmatex">\(z\)</span> transform is defined as:</li>
+</ul>
+<div class="arithmatex">\[
+\boxed{U(z) = \sum^{\infty}_{k=0}u_kz^{-k}}
+\]</div>
+<ul>
+<li>This is equivalent to the generic transform above with <span class="arithmatex">\(D = z^{-1}\)</span></li>
+<li>The negative power is adopted by analogy with the Laplace transform</li>
+<li><span class="arithmatex">\(\{u_k\}\)</span> is not assumed to be one-sided, but the z transform ignores all signal values at negative times</li>
+</ul>
+<h3 id="3-region-of-convergence-roc">3. Region of convergence (ROC)<a class="headerlink" href="#3-region-of-convergence-roc" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Consider the geometric sequence <span class="arithmatex">\(\mathbf{u}=\left\{u_k\right\}_{k \geq 0}=\left\{1, q, q^2, q^3, q^4, \ldots\right\}\)</span> for some <span class="arithmatex">\(q\)</span>. Using the formula for the sum of a geometric series (page 4 in the Mathematics Data Book), we obtain</li>
+</ul>
+<div class="arithmatex">\[
+U(z)=\sum_{k=0}^{\infty} q^k z^{-k}=\sum_{k=0}^{\infty}\left(q z^{-1}\right)^k=\frac{1}{1-q z^{-1}}=\frac{z}{z-q}
+\]</div>
+<p>This expression is only valid provided <span class="arithmatex">\(|q z^{-1}|&lt;1\)</span> or <span class="arithmatex">\(|z|&gt;|q|\)</span>, in other words outside the circle of radius <span class="arithmatex">\(|q|\)</span>. This is the region of convergence (ROC) of the <span class="arithmatex">\(z\)</span> transform.</p>
+<h3 id="4-the-discrete-time-fourier-transform-dtft">4. The Discrete-Time Fourier Transform (DTFT)<a class="headerlink" href="#4-the-discrete-time-fourier-transform-dtft" title="Permanent link">&para;</a></h3>
+<ul>
+<li>For a signal <span class="arithmatex">\(\{u_k\}\)</span>, the DTFT is defined as: </li>
+</ul>
+<div class="arithmatex">\[
+\boxed{U(\theta) = \sum^{\infty}_{k=-\infty}u_k e^{-jk\theta}}
+\]</div>
+<ul>
+<li>If a signal is zero for negative values, then: </li>
+</ul>
+<div class="arithmatex">\[
+U(\theta)=U(z) \text{ for } z=e^{j \theta}, \text{ i.e. }, U(\theta)=U\left(e^{j \theta}\right)
+\]</div>
+<ul>
+<li>For signals that are zero at negative values, the DTFT is equivalent to the z transform on the unit circle -&gt; spectrum</li>
+</ul>
+<h3 id="5-linearity-of-the-z-transform-and-dtft">5. Linearity of the <span class="arithmatex">\(z\)</span> transform and DTFT<a class="headerlink" href="#5-linearity-of-the-z-transform-and-dtft" title="Permanent link">&para;</a></h3>
+<ul>
+<li>For any scalars <span class="arithmatex">\(\alpha, \beta\)</span> :</li>
+</ul>
+<div class="arithmatex">\[
+\mathcal{Z}\left[\alpha\left\{x_k\right\}+\beta\left\{y_k\right\}\right]=\alpha \mathcal{Z}\left[\left\{x_k\right\}\right]+\beta \mathcal{Z}\left[\left\{y_k\right\}\right]
+\]</div>
+<p>This is because by definition, taking the <span class="arithmatex">\(z\)</span> transform requires only linear operations on the signal values.</p>
+<ul>
+<li>From this it also follows that, if the signal definition involves any parameter <span class="arithmatex">\(\alpha\)</span>, </li>
+</ul>
+<div class="arithmatex">\[
+\mathcal{Z}\left[\frac{d}{d \alpha} u_k\right]=\frac{d}{d \alpha} U(z)
+\]</div>
+<p>The DTFT obeys the same properties.</p>
+<h3 id="6-examples-of-the-z-transform">6. Examples of the <span class="arithmatex">\(z\)</span> transform<a class="headerlink" href="#6-examples-of-the-z-transform" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><span class="arithmatex">\(\mathcal{Z}\left\{q^k\right\}_{k \geq 0}=\frac{1}{1-q z^{-1}}=\frac{z}{z-q}\)</span></p>
+</li>
+<li>
+<p>Using the differentiation property of linearity $$
+\mathcal{Z}\left[\frac{d}{d q}\left[1, q, q^2, \ldots\right]\right]=\mathcal{Z}\left[0,1,2 q, 3 q^2, \ldots\right]=\frac{d}{d q} \frac{1}{1-q z<sup -1="-1">{-1}}=\frac{z</sup>{\left(1-q z}<sup>{-1}\right)</sup>2}$$In other words, the <span class="arithmatex">\(z\)</span> transform of the signal <span class="arithmatex">\(u_0=0, u_k=k q^{k-1}\)</span> for <span class="arithmatex">\(k&gt;0\)</span> is <span class="arithmatex">\(\frac{z^{-1}}{\left(1-q z^{-1}\right)^2} .=\frac{z}{(z-q)^2}\)</span></p>
+</li>
+<li>
+<p>By binomial expansion <span class="arithmatex">\(<span class="arithmatex">\(\mathcal{Z}\left[\frac{(k+m-2)!}{(k-1)!(m-1)!}\right]=\frac{z^{-1}}{\left(1-z^{-1}\right)^m} \text{ for all }m \geq 1\)</span>\)</span></p>
+</li>
+<li>
+<p>the linearity properties can be applied easily to determine the <span class="arithmatex">\(z\)</span> transforms of</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathcal{Z}[\cos \alpha k] &amp; =\mathcal{Z}\left[\frac{1}{2}\left(e^{j \alpha k}+e^{-j \alpha k}\right)\right] \\
+&amp; =\frac{1}{2}\left(\frac{1}{1-e^{j \alpha} z^{-1}}+\frac{1}{1-e^{-j \alpha} z^{-1}}\right) \\
+&amp; =\frac{1}{2} \frac{1-e^{-j \alpha} z^{-1}+1-e^{j \alpha}}{\left(1-e^{j \alpha}\right)\left(1-e^{-j \alpha}\right)} \\
+&amp; =\frac{1-z^{-1} \cos \alpha}{1-2 z^{-1} \cos \alpha+z^{-2}}
+\end{aligned}
+\]</div>
+<ul>
+<li>Similarly,</li>
+</ul>
+<div class="arithmatex">\[
+\mathcal{Z}[\sin \alpha k]=\frac{z^{-1} \sin \alpha}{1-2 z^{-1} \cos \alpha+z^{-2}}
+\]</div>
+<ul>
+<li>Scaling a sequence with a geometric sequence results in $$
+\mathcal{Z}\left[r^k u_k\right]=\sum_{k=0}^{\infty} u_k r^k z<sup _infty="\infty">{-k}=\sum_{k=0}</sup> z\right)} u_k\left(r^{-1<sup -1="-1">{-k}=U\left(r</sup> z\right) $$</li>
+</ul>
+<h3 id="7-time-shift-properties-of-the-dtft">7. Time shift properties of the DTFT<a class="headerlink" href="#7-time-shift-properties-of-the-dtft" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Consider a sequence <span class="arithmatex">\(\left\{u_k\right\}\)</span> shifted by a "delay" <span class="arithmatex">\(d: \mathbf{u}^{\prime}=\left\{u_{k-d}\right\}\)</span></li>
+<li><span class="arithmatex">\(d\)</span> can be negative in which case it's an "advance"</li>
+<li>The DTFT is</li>
+</ul>
+<div class="arithmatex">\[
+U^{\prime}(\theta)=\sum_{k=-\infty}^{\infty} u_{k-d} e^{-j k \theta}=\sum_{k^{\prime}=-\infty}^{\infty} u_{k^{\prime}} e^{-j\left(k^{\prime}+d\right) \theta}=e^{-j d \theta} U(\theta)
+\]</div>
+<p>where we used the variable substitution <span class="arithmatex">\(k^{\prime}=k-d\)</span></p>
+<ul>
+<li>Time shift for DTFT results simply in a multiplication by <span class="arithmatex">\(e^{-j \theta d}\)</span></li>
+</ul>
+<h3 id="8-time-shift-properties-of-the-z-transform">8. Time shift properties of the <span class="arithmatex">\(z\)</span> transform<a class="headerlink" href="#8-time-shift-properties-of-the-z-transform" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Time delay</strong> <span class="arithmatex">\(\left\{u_k^{\prime}\right\}=\left\{u_{k-d}\right\}\)</span> </li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathcal{Z}\left[\left\{u_{k-d}\right\}\right] &amp; =\sum_{k=0}^{\infty} u_{k-d} z^{-k} \\
+&amp; =u_{-d}+u_{-(d-1)} z^{-1}+\ldots+u_{-1} z^{-(d-1)}+\sum_{k=d}^{\infty} u_{k-d} z^{-k} \\
+&amp; =u_{-d}+u_{-(d-1)} z^{-1}+\ldots+u_{-1} z^{-(d-1)}+\sum_{k^{\prime}=0}^{\infty} u_{k^{\prime}} z^{-\left(k^{\prime}+d\right)} \\
+&amp; =u_{-d}+u_{-(d-1)} z^{-1}+\ldots+u_{-1} z^{-(d-1)}+z^{-d} U(z)
+\end{aligned}
+\]</div>
+<p>For signals <span class="arithmatex">\(\left\{u_k\right\}_{k \geq 0}\)</span> that are zero at negative values,</p>
+<div class="arithmatex">\[
+\mathcal{Z}\left[\left\{u_{k-d}\right\}\right]=z^{-d} \mathcal{Z}\left[\left\{u_k\right\}\right]
+\]</div>
+<p><span class="arithmatex">\(z^{-1}\)</span> is therefore the time-delay operator.</p>
+<ul>
+<li><strong>Time advance</strong> <span class="arithmatex">\(\left\{u_k^{\prime}\right\}\left\{u_{k+d}\right\}\)</span> </li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathcal{Z}\left[\left\{u_{k+d}\right\}\right] &amp; =\sum_{k=0}^{\infty} u_{k+d} z^{-k} \\
+&amp; =\sum_{k^{\prime}=d}^{\infty} u_{k^{\prime}} z^{-\left(k^{\prime}-d\right)} \\
+&amp; =\sum_{k^{\prime}=0}^{\infty} u_{k^{\prime}} z^{-\left(k^{\prime}-d\right)}-\sum_{k^{\prime}=0}^{d-1} u_{k^{\prime}} z^{-\left(k^{\prime}-d\right)} \\
+&amp; =z^d U(z)-z^d u_0-z^{d-1} u_1-\ldots-z u_{d-1}
+\end{aligned}
+\]</div>
+<p><span class="arithmatex">\(z\)</span> is the time-advance operator.</p>
+<h3 id="9-initial-value-theorem">9. Initial Value Theorem<a class="headerlink" href="#9-initial-value-theorem" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\boxed{\begin{aligned} \lim _{z \rightarrow \infty} U(z) &amp; =\lim _{z \rightarrow \infty} \sum_{k=0}^{\infty} u_k z^{-k} \\ &amp; =\lim _{z \rightarrow \infty}\left(u_0+\frac{u_1}{z}+\frac{u_2}{z^2}+\ldots\right) \\ &amp; =u_0\end{aligned}}\]</div>
+<h3 id="10-convolution-theorem">10. Convolution theorem<a class="headerlink" href="#10-convolution-theorem" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Discrete convolution:</li>
+</ul>
+<div class="arithmatex">\[
+\mathbf{a} * \mathbf{b}=\sum_{i=-\infty}^{\infty} a_i b_{k-i}=\sum_{i=-\infty}^{\infty} a_{k-i} b_i
+\]</div>
+<ul>
+<li>The convolution theorem for Z-transforms:</li>
+</ul>
+<div class="arithmatex">\[
+\mathcal{Z}[\mathbf{a} * \mathbf{b}]=A(z) B(z)
+\]</div>
+<ul>
+<li>The DTFT obeys the same properties</li>
+</ul>
+<h2 id="iii-z-transform-properties">III. <span class="arithmatex">\(z\)</span> transform properties<a class="headerlink" href="#iii-z-transform-properties" title="Permanent link">&para;</a></h2>
+<h3 id="1-conjugate-symmetry-property">1. Conjugate symmetry property<a class="headerlink" href="#1-conjugate-symmetry-property" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Similar to the Fourier transform, if a discrete-time signal <span class="arithmatex">\(\mathbf{s}\)</span> is real: 
+$$
+S(\bar{z})=\bar{S}(z)
+$$</p>
+</li>
+<li>
+<p>For example the transform <span class="arithmatex">\(S(z)=A z /(z-q)\)</span> of the real geometric sequence <span class="arithmatex">\(\left\{A q^k\right\}_{k \geq 0}\)</span>, with <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(q\)</span> real,</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+S(\bar{z})=A \frac{\bar{z}}{\bar{z}-q}=A \frac{\bar{z}}{\overline{z-q}}=\overline{S(z)}
+\]</div>
+<ul>
+<li>On the unit circle (and for the DTFT), this results in</li>
+</ul>
+<div class="arithmatex">\[
+\left\{\begin{array}{l}
+\left|S\left(e^{-j \theta}\right)\right|=\left|S\left(e^{j \theta}\right)\right| \\
+\angle S\left(e^{-j \theta}\right)=-\angle S\left(e^{j \theta}\right)
+\end{array}\right.
+\]</div>
+<h3 id="2-reverse-symmetry-property-for-dtft-only">2. Reverse symmetry property (for DTFT only)<a class="headerlink" href="#2-reverse-symmetry-property-for-dtft-only" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>The DTFT also has a reverse symmetry property: if <span class="arithmatex">\(s_{-k}=\bar{s}_k\)</span>, the DTFT <span class="arithmatex">\(S(\theta)\)</span> is real</p>
+</li>
+<li>
+<p>For example, consider the signal <span class="arithmatex">\(\left(s_{-1}, s_0, s_1\right)=(1,-1,1)\)</span>. Its DTFT is</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+S(\theta)=e^{j \theta}-1+e-j \theta=2 \cos \theta-1
+\]</div>
+<ul>
+<li>There is <strong>no reverse symmetry property</strong> for the (one-sided) <span class="arithmatex">\(z\)</span> transform because it doesn't depend on signal values for <span class="arithmatex">\(k&lt;0\)</span></li>
+</ul>
+<h3 id="3-inverse-z-transform">3. Inverse <span class="arithmatex">\(z\)</span> transform<a class="headerlink" href="#3-inverse-z-transform" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Methods to invert the <span class="arithmatex">\(z\)</span> transform includes:</strong><ol>
+<li>Use partial fractions to express the function as a sum of known <span class="arithmatex">\(z\)</span> transforms</li>
+<li>Use polynomial division to calculate the power series and hence the time samples</li>
+<li>Use the Taylor expansion of a function to get the power series and hence the time samples</li>
+</ol>
+</li>
+<li>The DTFT can be inverted with all the methods above + using the DTFT inversion formula: </li>
+</ul>
+<div class="arithmatex">\[
+s_k=\frac{1}{2 \pi} \int_{-\pi}^\pi S(\theta) e^{j k \theta} d \theta
+\]</div>
+<h3 id="4-the-dtft-vs-fourier-series">4. The DTFT vs Fourier series<a class="headerlink" href="#4-the-dtft-vs-fourier-series" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>DTFT: 
+$$ 
+S(\theta)=\sum_{k=-\infty}^{\infty} s_k e^{-j \theta k} \quad s_k=\frac{1}{2 \pi} \int_{-\pi}^\pi S(\theta) e^{j k \theta} d \theta 
+$$</p>
+</li>
+<li>
+<p>Complex Fourier Series (for <span class="arithmatex">\(T=2 \pi\)</span> ): 
+$$
+f(t)=\sum_{k=-\infty}^{\infty} c_k e^{j k t} \quad c_k=\frac{1}{2 \pi} \int_{-\pi}^\pi f(t) e^{-j k t} d t
+$$</p>
+</li>
+<li>
+<p>Fourier series were not presented as a transform but they have all the properties of a transform, mapping a continuous periodic function onto a discrete set of coefficients</p>
+</li>
+<li>Fourier series have many of the same properties we derived in this handout: conjugate symmetry, shift properties, convolution property for the periodic convolution <span class="arithmatex">\(g \star f=\int_{-\pi}^\pi g(\tau) f(t-\tau) d \tau\)</span></li>
+<li>Fourier series <span class="arithmatex">\(\Longleftrightarrow\)</span> DTFT (or <span class="arithmatex">\(z\)</span> transform on unit circle) with time and frequency swapped</li>
+</ul>
+<h3 id="5-the-laplace-transform-vs-the-z-transform">5. The Laplace transform vs the <span class="arithmatex">\(z\)</span> transform<a class="headerlink" href="#5-the-laplace-transform-vs-the-z-transform" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Applying the Laplace transform to a "train of impulses" sampled signal 
+$$
+w_s(t)=\sum_{k=0}^{\infty} w(k T) \delta(t-k T)
+$$</p>
+</li>
+<li>
+<p>We obtain</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+W_s(s) &amp; =\int_0^{\infty} \sum_{k=0}^{\infty} w(k T) \delta(t-k T) e^{-s t} d t \\
+&amp; =\sum_{k=0}^{\infty} w(k T) e^{-s k T}=\sum_{k=0}^{\infty} w_k z^{-k}
+\end{aligned}
+\]</div>
+<ul>
+<li>The <span class="arithmatex">\(z\)</span> transform is equivalent to the Laplace transform of the sampled "impulse train" signal using a mapping from the Laplace to the <span class="arithmatex">\(z\)</span> domain
+$$
+s \longrightarrow z=e^{s T}
+$$</li>
+</ul>
+<h2 id="iv-system-transfer-function-stability">IV. System transfer function &amp; stability<a class="headerlink" href="#iv-system-transfer-function-stability" title="Permanent link">&para;</a></h2>
+<h3 id="1-z-transfer-function-of-an-ltis">1. <span class="arithmatex">\(z\)</span>-transfer function of an LTIS<a class="headerlink" href="#1-z-transfer-function-of-an-ltis" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Consider a Linear Time-Invariant System (LTIS) described by linear difference equations in canonical for $$ y_k+a_1 y_{k-1}+\ldots+a_n y_{k-n}=b_0 x_k+\ldots+b_m x_{k-m} $$and subject to zero initial conditions
+$$
+y_k=x_k=0 \text { for } k&lt;0
+$$</li>
+<li>The system in the <span class="arithmatex">\(z\)</span> domain can be expressed as
+$$
+Y(z)+a_1 z^{-1} Y(z)+\ldots+a_n z^{-n} Y(z)=b_0 X(z)+\ldots+b_m z^{-m} X(z)
+$$</li>
+<li>
+<p>and is hence described by a transfer function:
+$$
+G(z)=\frac{Y(z)}{X(z)}=\frac{b_0+b_1 z^{-1}+\ldots+b_m z^{-m}}{1+a_1 z^{-1}+\ldots+a_n z^{-n}}
+$$</p>
+</li>
+<li>
+<p>Note: ratio is independent of <span class="arithmatex">\(X(z)\)</span>.</p>
+</li>
+</ul>
+<h3 id="2-fir-iir-in-the-z-domain">2. FIR / IIR in the <span class="arithmatex">\(z\)</span> domain<a class="headerlink" href="#2-fir-iir-in-the-z-domain" title="Permanent link">&para;</a></h3>
+<figure>
+<img alt="LTIS-implementation" src="../../assets/Discrete-time_Systems/LTIS-implementation.png" width="50%" />
+</figure>
+<ul>
+<li>the <span class="arithmatex">\(a\)</span> coefficients (denominator of <span class="arithmatex">\(G(z)\)</span>) point in opposite direction from input to output <span class="arithmatex">\(\Rightarrow\)</span> 
+<strong>feedback</strong></li>
+<li>the <span class="arithmatex">\(b\)</span> coefficients (numerator of <span class="arithmatex">\(G(z)\)</span>) point in the direction from input to output <span class="arithmatex">\(\Rightarrow\)</span> <strong>feed-forward</strong></li>
+<li>
+<p>an <strong>FIR</strong> satisfies <span class="arithmatex">\(a_n = 0\)</span> for <span class="arithmatex">\(n \neq 0\)</span> <span class="arithmatex">\(\Longrightarrow\)</span> <strong>feed-forward only system</strong>: the output <span class="arithmatex">\(y_k\)</span> depends on current and past values of the input <span class="arithmatex">\(x_k, x_{k-1}, ...\)</span> but not on past values of the output <span class="arithmatex">\(y_{k-1}, y_{k-2},...\)</span></p>
+</li>
+<li>
+<p>an <strong>IIR</strong> has an infinite length delta response as a result of <strong>feedback</strong>: more complex but can sometimes achieve better performance</p>
+</li>
+</ul>
+<h3 id="3-poles-and-zeros-of-the-z-transfer-function">3. Poles and zeros of the <span class="arithmatex">\(z\)</span>-transfer function<a class="headerlink" href="#3-poles-and-zeros-of-the-z-transfer-function" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Switching from negative to positive powers of <span class="arithmatex">\(z\)</span>, assuming <span class="arithmatex">\(m&lt;n\)</span>,</li>
+</ul>
+<div class="arithmatex">\[
+G(z)=\frac{b_0+b_1 z^{-1}+\ldots+b_m z^{-m}}{1+a_1 z^{-1}+\ldots+a_n z^{-n}}=\frac{b_0 z^n+b_1 z^{n-1}+\ldots+b_m z^{n-m}}{z^n+a_1 z^{n-1}+\ldots+a_{n-1} z+a_n}
+\]</div>
+<p>or if <span class="arithmatex">\(n&lt;m\)</span>,</p>
+<div class="arithmatex">\[
+G(z)=\frac{b_0 z^m+b_1 z^{m-1}+\ldots+b_1^{b-1}+b_m}{z^m+a_1 z^{m-1}+\ldots+a_n z^{m-n}}
+\]</div>
+<ul>
+<li>An LTIS in canonical form corresponds to a rational function with equal degrees <span class="arithmatex">\(\max \{m, n\}\)</span> in numerator and denominator fundamental theorem of algebra <span class="arithmatex">\(\longrightarrow\)</span> every polynomial of degree <span class="arithmatex">\(n\)</span> has <span class="arithmatex">\(n\)</span> complex roots (counted with multiplicity, i.e., some of them could be co-located)</li>
+<li><strong>a discrete LTIS has <span class="arithmatex">\(\max \{m, n\}\)</span> poles and <span class="arithmatex">\(\max \{m, n\}\)</span> zeros</strong> </li>
+<li>for an FIR, all the <span class="arithmatex">\(m\)</span> poles are at <span class="arithmatex">\(z=0\)</span></li>
+</ul>
+<h3 id="4-delta-response-and-poles">4. Delta response and poles<a class="headerlink" href="#4-delta-response-and-poles" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Consider a (LTI) system <span class="arithmatex">\(G(z)\)</span> subjected to a delta input: <span class="arithmatex">\(\delta_k=(1,0,0, \ldots) \longrightarrow \Delta(z)=1\)</span>. The output is: </li>
+</ul>
+<div class="arithmatex">\[
+y=\mathcal{Z}^{-1}[Y(z)]=\mathcal{Z}^{-1}[G(z) \Delta(z)]=\mathcal{Z}^{-1}[G(z)]
+\]</div>
+<p><span class="arithmatex">\(\Rightarrow\)</span> poles of <span class="arithmatex">\(G(z)\)</span> define the response to a pulse delta</p>
+<ul>
+<li>Real poles:
+<figure markdown="span">
+<img alt="real-poles" src="../../assets/Discrete-time_Systems/real-poles.png" width="50%" />
+</figure></li>
+<li>Complex conjugate poles:</li>
+</ul>
+<figure>
+<img alt="complex-poles" src="../../assets/Discrete-time_Systems/complex-conj-poles.png" width="50%" />
+</figure>
+<ul>
+<li>Repeated poles:</li>
+</ul>
+<div class="arithmatex">\[
+G(z)=\frac{1}{\left(1-p z^{-1}\right)^2}
+\]</div>
+<p>rewrite as <span class="arithmatex">\(G(z)=\frac{1}{1-p z^{-1}}+\frac{p z^{-1}}{\left(1-p z^{-1}\right)^2}\)</span> then <span class="arithmatex">\(\xrightarrow{\mathcal{Z}^{-1}} p^k+k p^k\)</span></p>
+<h4 id="damping-and-oscillation">Damping and Oscillation<a class="headerlink" href="#damping-and-oscillation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Distance of poles from origin is a measure of decay rate</li>
+<li>Complex pole just inside unit circle give lightly damped oscillation</li>
+<li>Oscillation is possible for real poles on negative real axis</li>
+</ul>
+<h3 id="5-bibo-stability">5. BIBO stability<a class="headerlink" href="#5-bibo-stability" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A discrete time system is <strong>stable</strong> if bounded inputs give bounded output ("BIBO stability")</li>
+</ul>
+<figure>
+<img alt="BIBO" src="../../assets/Discrete-time_Systems/BIBO.png" width="60%" />
+</figure>
+<p>- Definition of bounded: for a signal <span class="arithmatex">\(\{u_k\}\)</span>, the signal is bounded if there exists a positive constant M such that <span class="arithmatex">\(|u_k| &lt; M \text{ for all } k\)</span>
+- The definition is more subtle than appears:
+    - If a bounded input gives an unbounded output, the system is unstable
+    - However, for some unstable systems there is no unbounded output but a collection of input signals bounded by <span class="arithmatex">\(M\)</span> give outputs that cannot be bounded by any single <span class="arithmatex">\(N\)</span></p>
+<h3 id="6-conditions-for-stability-of-a-discrete-time-system">6. Conditions for stability of a discrete time system<a class="headerlink" href="#6-conditions-for-stability-of-a-discrete-time-system" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(G\)</span> be a discrete time system with a rational transfer function,</p>
+<p>$$
+G(z)=\frac{b(z)}{a(z)}=\frac{b_0+\ldots+b_m z^{-m}}{1+a_1 z^{-1}+\ldots+a_n z^{-n}}
+$$
+s
+with no common factors between <span class="arithmatex">\(b(z)\)</span> and <span class="arithmatex">\(a(z)\)</span>. Let the delta response of <span class="arithmatex">\(G\)</span> be <span class="arithmatex">\(\left\{g_k\right\}_{k \geq 0}\)</span>. Then the following are equivalent:
+1. <span class="arithmatex">\(G\)</span> is stable
+2. All of the roots <span class="arithmatex">\(p_i\)</span> of <span class="arithmatex">\(a(z)\)</span> (i.e. poles) satisfy <span class="arithmatex">\(\left|p_i\right|&lt;1\)</span> (inside unit circle)
+3. <span class="arithmatex">\(\sum_{k=0}^{\infty}\left|g_k\right|\)</span> is finite</p>
+<p>Logical sequence of proof:
+$$
+(1) \stackrel{A}{\Longrightarrow}(2) \stackrel{B}{\Longrightarrow}(3) \stackrel{C}{\Longrightarrow}(1)
+$$</p>
+<h4 id="proof-for-part-a">Proof for part A<a class="headerlink" href="#proof-for-part-a" title="Permanent link">&para;</a></h4>
+<p>A: <span class="arithmatex">\(G\)</span> stable <span class="arithmatex">\(\Longrightarrow\)</span> all of the roots of <span class="arithmatex">\(a(z)\)</span> satisfy <span class="arithmatex">\(\left|p_i\right|&lt;1\)</span>.
+We will prove <span class="arithmatex">\(\neg\left(\left|p_i\right|&lt;1\right.\)</span> for all <span class="arithmatex">\(\left.i\right) \Longrightarrow G\)</span> not stable, i.e., if there is at least one root for which <span class="arithmatex">\(\left|p_i\right| \geq 1\)</span>, then <span class="arithmatex">\(G\)</span> is not stable.
+Suppose <span class="arithmatex">\(p_1, p_2, p_3, \ldots\)</span> are distinct. Then we can decompose <span class="arithmatex">\(G\)</span> using partial fractions:</p>
+<div class="arithmatex">\[
+G(z)=\frac{\alpha_1}{1-p_1 z^{-1}}+\ldots+\frac{\alpha_n}{1-p_n z^{-1}}
+\]</div>
+<p>Then</p>
+<div class="arithmatex">\[
+g_k=\alpha_1 p_1^k+\alpha_2 p_2^k+\ldots+\alpha_n p_n^k
+\]</div>
+<p>Suppose <span class="arithmatex">\(\left|p_i\right|&gt;1\)</span> for some <span class="arithmatex">\(i\)</span>. Then <span class="arithmatex">\(g_k\)</span> is unbounded.
+Therefore a delta input (bounded) gives an unbounded output and <span class="arithmatex">\(G\)</span> is not stable.</p>
+<p>For pole <strong>on</strong> the unit circle (<span class="arithmatex">\(|p_i| = 1\)</span>), extract the term to get:</p>
+<div class="arithmatex">\[
+G(z)=\frac{\alpha_i}{1-e^{j \theta} z^{-1}}+\tilde{G}(z)
+\]</div>
+<p>where <span class="arithmatex">\(\tilde{G}(z)\)</span> contains the remaining terms in the partial fraction expansion of <span class="arithmatex">\(G(z)\)</span>. Recall that <span class="arithmatex">\(g_k=\alpha_1 p_1^k+\ldots+\alpha_n p_n^k\)</span> and hence the <span class="arithmatex">\(i\)</span>-th term in the sum corresponding to this pole is</p>
+<div class="arithmatex">\[
+g_k^{\prime}=\alpha_i e^{j \theta k}
+\]</div>
+<p>whose magnitude <span class="arithmatex">\(\left|g_k^{\prime}\right|=\alpha_i\)</span> is constant for all times and hence bounded.</p>
+<p>Now consider the input</p>
+<div class="arithmatex">\[
+U(z)=\frac{\alpha_i z^{-1}}{1-e^{j \theta} z^{-1}}
+\]</div>
+<p>It corresponds to the sequence <span class="arithmatex">\(g_{k-1}^{\prime}\)</span> as it is simply the time-shift operator <span class="arithmatex">\(z^{-1}\)</span> applied to the <span class="arithmatex">\(z\)</span> transform of <span class="arithmatex">\(g_k^{\prime}\)</span>, and hence it is bounded.</p>
+<p>The corresponding output is</p>
+<div class="arithmatex">\[
+\begin{aligned}
+Y(z)=U(z) G(z) &amp; =U(z)\left(\frac{\alpha_i}{1-e^{j \theta} z^{-1}}+\tilde{G}(z)\right) \\
+&amp; =\frac{\alpha_i^2 z^{-1}}{\left(1-e^{j \theta} z^{-1}\right)^2}+U(z) \tilde{G}(z)
+\end{aligned}
+\]</div>
+<p>The first term in this sum corresponds to the time sequence</p>
+<div class="arithmatex">\[
+y_k^{\prime}=k \alpha_i^2 e^{j \theta(k-1)}
+\]</div>
+<p>whose magnitude grows with <span class="arithmatex">\(k\)</span> and is therefore unbounded! Hence we have found a bounded input <span class="arithmatex">\(g_{k-1}^{\prime}\)</span> that gives an output <span class="arithmatex">\(y_k\)</span> with an unbounded component <span class="arithmatex">\(y_k^{\prime}\)</span>.
+We have completed the proof that</p>
+<div class="arithmatex">\[
+G(z)=\frac{b(z)}{a(z)} \text { is stable } \Longrightarrow \text { the roots of } a(z) \text { satisfy }\left|p_i\right|&lt;1
+\]</div>
+<h4 id="proof-for-part-b">Proof for part B<a class="headerlink" href="#proof-for-part-b" title="Permanent link">&para;</a></h4>
+<p>The basic idea is to split <span class="arithmatex">\(G(z)\)</span> into partial fractions and note that each factor of the form <span class="arithmatex">\(\frac{1}{1-P_i z^{-1}}\)</span> is the <span class="arithmatex">\(z\)</span>-transform of <span class="arithmatex">\(\left\{P_i^k\right\}_{k \geq 0}\)</span>. If <span class="arithmatex">\(\left|P_i\right|&lt;1\)</span> for each <span class="arithmatex">\(i\)</span> then</p>
+<div class="arithmatex">\[
+\sum_{k=0}^{\infty}\left|g_k\right| \leq \sum_{k=0}^{\infty}\left|P_1\right|^k+\sum_{k=0}^{\infty}\left|P_2\right|^k+\ldots \sum_{k=0}^{\infty}\left|P_n\right|^k
+\]</div>
+<p>and the right hand side is finite. The general argument which covers multiple poles goes as follows. A rational transfer function of the form</p>
+<div class="arithmatex">\[
+G(z)=\frac{b_0+b_1 z^{-1}+\ldots+b_m z^{-m}}{\left(1-P_1 z^{-1}\right)^{n_1}\left(1-P_2 z^{-1}\right)^{n_2} \ldots\left(1-P_r z^{-1}\right)^{n_r}}
+\]</div>
+<p>(with <span class="arithmatex">\(n_1+n_2+\ldots+n_r=n&gt;m\)</span> ) can be split into partial fractions of the form</p>
+<div class="arithmatex">\[
+G(z)=\sum_{i=1}^r \sum_{l=1}^{n_r} \frac{A_{i l}}{\left(1-P_i z^{-1}\right)^l}
+\]</div>
+<p>Thus <span class="arithmatex">\(\left\{g_k\right\}\)</span> is a sum of the number sequences which are the inverse <span class="arithmatex">\(z\)</span>-transform of <span class="arithmatex">\(A_{i l} /\left(1-P_i z^{-1}\right)^l\)</span>. To show that <span class="arithmatex">\(\sum_{k=0}^{\infty}\left|g_k\right|\)</span> is finite it is sufficient to show the same for each of these sequences. Note (from <span class="arithmatex">\(z\)</span>-transform table) that</p>
+<div class="arithmatex">\[
+\mathcal{Z}^{-1}\left(\frac{1}{\left(1-P_i z^{-1}\right)^l}\right)=\left\{\frac{(k+l-1)!P_i^k}{k!(l-1)!}\right\}_{k \geq 0}
+\]</div>
+<p>Note further that the sum below is finite and</p>
+<div class="arithmatex">\[
+\sum_{k=0}^{\infty} \frac{(k+l-1)!}{k!(l-1)!}\left|P_i\right|^k=\frac{1}{\left(1-\left|P_i\right|\right)^l}
+\]</div>
+<p>since <span class="arithmatex">\(\left|P_i\right|&lt;1\)</span>. Thus</p>
+<div class="arithmatex">\[
+\sum_{k=0}^{\infty}\left|g_k\right| \leq \sum_{i=1}^r \sum_{l=1}^{n_i} \frac{\left|A_{i l}\right|}{\left(1-\left|P_i\right|\right)^l}
+\]</div>
+<p>which is finite.</p>
+<h4 id="proof-for-part-c">Proof for part C<a class="headerlink" href="#proof-for-part-c" title="Permanent link">&para;</a></h4>
+<p>C: <span class="arithmatex">\(\sum_{k=0}^{\infty}\left|g_k\right|&lt;\infty \Longrightarrow G\)</span> stable (bounded input <span class="arithmatex">\(\Longrightarrow\)</span> bounded output)
+Suppose that <span class="arithmatex">\(\sum_{k=0}^{\infty}\left|g_k\right|&lt;\infty\)</span>, i.e., the sum is finite. Let <span class="arithmatex">\(\left\{u_k\right\}\)</span> be an arbitrary bounded input, i.e. <span class="arithmatex">\(\left|u_k\right|&lt;M\)</span> for <span class="arithmatex">\(k \geq 0\)</span>. Then the output, <span class="arithmatex">\(\left\{y_k\right\}\)</span> is given by the convolution</p>
+<div class="arithmatex">\[
+y_k=\sum_{i=0}^{k \rightarrow \infty} g_i u_{k-i}
+\]</div>
+<p>Thus,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\left|y_k\right| &amp; =\left|\sum_{i=0}^{k \rightarrow \infty} g_i u_{k-i}\right| \\
+&amp; \leq \sum_{i=0}^{k \rightarrow \infty}\left|g_i\right|\left|u_{k-i}\right| \\
+&amp; &lt;\sum_{i=0}^{k \rightarrow \infty}\left|g_i\right| M=M \sum_{i=0}^{k \rightarrow \infty}\left|g_i\right|&lt;\infty
+\end{aligned}
+\]</div>
+<p>The basic idea is to split <span class="arithmatex">\(G(z)\)</span> into partial fractions and note that each factor of the form <span class="arithmatex">\(\frac{1}{1-P_i z^{-1}}\)</span> is the <span class="arithmatex">\(z\)</span>-transform of <span class="arithmatex">\(\left\{P_i^k\right\}_{k \geq 0}\)</span>. If <span class="arithmatex">\(\left|P_i\right|&lt;1\)</span> for each <span class="arithmatex">\(i\)</span> then</p>
+<div class="arithmatex">\[
+\sum_{k=0}^{\infty}\left|g_k\right| \leq \sum_{k=0}^{\infty}\left|P_1\right|^k+\sum_{k=0}^{\infty}\left|P_2\right|^k+\ldots \sum_{k=0}^{\infty}\left|P_n\right|^k
+\]</div>
+<p>and the right hand side is finite. The general argument which covers multiple poles goes as follows. A rational transfer function of the form</p>
+<div class="arithmatex">\[
+G(z)=\frac{b_0+b_1 z^{-1}+\ldots+b_m z^{-m}}{\left(1-P_1 z^{-1}\right)^{n_1}\left(1-P_2 z^{-1}\right)^{n_2} \ldots\left(1-P_r z^{-1}\right)^{n_r}}
+\]</div>
+<p>(with <span class="arithmatex">\(n_1+n_2+\ldots+n_r=n&gt;m\)</span> ) can be split into partial fractions of the form</p>
+<div class="arithmatex">\[
+G(z)=\sum_{i=1}^r \sum_{l=1}^{n_r} \frac{A_{i l}}{\left(1-P_i z^{-1}\right)^l}
+\]</div>
+<p>Thus <span class="arithmatex">\(\left\{g_k\right\}\)</span> is a sum of the number sequences which are the inverse <span class="arithmatex">\(z\)</span>-transform of <span class="arithmatex">\(A_{i l} /\left(1-P_i z^{-1}\right)^l\)</span>. To show that <span class="arithmatex">\(\sum_{k=0}^{\infty}\left|g_k\right|\)</span> is finite it is sufficient to show the same for each of these sequences. Note (from <span class="arithmatex">\(z\)</span>-transform table) that</p>
+<div class="arithmatex">\[
+Z^{-1}\left(\frac{1}{\left(1-P_i z^{-1}\right)^l}\right)=\left\{\frac{(k+l-1)!P_i^k}{k!(l-1)!}\right\}_{k \geq 0}
+\]</div>
+<p>Note further that the sum below is finite and</p>
+<div class="arithmatex">\[
+\sum_{k=0}^{\infty} \frac{(k+l-1)!}{k!(l-1)!}\left|P_i\right|^k=\frac{1}{\left(1-\left|P_i\right|\right)^l}
+\]</div>
+<p>since <span class="arithmatex">\(\left|P_i\right|&lt;1\)</span>. Thus</p>
+<p>$$
+\sum_{k=0}^{\infty}\left|g_k\right| \leq \sum_{i=1}^r \sum_{l=1}^{n_i} \frac{\left|A_{i l}\right|}{\left(1-\left|P_i\right|\right)^l}
+$$
+which is finite.</p>
+<div class="page-break" style="page-break-before: always;"></div>
+
+<h2 id="v-bode-diagrams">V. Bode diagrams<a class="headerlink" href="#v-bode-diagrams" title="Permanent link">&para;</a></h2>
+<h3 id="1-final-value-theorem-fvt">1. Final Value Theorem (FVT)<a class="headerlink" href="#1-final-value-theorem-fvt" title="Permanent link">&para;</a></h3>
+<p>Suppose that all the poles of <span class="arithmatex">\((z-1) Y(z)\)</span> lie strictly inside the unit circle. Then</p>
+<div class="arithmatex">\[
+\boxed{
+\lim _{k \rightarrow \infty} y_k=\lim _{z \rightarrow 1}(z-1) Y(z)}
+\]</div>
+<p><strong>Warning:</strong> you MUST check the poles of <span class="arithmatex">\((z-1) Y(z)\)</span> before applying the FVT. (Check for stability)</p>
+<h4 id="proof">Proof<a class="headerlink" href="#proof" title="Permanent link">&para;</a></h4>
+<p>All poles of <span class="arithmatex">\(Y(z)\)</span> are in the unit circle except possibly a (non-repeated) pole at <span class="arithmatex">\(z=1\)</span>. Assuming distinct poles, we can rewrite</p>
+<div class="arithmatex">\[
+Y(z)=\frac{\alpha_0}{1-z^{-1}}+\sum_i \frac{\alpha_i}{1-p_i z^{-1}}
+\]</div>
+<p>where <span class="arithmatex">\(\left|p_i\right|&lt;1\)</span>. By inverse z-transform:</p>
+<div class="arithmatex">\[
+\lim _{k \rightarrow \infty} y_k=\lim _{k \rightarrow \infty}\left(\alpha_0+\sum_i \alpha_i p_i^k\right)=\alpha_0
+\]</div>
+<p>Also,</p>
+<div class="arithmatex">\[
+\lim _{z \rightarrow 1}(z-1) Y(z)=\lim _{z \rightarrow 1}\left(z \alpha_0+(z-1) \sum_i \frac{\alpha_i}{1-p_i z^{-1}}\right)=\alpha_0 .
+\]</div>
+<p>(If poles are not distinct, the right-hand side of the <span class="arithmatex">\(\sum\)</span> is more convoluted but limits still converge to zero as <span class="arithmatex">\(k \rightarrow \infty\)</span> and <span class="arithmatex">\(z \rightarrow 1\)</span>.)</p>
+<h3 id="2-steady-state-responses-to-various-inputs">2. Steady-state responses to various inputs<a class="headerlink" href="#2-steady-state-responses-to-various-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Steady-state response to a <em>complex</em> sinusoidal input</li>
+</ul>
+<figure>
+<img alt="complex-sine-steady-state" src="../../assets/Discrete-time_Systems/complex-sine-steady-state.png" width="50%" />
+</figure>
+<ul>
+<li>Steady-state response to a <em>real</em> sinusoidal input</li>
+</ul>
+<figure>
+<img alt="real-sine-steady-state" src="../../assets/Discrete-time_Systems/real-sine-steady-state.png" width="50%" />
+</figure>
+<h3 id="3-bode-diagrams">3. Bode diagrams<a class="headerlink" href="#3-bode-diagrams" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Every signal at the input can be decomposed into sum of sinusoids</li>
+<li>Filter amplification and phase shift can be characterised each frequency <span class="arithmatex">\(\rightarrow\)</span> Bode diagrams</li>
+<li>Negative frequency mirror positive frequencies for real-valued signals <span class="arithmatex">\(\rightarrow\)</span> Bode diagrams generally limited to the frequency interval <span class="arithmatex">\([0, \pi)\)</span></li>
+</ul>
+<h4 id="decomposing-the-components-by-zeros-and-poles">Decomposing the components by zeros and poles:<a class="headerlink" href="#decomposing-the-components-by-zeros-and-poles" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[
+G(z)=c \frac{\prod_{k=1}^m\left(z-z_k\right)}{\prod_{k=1}^n\left(z-p_k\right)}
+\]</div>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp; \left|G\left(e^{j \theta}\right)\right|=|c| \frac{\prod_{k=1}^m\left|e^{j \theta}-z_k\right|}{\prod_{k=1}^n\left|e^{j \theta}-p_k\right|} \\
+&amp; \begin{aligned}
+\left|G\left(e^{j \theta}\right)\right|_{d B} &amp; =20 \log \left(\left|G\left(e^{j \theta}\right)\right|\right) \\
+&amp; =20\left(\log |c|+\sum_{k=1}^m \log \left|e^{j \theta}-z_k\right|-\sum_{k=1}^n \log \left|e^{j \theta}-p_k\right|\right) 
+\end{aligned}
+\end{aligned}
+\]</div>
+<div class="arithmatex">\[
+\angle G\left(e^{j \theta}\right)=\angle(c)+\sum_{k=1}^m \angle\left(e^{j \theta}-z_k\right)-\sum_{k=1}^n \angle\left(e^{j \theta}-p_k\right)
+\]</div>
+<figure>
+<img alt="decompose-bode" src="../../assets/Discrete-time_Systems/decompose-bode.png" width="60%" />
+</figure>
+<h4 id="hints-on-bode-diagrams">Hints on Bode diagrams<a class="headerlink" href="#hints-on-bode-diagrams" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The magnitude of the frequency response is given by the product of the distances from the zeros to <span class="arithmatex">\(e^{j\theta}\)</span> divided by the product of the distances from the poles to <span class="arithmatex">\(e^{j\theta}\)</span></li>
+<li>The phase response is given by the sum of the angles from the zeros to <span class="arithmatex">\(e^{j\theta}\)</span> minus the sum of the angles from the poles to <span class="arithmatex">\(e^{j\theta}\)</span></li>
+<li>Thus:<ul>
+<li>when <span class="arithmatex">\(e^{j\theta}\)</span> is close to a pole, the magnitude of the response rises (resonance)</li>
+<li>when <span class="arithmatex">\(e^{j\theta}\)</span> is close to a zero, the magnitude falls</li>
+</ul>
+</li>
+<li>Use numerical tools to draw the Bode diagrams of digital systems!</li>
+</ul>
+<h2 id="vi-nyquist-stability-criterion">VI. Nyquist stability criterion<a class="headerlink" href="#vi-nyquist-stability-criterion" title="Permanent link">&para;</a></h2>
+<h3 id="1-closed-loop-control-systems">1. Closed loop control systems<a class="headerlink" href="#1-closed-loop-control-systems" title="Permanent link">&para;</a></h3>
+<figure>
+<img alt="closed-loop-control-systems" src="../../assets/Discrete-time_Systems/closed-loop-control-systems.png" width="40%" />
+</figure>
+<h3 id="2-derivation-of-the-nyquist-stability-criterion">2. Derivation of the Nyquist stability criterion<a class="headerlink" href="#2-derivation-of-the-nyquist-stability-criterion" title="Permanent link">&para;</a></h3>
+<h4 id="nyquist-diagram-definition">Nyquist diagram definition<a class="headerlink" href="#nyquist-diagram-definition" title="Permanent link">&para;</a></h4>
+<p><span class="arithmatex">\(\mathbf{G}(\mathbf{e}^{\mathbf{j} \theta})\)</span> drawn in the complex plane (Argand diagram) as <span class="arithmatex">\(\theta\)</span> increases from <span class="arithmatex">\(-\pi\)</span> to <span class="arithmatex">\(\pi\)</span> (or, alternatively, from 0 to <span class="arithmatex">\(2 \pi\)</span> ).</p>
+<div class="admonition note">
+<p class="admonition-title">Nyquist Stability Criterion</p>
+<p>The closed loop system is stable if and only if the number of encirclements of <span class="arithmatex">\(-1 / K\)</span> by <span class="arithmatex">\(G\left(e^{j \theta}\right)\)</span> as <span class="arithmatex">\(\theta\)</span> increases from <span class="arithmatex">\(-\pi\)</span> to <span class="arithmatex">\(\pi\)</span> equals the number of open loop poles strictly outside the unit circle.</p>
+</div>
+<h4 id="outline-of-the-proof-of-the-criterion">Outline of the proof of the criterion<a class="headerlink" href="#outline-of-the-proof-of-the-criterion" title="Permanent link">&para;</a></h4>
+<ol>
+<li>poles/zeros and encirclements of the origin</li>
+<li>counting encirclements of the origin</li>
+<li>poles and zeros of <span class="arithmatex">\(1+K G(z)\)</span> and corresponding encirclements</li>
+<li>polynomial degrees vs. numbers of poles/zeros</li>
+<li>pole arithmetic: how do closed and open loop stable/unstable poles add up?</li>
+<li>shifting the graph to <span class="arithmatex">\(-1 / K\)</span></li>
+<li>The Nyquist criterion</li>
+</ol>
+<h4 id="1-the-encirclement-property">1. The encirclement property<a class="headerlink" href="#1-the-encirclement-property" title="Permanent link">&para;</a></h4>
+<p>Consider
+$$
+F(z)=A \frac{\left(z-z_1\right)\left(z-z_2\right) \cdots\left(z-z_m\right)}{\left(z-p_1\right)\left(z-p_2\right) \cdots\left(z-p_n\right)}
+$$
+and remember that <span class="arithmatex">\(<span class="arithmatex">\(\angle F\left(e^{j \theta}\right)=\angle A+\sum_{i=1}^m \angle\left(e^{j \theta}-z_i\right)-\sum_{i=1}^n \angle\left(e^{j \theta}-p_i\right)\)</span>\)</span>(counterclockwise encirclements used here)</p>
+<figure>
+<img alt="encirclement-property" src="../../assets/Discrete-time_Systems/encirclement-property.png" width="40%" />
+</figure>
+<p>Note that a pole on the unit circle causes an encirclement just the same as a zero (pole) <strong>inside the unit circle</strong> (the phase jumps by <span class="arithmatex">\(\pi\)</span> when it passes the zero).</p>
+<h4 id="2-counting-encirclements">2. Counting encirclements<a class="headerlink" href="#2-counting-encirclements" title="Permanent link">&para;</a></h4>
+<p>Let
+- <span class="arithmatex">\(N_{z, i}\)</span> be the number of zeros of <span class="arithmatex">\(F(z)\)</span> inside the unit circle
+- <span class="arithmatex">\(N_{p, i}\)</span> be the number of poles of <span class="arithmatex">\(F(z)\)</span> inside the unit circle ("inside" includes the unit circle)
+Then, the overall increase <span class="arithmatex">\(\alpha\)</span> of <span class="arithmatex">\(\angle F\left(e^{j \theta}\right)\)</span> as <span class="arithmatex">\(\theta\)</span> increases from 0 to <span class="arithmatex">\(2 \pi\)</span> (or, equivalently, from <span class="arithmatex">\(-\pi\)</span> to <span class="arithmatex">\(\pi\)</span> ) is</p>
+<div class="arithmatex">\[
+\alpha=2 \pi\left(N_{z, i}-N_{p, i}\right)
+\]</div>
+<p>Hence, the number of encirclements <span class="arithmatex">\(\mathcal{C}\)</span> of the origin as <span class="arithmatex">\(\theta\)</span> increases from 0 to <span class="arithmatex">\(2 \pi\)</span> (or <span class="arithmatex">\(-\pi\)</span> to <span class="arithmatex">\(\pi\)</span> ) satisfies</p>
+<div class="arithmatex">\[
+\mathcal{C}=N_{z, i}-N_{p, i}
+\]</div>
+<h4 id="3-zeros-and-poles-of-1-kgz">3. Zeros and poles of <span class="arithmatex">\(1 + KG(z)\)</span><a class="headerlink" href="#3-zeros-and-poles-of-1-kgz" title="Permanent link">&para;</a></h4>
+<p>Re-writing <span class="arithmatex">\(G(z)\)</span> as <span class="arithmatex">\(<span class="arithmatex">\(G(z) = \frac{b(z)}{a(z)}\)</span>\)</span><span class="arithmatex">\(<span class="arithmatex">\(1+K G(z)=\frac{a(z)+K b(z)}{a(z)}\)</span>\)</span>
+and that the closed loop poles are solutions of <span class="arithmatex">\(1+K G(z)=0\)</span>.
+Hence 
+- the <strong>zeros</strong> of <span class="arithmatex">\(1+K G(z)\)</span> (when <span class="arithmatex">\(a(z)+K b(z)=0\)</span> ) are the <strong>closed loop poles</strong>
+- the <strong>poles</strong> of <span class="arithmatex">\(1+K G(z)\)</span> (when <span class="arithmatex">\(a(z)=0)\)</span> are the <strong>open loop poles</strong>
+Let
+- <span class="arithmatex">\(N_{z, i}\)</span> be the number of zeros of <span class="arithmatex">\(1+K G(z)\)</span> inside the unit circle
+- <span class="arithmatex">\(N_{p, i}\)</span> be the number of poles of <span class="arithmatex">\(1+K G(z)\)</span> inside the unit circle
+This is equivalent to
+- <span class="arithmatex">\(N_{c p, i}=N_{z, i}\)</span> is the number of closed loop poles inside the unit circle
+- <span class="arithmatex">\(N_{o p, i}=N_{p, i}\)</span> is the number of open loop poles inside the unit circle
+The number <span class="arithmatex">\(\mathcal{C}\)</span> of encirclements of the origin by <span class="arithmatex">\(1+K G\left(e^{j \theta}\right)\)</span> as <span class="arithmatex">\(\theta\)</span> goes from <span class="arithmatex">\(-\pi\)</span> to <span class="arithmatex">\(\pi\)</span> (or, equivalently, from 0 to <span class="arithmatex">\(2 \pi\)</span> ) is</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathcal{C} &amp; =N_{z, i}-N_{p, i} \\
+&amp; =N_{c p, i}-N_{o p, i}
+\end{aligned}
+\]</div>
+<h4 id="4-polynomial-degrees">4. Polynomial degrees<a class="headerlink" href="#4-polynomial-degrees" title="Permanent link">&para;</a></h4>
+<p>Recall that for a linear system in canonical form,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+G(z) &amp; =\frac{b(z)}{a(z)}=\frac{b_0+b_1 z^{-1}+\ldots+b_m z^{-m}}{1+a_1 z^{-1}+\ldots+a_n z^{-n}} \\
+&amp; =\frac{b_0 z^{\max (m, n)}+\ldots+b_m z^{\min (n-m, 0)}}{z^{\max (m, n)}+\ldots+a_n z^{\min (m-n, 0)}}
+\end{aligned}
+\]</div>
+<p>Now consider</p>
+<div class="arithmatex">\[
+1+K G(z)=\frac{a(z)+K b(z)}{a(z)}
+\]</div>
+<p>In the numerator, we add two polynomials of the same degree ( <span class="arithmatex">\(K\)</span> is a constant and doesn't affect polynomial degrees). Hence,</p>
+<div class="arithmatex">\[
+\operatorname{deg}(a(z)+K b(z)) \leq \operatorname{deg}(a(z))=\max (m, n)
+\]</div>
+<p>with equality unless <span class="arithmatex">\(1+K b_0=0\)</span> (coefficient cancels). We will assume for now that <span class="arithmatex">\(K \neq-1 / b_0, \Longrightarrow 1+K G(z)\)</span> is a fraction of two polynomials of degree <span class="arithmatex">\(\ell=\max (\mathbf{m}, \mathbf{n})\)</span>.</p>
+<h4 id="5-pole-arithmetic">5. Pole arithmetic<a class="headerlink" href="#5-pole-arithmetic" title="Permanent link">&para;</a></h4>
+<p>Since <span class="arithmatex">\(\operatorname{deg}(a(z)+K b(z))=\operatorname{deg}(a(z))=\ell\)</span>, both the numerator and denominator of <span class="arithmatex">\(1+K G(z)\)</span> have <span class="arithmatex">\(\ell\)</span> roots. Some of them may be inside the unit circle and some outside the unit circle. If we complete our list of pole counters to
+- <span class="arithmatex">\(N_{c p, i}=N_{z, i}\)</span> counts <strong>closed loop poles</strong> inside the unit circle
+- <span class="arithmatex">\(N_{o p, i}=N_{p, i}\)</span> counts <strong>open loop poles</strong> inside the unit circle
+- <span class="arithmatex">\(N_{c p, o}=N_{z, o}\)</span> counts <strong>closed loop poles</strong> outside the unit circle
+- <span class="arithmatex">\(N_{o p, o}=N_{p, o}\)</span> counts <strong>open loop poles</strong> outside the unit circle
+we have</p>
+<div class="arithmatex">\[
+N_{c p, i}+N_{c p, o}=N_{o p, i}+N_{o p, o}=\ell .
+\]</div>
+<p>Hence, the number of encirclements <span class="arithmatex">\(\mathcal{C}\)</span> satisfies</p>
+<div class="arithmatex">\[
+\mathcal{C}=N_{c p, i}-N_{o p, i}=\left(\ell-N_{c p, o}\right)-\left(\ell-N_{o p, o}\right)=N_{o p, o}-N_{c p, o} .
+\]</div>
+<p>The closed loop system is stable if <span class="arithmatex">\(N_{c p, o}=0\)</span>, i.e., there are no closed loop poles outside the unit circle. Hence, we have proved the Nyquist stability criterion:</p>
+<div class="arithmatex">\[
+\text { If } N_{o p, 0}-C=0, C=N_{o p, 0}
+\]</div>
+<p>The closed loop system is stable if and only if the number of encirclements of the origin by <span class="arithmatex">\(1+K G\left(e^{j \theta}\right)\)</span> as <span class="arithmatex">\(\theta\)</span> increases from <span class="arithmatex">\(-\pi\)</span> to <span class="arithmatex">\(\pi\)</span> equals the number of open loop poles <span class="arithmatex">\(N_{\text {op,o }}\)</span> strictly outside the unit circle <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(\mathcal{C} = N_{op,o}\)</span></p>
+<p>Hence we have proved a preliminary version of the Nyquist criterion:</p>
+<div class="admonition note">
+<p class="admonition-title">Nyquist Stability Criterion (preliminary)</p>
+<p>The closed loop system is stable if and only if the number of encirclements of the origin by <span class="arithmatex">\(1+K G\left(e^{j \theta}\right)\)</span> as <span class="arithmatex">\(\theta\)</span> increases from <span class="arithmatex">\(-\pi\)</span> to <span class="arithmatex">\(\pi\)</span> equals the number of open loop poles <span class="arithmatex">\(N_{o p, o}\)</span> strictly outside the unit circle.</p>
+</div>
+<h4 id="6-shifting-encirclements-to-1k">6. Shifting encirclements to <span class="arithmatex">\(-1/K\)</span><a class="headerlink" href="#6-shifting-encirclements-to-1k" title="Permanent link">&para;</a></h4>
+<p>When <span class="arithmatex">\(1+K G\left(e^{j \theta}\right)\)</span> encircles the origin,
+- <span class="arithmatex">\(K G\left(e^{j \theta}\right)\)</span> encircles the point</p>
+<div class="arithmatex">\[
+-1=e^{j \pi}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(G\left(e^{j \theta}\right)\)</span> encircles</li>
+</ul>
+<div class="arithmatex">\[
+-1 / K
+\]</div>
+<p>Hence, the number <span class="arithmatex">\(\mathcal{C}\)</span> of encirclements of the point <span class="arithmatex">\(-\mathbf{1} / \mathrm{K}\)</span> by <span class="arithmatex">\(G\left(e^{j \theta}\right)\)</span> as <span class="arithmatex">\(\theta\)</span> goes from <span class="arithmatex">\(-\pi\)</span> to <span class="arithmatex">\(\pi\)</span> (the Nyquist diagram!!) satisfies</p>
+<div class="arithmatex">\[
+\mathcal{C}=N_{c p, i}-N_{o p, i}=N_{o p, o}-N_{c p, o} .
+\]</div>
+<h4 id="7-finally-the-nyquist-stability-criterion">7. Finally, the Nyquist stability criterion!<a class="headerlink" href="#7-finally-the-nyquist-stability-criterion" title="Permanent link">&para;</a></h4>
+<p>The closed loop system is stable if <span class="arithmatex">\(N_{c p, o}=0\)</span>, i.e., there are no closed loop poles outside the unit circle. Hence, we have proved the Nyquist stability criterion:</p>
+<div class="admonition note">
+<p class="admonition-title">Nyquist stability criterion (final)</p>
+<p>The closed loop system is stable if and only if the number of encirclements of <span class="arithmatex">\(-1 / K)\)</span> by <span class="arithmatex">\(G\left(e^{j \theta}\right)\)</span> as <span class="arithmatex">\(\theta\)</span> increases from <span class="arithmatex">\(-\pi\)</span> to <span class="arithmatex">\(\pi\)</span> equals the number of open loop poles <span class="arithmatex">\(N_{o p, o}\)</span> strictly outside the unit circle.</p>
+</div>
+<h3 id="3-nyquist-stability-criterion-completions">3. Nyquist stability criterion completions<a class="headerlink" href="#3-nyquist-stability-criterion-completions" title="Permanent link">&para;</a></h3>
+<h4 id="methodology">Methodology<a class="headerlink" href="#methodology" title="Permanent link">&para;</a></h4>
+<ol>
+<li>draw a pole-zero diagram of the open loop system <span class="arithmatex">\(G(z)\)</span></li>
+<li>count the number of poles strictly outside the unit circle -- the number <span class="arithmatex">\(\mathcal{C}\)</span> of encirclements of <span class="arithmatex">\(-1/K\)</span> necessary to achieve stability</li>
+<li>draw the Nyquist locus of <span class="arithmatex">\(G\left(e^{j \theta}\right)\)</span> for <span class="arithmatex">\(\theta\)</span> from 0 to <span class="arithmatex">\(\pi\)</span> (this is always given to you in examples and exams)</li>
+<li>work out the values of <span class="arithmatex">\(G\left(e^{j \theta}\right)\)</span> for <span class="arithmatex">\(\theta=0, \theta=\pi\)</span> and any key points of interest and annotate those on the graph. You may want to annotate the "direction" of the curve from 0 to <span class="arithmatex">\(\pi\)</span>.</li>
+<li>complete the graph for <span class="arithmatex">\(\theta\)</span> from <span class="arithmatex">\(\pi\)</span> to <span class="arithmatex">\(2 \pi\)</span> (or, equivalently, <span class="arithmatex">\(-\pi\)</span> to 0 ) by symmetry (mirror around the real axis, assuming an open loop system with a real delta response.)</li>
+<li>if the open loop system has poles on the unit circle, you can work out the asymptotes as the locus goes to infinity, and how the curves connect "at infinity" (more about this later)</li>
+<li>apply the Nyquist stability criterion to determine range(s) of <span class="arithmatex">\(K\)</span> for which the closed loop system is stable</li>
+</ol>
+<h4 id="analysis-on-the-k-1b_0-case-excluded-in-the-previous-proof">Analysis on the <span class="arithmatex">\(K = -1/b_0\)</span> case (excluded in the previous proof)<a class="headerlink" href="#analysis-on-the-k-1b_0-case-excluded-in-the-previous-proof" title="Permanent link">&para;</a></h4>
+<ul>
+<li>If <span class="arithmatex">\(K = -1/b_0\)</span>, the denominator degree <span class="arithmatex">\(n\)</span> is smaller than the numerator degree <span class="arithmatex">\(m\)</span></li>
+<li>This is an <strong>illegal</strong> transfer function because the polynomial division gives terms in positive powers of <span class="arithmatex">\(z\)</span> - time advance!</li>
+<li>This indicates that output depends on <strong>future input</strong></li>
+<li>This does not correspond to the delta response of a system via the one-sided <span class="arithmatex">\(z\)</span> transform</li>
+</ul>
+<h4 id="analysis-on-the-location-of-poles">Analysis on the location of poles<a class="headerlink" href="#analysis-on-the-location-of-poles" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Poles on the unit circle also correspond to an unstable open loop pole</li>
+<li><strong>Closed loop poles</strong> will be on the unit circle exactly on the boundary of the stable ranges of <span class="arithmatex">\(K\)</span></li>
+<li>Hence the inequalities defining the stable range of <span class="arithmatex">\(K\)</span> are <strong>strict inequalities</strong></li>
+</ul>
+<h4 id="analysis-on-the-open-loop-poles-on-the-unit-circle">Analysis on the open loop poles on the unit circle<a class="headerlink" href="#analysis-on-the-open-loop-poles-on-the-unit-circle" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The open loop poles on the unit circle will cause the Nyquist diagram to go to infinity as it pass through the pole on the unit circle</li>
+<li>for the closed loop <span class="arithmatex">\(<span class="arithmatex">\(H(z)=\frac{K G(z)}{1+K G(z)}\)</span>\)</span> tends to 1 around the open loop pole</li>
+<li>hence the open loop should be counted as being <strong>inside</strong> the unit circle</li>
+<li>the path of <span class="arithmatex">\(z\)</span> around the poles on the unit circle is indented with a small semi-circular extrusion outside the unit circle</li>
+<li>the "right turn" in the z-plane then gives a "right turn" in the <span class="arithmatex">\(G\)</span>-plane and a circular arc of large radius is produced which continues for <span class="arithmatex">\(m\pi\)</span> radians, where <span class="arithmatex">\(m\)</span> is the multiplicity of the pole on the unit circle</li>
+<li>if there is an open-loop pole of multiplicity <strong>one</strong> on the unit circle, the Nyquist diagram will be asymptotic to a straight line as it tends to infinity -- the asymptote can be found with Taylor expansion</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
