@@ -8,6 +8,7 @@ X(\theta)=\sum_{k=-\infty}^{\infty} x_k e^{-j k \theta} \text { where } \theta=\
 $$
 
 **cannot be evaluated numerically:**
+
 - it results in a continuous spectrum
 - it requires an infinite sum
 It could be computed numerically if we made the following simplifications:
@@ -21,6 +22,7 @@ X_n=\sum_{k=0}^{N-1} x_k e^{-j \frac{2 \pi}{N} k n}
 $$
 
 for $0 \leq n \leq N-1$.
+
 - **Can be computed numerically**
 - works for to all integers $n$, with an $N$-period spectrum because 
 $$
@@ -272,7 +274,7 @@ Assume that the FFT length can be factorised into two integers $M$ and $L$: $$N=
 #### Arranging vectors into an $L\times M$ array
 - re-consider a vector ( $\vec{x}$ or $\vec{X}$ ) as an $L \times M$ array with $L$ rows and $M$ columns, i.e., 
 <figure markdown="span">
-![L-M-array](../assets/Discrete_Fourier_Transform/L-M-array.png){width=50%}
+![L-M-array](assets/Discrete_Fourier_Transform/L-M-array.png){width=50%}
 </figure>
 - "row major form": consecutive entries in a row are consecutive in $\vec{x}$ while consecutive entries in a column are $M$ apart in $\vec{x}$
 #### Indexing
@@ -359,7 +361,7 @@ Using length $N$ FFT to do linear convolutions with an FIR of length $L+1 \ll N$
 7. take the inverse FFT $\vec{y}_n^{\prime}$ of $\vec{Y}_n^{\prime}$ and discard the first $L$ terms of $\vec{y}_n^{\prime}$ to obtain $\vec{y}_n$, giving the next $N-L$ terms of the output sequence $\{y\}_{k \geq 0}$, then increment $n$ and go back to step 5
 
 <figure markdown="span">
-![overlap-and-save](../assets/Discrete_Fourier_Transform/overlap-and-save.png){width=50%}
+![overlap-and-save](assets/Discrete_Fourier_Transform/overlap-and-save.png){width=50%}
 </figure>
 
 ### 3. Interpolation and decimation

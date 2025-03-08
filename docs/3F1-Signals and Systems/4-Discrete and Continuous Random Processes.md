@@ -1,7 +1,8 @@
 ## Overview
 <figure markdown="span">
-![random-process-overview](../assets/Discrete_and_Continuous%20Random%20Processes/random-process-overview.png){width=50%}
+![random-process-overview](assets/Discrete_and_Continuous%20Random%20Processes/random-process-overview.png){width=50%}
 </figure>
+
 ## I. Introduction to random processes
 ### 1. Definition of a random process
 - A random process is a random signal (discrete or continuous) for which the joint density of any collection of any $n$ signal values $\left(X_{t_1}, X_{t_2}, \ldots, X_{t_n}\right)$ is known and well defined.
@@ -160,7 +161,7 @@ X(t)=\sum_{k=\frac{-T}{2 b}}^{\frac{T}{2 b}-1} x_k p(t-k b)
 $$
 
 <figure markdown="span">
-![continuous-time-white-noise](../assets/Discrete_and_Continuous%20Random%20Processes/continuous-time-white-noise.png){width=50%}
+![continuous-time-white-noise](assets/Discrete_and_Continuous%20Random%20Processes/continuous-time-white-noise.png){width=50%}
 </figure>
 
 ### Analysis

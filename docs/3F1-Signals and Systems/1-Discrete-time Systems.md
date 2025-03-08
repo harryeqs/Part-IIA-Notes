@@ -184,8 +184,11 @@ The DTFT obeys the same properties.
 
 - $\mathcal{Z}\left\{q^k\right\}_{k \geq 0}=\frac{1}{1-q z^{-1}}=\frac{z}{z-q}$
 
-- Using the differentiation property of linearity $$
-\mathcal{Z}\left[\frac{d}{d q}\left[1, q, q^2, \ldots\right]\right]=\mathcal{Z}\left[0,1,2 q, 3 q^2, \ldots\right]=\frac{d}{d q} \frac{1}{1-q z^{-1}}=\frac{z^{-1}}{\left(1-q z^{-1}\right)^2}$$In other words, the $z$ transform of the signal $u_0=0, u_k=k q^{k-1}$ for $k>0$ is $\frac{z^{-1}}{\left(1-q z^{-1}\right)^2} .=\frac{z}{(z-q)^2}$
+- Using the differentiation property of linearity 
+$$
+\mathcal{Z}\left[\frac{d}{d q}\left[1, q, q^2, \ldots\right]\right]=\mathcal{Z}\left[0,1,2 q, 3 q^2, \ldots\right]=\frac{d}{d q} \frac{1}{1-q z^{-1}}=\frac{z^{-1}}{\left(1-q z^{-1}\right)^2}
+$$
+In other words, the $z$ transform of the signal $u_0=0, u_k=k q^{k-1}$ for $k>0$ is $\frac{z^{-1}}{\left(1-q z^{-1}\right)^2} .=\frac{z}{(z-q)^2}$
 
 - By binomial expansion $$\mathcal{Z}\left[\frac{(k+m-2)!}{(k-1)!(m-1)!}\right]=\frac{z^{-1}}{\left(1-z^{-1}\right)^m} \text{ for all }m \geq 1$$
 
@@ -206,8 +209,11 @@ $$
 \mathcal{Z}[\sin \alpha k]=\frac{z^{-1} \sin \alpha}{1-2 z^{-1} \cos \alpha+z^{-2}}
 $$
 
-- Scaling a sequence with a geometric sequence results in $$
-\mathcal{Z}\left[r^k u_k\right]=\sum_{k=0}^{\infty} u_k r^k z^{-k}=\sum_{k=0}^{\infty} u_k\left(r^{-1} z\right)^{-k}=U\left(r^{-1} z\right) $$
+- Scaling a sequence with a geometric sequence results in 
+
+$$
+\mathcal{Z}\left[r^k u_k\right]=\sum_{k=0}^{\infty} u_k r^k z^{-k}=\sum_{k=0}^{\infty} u_k\left(r^{-1} z\right)^{-k}=U\left(r^{-1} z\right) 
+$$
 
 ### 7. Time shift properties of the DTFT
 
@@ -379,7 +385,7 @@ $$
 
 ### 2. FIR / IIR in the $z$ domain
 <figure markdown="span">
-![LTIS-implementation](../assets//Discrete-time_Systems/LTIS-implementation.png){width=50%}
+![LTIS-implementation](assets//Discrete-time_Systems/LTIS-implementation.png){width=50%}
 </figure>
 
 - the $a$ coefficients (denominator of $G(z)$) point in opposite direction from input to output $\Rightarrow$ 
@@ -418,11 +424,11 @@ $\Rightarrow$ poles of $G(z)$ define the response to a pulse delta
 
 - Real poles:
 <figure markdown="span">
-![real-poles](../assets/Discrete-time_Systems/real-poles.png){width=50%}
+![real-poles](assets/Discrete-time_Systems/real-poles.png){width=50%}
 </figure>
 - Complex conjugate poles:
 <figure markdown="span">
-![complex-poles](../assets/Discrete-time_Systems/complex-conj-poles.png){width=50%}
+![complex-poles](assets/Discrete-time_Systems/complex-conj-poles.png){width=50%}
 </figure>
 - Repeated poles:
 
@@ -439,7 +445,7 @@ rewrite as $G(z)=\frac{1}{1-p z^{-1}}+\frac{p z^{-1}}{\left(1-p z^{-1}\right)^2}
 ### 5. BIBO stability
 - A discrete time system is **stable** if bounded inputs give bounded output ("BIBO stability")
 <figure markdown="span">
-![BIBO](../assets/Discrete-time_Systems/BIBO.png){width=60%}
+![BIBO](assets/Discrete-time_Systems/BIBO.png){width=60%}
 </figure>	
 - Definition of bounded: for a signal $\{u_k\}$, the signal is bounded if there exists a positive constant M such that $|u_k| < M \text{ for all } k$
 - The definition is more subtle than appears:
@@ -654,11 +660,11 @@ $$
 ### 2. Steady-state responses to various inputs
 - Steady-state response to a *complex* sinusoidal input
 <figure markdown="span">
-![complex-sine-steady-state](../assets/Discrete-time_Systems/complex-sine-steady-state.png){width=50%}
+![complex-sine-steady-state](assets/Discrete-time_Systems/complex-sine-steady-state.png){width=50%}
 </figure>
 - Steady-state response to a *real* sinusoidal input
 <figure markdown="span">
-![real-sine-steady-state](../assets/Discrete-time_Systems/real-sine-steady-state.png){width=50%}
+![real-sine-steady-state](assets/Discrete-time_Systems/real-sine-steady-state.png){width=50%}
 </figure>
 ### 3. Bode diagrams
 - Every signal at the input can be decomposed into sum of sinusoids
@@ -686,7 +692,7 @@ $$
 $$
 
 <figure markdown="span">
-![decompose-bode](../assets/Discrete-time_Systems/decompose-bode.png){width=60%}
+![decompose-bode](assets/Discrete-time_Systems/decompose-bode.png){width=60%}
 </figure>
 #### Hints on Bode diagrams
 - The magnitude of the frequency response is given by the product of the distances from the zeros to $e^{j\theta}$ divided by the product of the distances from the poles to $e^{j\theta}$
@@ -700,7 +706,7 @@ $$
 ## VI. Nyquist stability criterion
 ### 1. Closed loop control systems
 <figure markdown="span">
-![closed-loop-control-systems](../assets/Discrete-time_Systems/closed-loop-control-systems.png){width=40%}
+![closed-loop-control-systems](assets/Discrete-time_Systems/closed-loop-control-systems.png){width=40%}
 </figure>
 ### 2. Derivation of the Nyquist stability criterion
 #### Nyquist diagram definition
@@ -710,6 +716,7 @@ $\mathbf{G}(\mathbf{e}^{\mathbf{j} \theta})$ drawn in the complex plane (Argand 
 	The closed loop system is stable if and only if the number of encirclements of $-1 / K$ by $G\left(e^{j \theta}\right)$ as $\theta$ increases from $-\pi$ to $\pi$ equals the number of open loop poles strictly outside the unit circle.
 
 #### Outline of the proof of the criterion
+
 1. poles/zeros and encirclements of the origin
 2. counting encirclements of the origin
 3. poles and zeros of $1+K G(z)$ and corresponding encirclements
@@ -726,7 +733,7 @@ $$
 and remember that $$\angle F\left(e^{j \theta}\right)=\angle A+\sum_{i=1}^m \angle\left(e^{j \theta}-z_i\right)-\sum_{i=1}^n \angle\left(e^{j \theta}-p_i\right)$$(counterclockwise encirclements used here)
 
 <figure markdown="span">
-![encirclement-property](../assets/Discrete-time_Systems/encirclement-property.png){width=40%}
+![encirclement-property](assets/Discrete-time_Systems/encirclement-property.png){width=40%}
 </figure>
 
 Note that a pole on the unit circle causes an encirclement just the same as a zero (pole) **inside the unit circle** (the phase jumps by $\pi$ when it passes the zero).
@@ -748,12 +755,21 @@ $$
 $$
 
 #### 3. Zeros and poles of $1 + KG(z)$
-Re-writing $G(z)$ as $$G(z) = \frac{b(z)}{a(z)}$$$$1+K G(z)=\frac{a(z)+K b(z)}{a(z)}$$
+Re-writing $G(z)$ as
+$$
+G(z) = \frac{b(z)}{a(z)}
+$$
+$$
+1+K G(z)=\frac{a(z)+K b(z)}{a(z)}
+$$
 and that the closed loop poles are solutions of $1+K G(z)=0$.
-Hence 
+Hence
+
 - the **zeros** of $1+K G(z)$ (when $a(z)+K b(z)=0$ ) are the **closed loop poles**
 - the **poles** of $1+K G(z)$ (when $a(z)=0)$ are the **open loop poles**
+
 Let
+
 - $N_{z, i}$ be the number of zeros of $1+K G(z)$ inside the unit circle
 - $N_{p, i}$ be the number of poles of $1+K G(z)$ inside the unit circle
 This is equivalent to
@@ -794,6 +810,7 @@ with equality unless $1+K b_0=0$ (coefficient cancels). We will assume for now t
 
 #### 5. Pole arithmetic
 Since $\operatorname{deg}(a(z)+K b(z))=\operatorname{deg}(a(z))=\ell$, both the numerator and denominator of $1+K G(z)$ have $\ell$ roots. Some of them may be inside the unit circle and some outside the unit circle. If we complete our list of pole counters to
+
 - $N_{c p, i}=N_{z, i}$ counts **closed loop poles** inside the unit circle
 - $N_{o p, i}=N_{p, i}$ counts **open loop poles** inside the unit circle
 - $N_{c p, o}=N_{z, o}$ counts **closed loop poles** outside the unit circle
@@ -824,19 +841,19 @@ Hence we have proved a preliminary version of the Nyquist criterion:
 
 #### 6. Shifting encirclements to $-1/K$
 When $1+K G\left(e^{j \theta}\right)$ encircles the origin,
-- $K G\left(e^{j \theta}\right)$ encircles the point
+$- K G\left(e^{j \theta}\right)$ encircles the point
 
 $$
 -1=e^{j \pi}
 $$
 
-- $G\left(e^{j \theta}\right)$ encircles
+$G\left(e^{j \theta}\right)$ encircles
 
 $$
 -1 / K
 $$
 
-Hence, the number $\mathcal{C}$ of encirclements of the point $-\mathbf{1} / \mathrm{K}$ by $G\left(e^{j \theta}\right)$ as $\theta$ goes from $-\pi$ to $\pi$ (the Nyquist diagram!!) satisfies
+hence, the number $\mathcal{C}$ of encirclements of the point $-\mathbf{1} / \mathrm{K}$ by $G\left(e^{j \theta}\right)$ as $\theta$ goes from $-\pi$ to $\pi$ (the Nyquist diagram!!) satisfies
 
 $$
 \mathcal{C}=N_{c p, i}-N_{o p, i}=N_{o p, o}-N_{c p, o} .
@@ -870,8 +887,15 @@ The closed loop system is stable if $N_{c p, o}=0$, i.e., there are no closed lo
 
 #### Analysis on the open loop poles on the unit circle
 - The open loop poles on the unit circle will cause the Nyquist diagram to go to infinity as it pass through the pole on the unit circle
-- for the closed loop $$H(z)=\frac{K G(z)}{1+K G(z)}$$ tends to 1 around the open loop pole
+- for the closed loop
+
+	$$
+	H(z)=\frac{K G(z)}{1+K G(z)}
+	$$
+
+	tends to 1 around the open loop pole
+
 - hence the open loop should be counted as being **inside** the unit circle
 - the path of $z$ around the poles on the unit circle is indented with a small semi-circular extrusion outside the unit circle
 - the "right turn" in the z-plane then gives a "right turn" in the $G$-plane and a circular arc of large radius is produced which continues for $m\pi$ radians, where $m$ is the multiplicity of the pole on the unit circle
-- if there is an open-loop pole of multiplicity **one** on the unit circle, the Nyquist diagram will be asymptotic to a straight line as it tends to infinity -- the asymptote can be found with Taylor expansion
+- if there is an open-loop pole of multiplicity **one** on the unit circle, the Nyquist diagram will be asymptotic to a straight line as it tends to infinity — the asymptote can be found with Taylor expansion

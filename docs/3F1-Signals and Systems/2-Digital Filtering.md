@@ -76,7 +76,7 @@ this coincides with the quadratic expansion of $e^{s T}$
 Each of these transformations corresponds to a certain mapping between $s$-plane and $z$-plane
 
 <figure markdown="span">
-![s-z-mapping](../assets/Digital_Filtering/s-z-mapping.png){ width=60% }
+![s-z-mapping](assets/Digital_Filtering/s-z-mapping.png){ width=60% }
 </figure>
 
 Backward difference and Tustin transformation applied to stable continuous systems **result in** stable discrete time systems -- not necessarily true for Euler's method!
@@ -153,7 +153,7 @@ $$
 
 ### 2. Response matching
 <figure markdown="span">
-![DAC-ADC](../assets/Digital_Filtering/DAC-ADC.png){width=50%}
+![DAC-ADC](assets/Digital_Filtering/DAC-ADC.png){width=50%}
 </figure>
 Goal: find the transfer function $G(z)$ from $\left\{u_k\right\}_{k \geq 0}$ to $\left\{y_k\right\}_{k \geq 0}$ 
 Approach: take an appropriate input, find the output, take the ratio of the $z$ transform
@@ -212,7 +212,7 @@ Note: any waveform invariance can be considered. The digital filter will preserv
 ## II. Digital filtering
 ### 1. Desired frequency responses
 <figure markdown="span">
-![desired-frequency-responses](../assets/Digital_Filtering/desired-frequency-responses.png){width=50%}
+![desired-frequency-responses](assets/Digital_Filtering/desired-frequency-responses.png){width=50%}
 </figure>
 ### 2. Ideal lowpass delta response
 
@@ -220,15 +220,16 @@ $$
 \begin{aligned} g_k & =\frac{1}{2 \pi} \int_{-\pi}^\pi G\left(e^{j \theta}\right) e^{j \theta k} d \theta=\frac{1}{2 \pi} \int_{-\theta_c}^{\theta_c} e^{j \theta k} d \theta \\ & =\frac{\sin \left(\theta_c k\right)}{\pi k}=\frac{\theta_c}{\pi} \operatorname{sinc}\left(\theta_c k\right)\end{aligned}
 $$
 <figure markdown="span">
-![ideal-lp-delta-response](../assets/Digital_Filtering/ideal-lp-delta-response.png){width=50%}
+![ideal-lp-delta-response](assets/Digital_Filtering/ideal-lp-delta-response.png){width=50%}
 </figure>
 - This response is **non-causal** as $g_k \neq 0 \text{ for } k < 0$ (two-sided)
 - Not realisable as a real-time linear system since it is infinite
 
 ### 3. Realisable filter specs
 <figure markdown="span">
-![realisable-filter](../assets/Digital_Filtering/realisable-filter.png){width=50%}
+![realisable-filter](assets/Digital_Filtering/realisable-filter.png){width=50%}
 </figure>
+
 ### 4. FIR vs IIR filters
 #### FIR
 - FIR filters are simple
@@ -261,7 +262,7 @@ Note: response matching may be better suited for FIR design
 
 #### Classical analog prototypes
 <figure markdown="span">
-![classical-analog-prototypes](../assets/Digital_Filtering/classical-analog-prototypes.png){width=50%}
+![classical-analog-prototypes](assets/Digital_Filtering/classical-analog-prototypes.png){width=50%}
 </figure>
 #### Butterworth filter
 $N$ th-order lowpass, $G_c(s)$ satisfies
@@ -288,6 +289,7 @@ $$
 Prototypes are typically lowpass. Standard transformation can be used to convert a lowpass prototype into other types.
 
 Assuming a lowpass prototype with cutoff at 1 :
+
 - Lowpass to Lowpass: set $s=\frac{\bar{s}}{\omega_c}$ to change the cutoff frequency to $\omega_c$.
 - Lowpass to Highpass: set $s=\frac{\omega_c}{\bar{s}}$ to get highpass with cutoff frequency at $\omega_c$.
 - Lowpass to Bandpass:
@@ -295,7 +297,7 @@ set $s=\frac{\bar{s}^2+\omega_l \omega_u}{\bar{s}\left(\omega_\mu-\omega_l\right
 - Lowpass to Bandstop: set $s=\frac{\bar{s}\left(\omega_u-\omega_l\right)}{\bar{s}^2+\omega_{\mid} \omega_u}$ to get bandstop with lower cutoff at $\omega_l$ and upper cutoff at $\omega_u$.
 ### 6. FIR filter design
 <figure markdown="span">
-![FIR-shift-trunc](../assets/Digital_Filtering/FIR-shift-trunc.png){width=50%}
+![FIR-shift-trunc](assets/Digital_Filtering/FIR-shift-trunc.png){width=50%}
 </figure>
 - $h_k$ is non-causal impulse response of the ideal filter
 - New filter G derived by
@@ -365,7 +367,7 @@ This is approximately a sinc function.
 
 #### The effect of truncation
 <figure markdown="span">
-![window-function](../assets/Digital_Filtering/window-function.png){width=50%}
+![window-function](assets/Digital_Filtering/window-function.png){width=50%}
 </figure>
 - Transition band is related to main lobe. It reduces as $N \rightarrow \infty$.
 - Ripples of $G$ are related to the area under sidelobes, which remains constant as $N$ increases -- improved by redesigning the window function
@@ -396,12 +398,12 @@ $$
 
 #### Window plots
 <figure markdown="span">
-![window-plots](../assets/Digital_Filtering/window-plots.png){width=50%}
+![window-plots](assets/Digital_Filtering/window-plots.png){width=50%}
 </figure>
 
 #### Window characteristics
 <figure markdown="span">
-![window-characteristics](../assets/Digital_Filtering/window-characteristics.png){width=50%}
+![window-characteristics](assets/Digital_Filtering/window-characteristics.png){width=50%}
 </figure>
 #### Window method
 - Design filters to approximate a given target response
@@ -449,7 +451,7 @@ $$
 
 #### Linear phase filter
 <figure markdown="span">
-![linear-phase-filter](../assets/Digital_Filtering/linear-phase-filter.png){width=50%}
+![linear-phase-filter](assets/Digital_Filtering/linear-phase-filter.png){width=50%}
 </figure>
 Linear phase $G\left(e^{j \theta}\right)=\left|G\left(e^{j \theta}\right)\right| e^{-j \theta \frac{N}{2}}$ is achieved if $\mathbf{g}_{\mathbf{k}}=\mathbf{g}_{N-\mathbf{k}}$.
 
