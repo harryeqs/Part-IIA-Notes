@@ -1,0 +1,1839 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Notes for Part IIA Engineering at the University of Cambridge">
+      
+      
+        <meta name="author" content="Harry Ye">
+      
+      
+      
+        <link rel="prev" href="../2-Digital%20Filtering/">
+      
+      
+        <link rel="next" href="../4-Discrete%20and%20Continuous%20Random%20Processes/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>3 Discrete Fourier Transform - Harry's Part IIA Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#2960A5" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#i-discrete-fourier-transform" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Harry&#39;s Part IIA Notes" class="md-header__button md-logo" aria-label="Harry's Part IIA Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Harry's Part IIA Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3 Discrete Fourier Transform
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="#2960A5" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="#2960A5" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Harry&#39;s Part IIA Notes" class="md-nav__button md-logo" aria-label="Harry's Part IIA Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Harry's Part IIA Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About this site
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3F1 Signals and Systems
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            3F1 Signals and Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-Discrete-time%20Systems/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 Discrete time Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-Digital%20Filtering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 Digital Filtering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    3 Discrete Fourier Transform
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    3 Discrete Fourier Transform
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-discrete-fourier-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Discrete Fourier Transform
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Discrete Fourier Transform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-limitations-of-the-dtft" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Limitations of the DTFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-discrete-time-fourier-transform-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The Discrete-Time Fourier Transform (DFT)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The Discrete-Time Fourier Transform (DFT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relating-to-the-frequencies-of-the-sampled-signal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relating to the frequencies of the sampled signal
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-the-dft-as-a-matrix-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. The DFT as a matrix operation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. The DFT as a matrix operation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties-of-w_n" class="md-nav__link">
+    <span class="md-ellipsis">
+      Properties of \(W_N\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cyclic-properties-of-the-powers-of-w_n" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cyclic properties of the powers of \(W_N\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constructing-the-dft-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constructing the DFT matrix
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-properties-of-the-dft-matrix-mathbff" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Properties of the DFT matrix \(\mathbf{F}\)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Properties of the DFT matrix \(\mathbf{F}\)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sums-of-columns-of-mathbff" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sums of columns of \(\mathbf{F}\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orthogonality-of-mathbff" class="md-nav__link">
+    <span class="md-ellipsis">
+      Orthogonality of \(\mathbf{F}\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-inverse-of-mathbff" class="md-nav__link">
+    <span class="md-ellipsis">
+      The inverse of \(\mathbf{F}\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-inverse-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      The inverse DFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conjugate-symmetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conjugate symmetry
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-cyclic-convolution-property-of-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Cyclic convolution property of DFT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Cyclic convolution property of DFT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#circular-cyclic-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Circular (cyclic) convolution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof-of-the-circular-convolution-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proof of the circular convolution property
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-time-and-frequency-shift-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Time and frequency shift properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-parseval" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Parseval
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-the-fast-fourier-transform-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. The Fast Fourier Transform (FFT)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. The Fast Fourier Transform (FFT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-setup-of-the-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Setup of the FFT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Setup of the FFT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#factorising-the-fft-length-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      Factorising the FFT length \(N\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arranging-vectors-into-an-ltimes-m-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arranging vectors into an \(L\times M\) array
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indexing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rearranging-the-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rearranging the DFT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-2-stage-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The 2-stage FFT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The 2-stage FFT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complexity analysis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-applications-of-the-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. Applications of the DFT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. Applications of the DFT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cyclic-convolution-vs-linear-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Cyclic convolution vs linear convolution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Cyclic convolution vs linear convolution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cyclic-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cyclic convolution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linear-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linear convolution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-overlap-and-save-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Overlap and save method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-interpolation-and-decimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Interpolation and decimation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Interpolation and decimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interpolation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decimation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpolation-and-decimation-via-the-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interpolation and decimation via the FFT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-Discrete%20and%20Continuous%20Random%20Processes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 Discrete and Continuous Random Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3F3 Statistical Signal Processing
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            3F3 Statistical Signal Processing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F3-Statistical%20Signal%20Processing/1-Probability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 Probability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F3-Statistical%20Signal%20Processing/2-Random%20Processes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 Random Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F3-Statistical%20Signal%20Processing/3-Statistical%20Signal%20Processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 Statistical Signal Processing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F3-Statistical%20Signal%20Processing/4-Estimation%20Theory%20and%20Inference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 Estimation Theory and Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-discrete-fourier-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Discrete Fourier Transform
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Discrete Fourier Transform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-limitations-of-the-dtft" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Limitations of the DTFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-discrete-time-fourier-transform-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The Discrete-Time Fourier Transform (DFT)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The Discrete-Time Fourier Transform (DFT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relating-to-the-frequencies-of-the-sampled-signal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relating to the frequencies of the sampled signal
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-the-dft-as-a-matrix-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. The DFT as a matrix operation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. The DFT as a matrix operation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties-of-w_n" class="md-nav__link">
+    <span class="md-ellipsis">
+      Properties of \(W_N\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cyclic-properties-of-the-powers-of-w_n" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cyclic properties of the powers of \(W_N\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constructing-the-dft-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constructing the DFT matrix
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-properties-of-the-dft-matrix-mathbff" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Properties of the DFT matrix \(\mathbf{F}\)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Properties of the DFT matrix \(\mathbf{F}\)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sums-of-columns-of-mathbff" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sums of columns of \(\mathbf{F}\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orthogonality-of-mathbff" class="md-nav__link">
+    <span class="md-ellipsis">
+      Orthogonality of \(\mathbf{F}\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-inverse-of-mathbff" class="md-nav__link">
+    <span class="md-ellipsis">
+      The inverse of \(\mathbf{F}\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-inverse-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      The inverse DFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conjugate-symmetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conjugate symmetry
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-cyclic-convolution-property-of-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Cyclic convolution property of DFT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Cyclic convolution property of DFT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#circular-cyclic-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Circular (cyclic) convolution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proof-of-the-circular-convolution-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proof of the circular convolution property
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-time-and-frequency-shift-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Time and frequency shift properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-parseval" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Parseval
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-the-fast-fourier-transform-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. The Fast Fourier Transform (FFT)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. The Fast Fourier Transform (FFT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-setup-of-the-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Setup of the FFT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Setup of the FFT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#factorising-the-fft-length-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      Factorising the FFT length \(N\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arranging-vectors-into-an-ltimes-m-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arranging vectors into an \(L\times M\) array
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Indexing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rearranging-the-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rearranging the DFT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-2-stage-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The 2-stage FFT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The 2-stage FFT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complexity-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complexity analysis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-applications-of-the-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. Applications of the DFT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. Applications of the DFT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cyclic-convolution-vs-linear-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Cyclic convolution vs linear convolution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Cyclic convolution vs linear convolution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cyclic-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cyclic convolution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linear-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linear convolution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-overlap-and-save-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Overlap and save method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-interpolation-and-decimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Interpolation and decimation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Interpolation and decimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Motivation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interpolation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decimation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpolation-and-decimation-via-the-fft" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interpolation and decimation via the FFT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>3 Discrete Fourier Transform</h1>
+
+<h2 id="i-discrete-fourier-transform">I. Discrete Fourier Transform<a class="headerlink" href="#i-discrete-fourier-transform" title="Permanent link">&para;</a></h2>
+<h3 id="1-limitations-of-the-dtft">1. Limitations of the DTFT<a class="headerlink" href="#1-limitations-of-the-dtft" title="Permanent link">&para;</a></h3>
+<p>The DTFT</p>
+<div class="arithmatex">\[
+X(\theta)=\sum_{k=-\infty}^{\infty} x_k e^{-j k \theta} \text { where } \theta=\omega T=2 \pi f T
+\]</div>
+<p><strong>cannot be evaluated numerically:</strong></p>
+<ul>
+<li>it results in a continuous spectrum</li>
+<li>it requires an infinite sum
+It could be computed numerically if we made the following simplifications:</li>
+<li>evaluate it only at <span class="arithmatex">\(N\)</span> discrete frequencies on the unit circle (where <span class="arithmatex">\(N\)</span> can be made as large as desired). This is a <strong>"sampled spectrum".</strong></li>
+<li>compute only the first <span class="arithmatex">\(N\)</span> terms of the sum, i.e., for the <strong>"truncated" sequence</strong>: <span class="arithmatex">\(\left\{x_k\right\}_{0 \leq k \leq N-1}\)</span> </li>
+</ul>
+<h3 id="2-the-discrete-time-fourier-transform-dft">2. The Discrete-Time Fourier Transform (DFT)<a class="headerlink" href="#2-the-discrete-time-fourier-transform-dft" title="Permanent link">&para;</a></h3>
+<h4 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[
+X_n=\sum_{k=0}^{N-1} x_k e^{-j \frac{2 \pi}{N} k n}
+\]</div>
+<p>for <span class="arithmatex">\(0 \leq n \leq N-1\)</span>.</p>
+<ul>
+<li><strong>Can be computed numerically</strong></li>
+<li>works for to all integers <span class="arithmatex">\(n\)</span>, with an <span class="arithmatex">\(N\)</span>-period spectrum because 
+$$
+e^{-j \frac{2 \pi}{N} k(n+aN)}=e^{-j \frac{2 \pi}{N}kn}
+$$
+for any <span class="arithmatex">\(a\)</span>.</li>
+<li>The transform now maps a finite-length sequence <span class="arithmatex">\(\left\{x_k\right\}_{0 \leq k \leq N-1}\)</span> to a finite-length sequence: <span class="arithmatex">\(\left\{X_n\right\}_{0 \leq n \leq N-1}\)</span> <span class="arithmatex">\(\longrightarrow\)</span> these are vectors! (note indexation <strong>0</strong> to <span class="arithmatex">\(n-1\)</span> rather than 1 to <span class="arithmatex">\(n\)</span> )</li>
+</ul>
+<h4 id="relating-to-the-frequencies-of-the-sampled-signal">Relating to the frequencies of the sampled signal<a class="headerlink" href="#relating-to-the-frequencies-of-the-sampled-signal" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The <span class="arithmatex">\(N\)</span> frequency readings obtained from the DFT are sampled frequencies between 0 and <span class="arithmatex">\(2\pi\)</span> in normalised frequency <span class="arithmatex">\(\longrightarrow\)</span> <span class="arithmatex">\(2\pi\)</span> corresponds to the sampling frequency <span class="arithmatex">\(f_s\)</span></li>
+<li><span class="arithmatex">\(X_0\)</span> corresponds to frequency 0 ("D.C." or bias) <span class="arithmatex">\(\rightarrow\)</span> 0 if the sum of <span class="arithmatex">\(\vec{x}\)</span> is 0</li>
+<li>Position 1 to <span class="arithmatex">\(\lceil N / 2-1\rceil\)</span> correspond to equally spaced positive frequencies between 0 and <span class="arithmatex">\(\pi\)</span>, i.e., <span class="arithmatex">\(f_s / 2\)</span></li>
+<li>Position <span class="arithmatex">\(N-1\)</span> down to <span class="arithmatex">\(\lfloor N / 2+1\rfloor\)</span> correspond to "negative" frequencies between 0 and <span class="arithmatex">\(-\pi\)</span>, i.e., <span class="arithmatex">\(-f_s / 2\)</span></li>
+</ul>
+<h3 id="3-the-dft-as-a-matrix-operation">3. The DFT as a matrix operation<a class="headerlink" href="#3-the-dft-as-a-matrix-operation" title="Permanent link">&para;</a></h3>
+<p>The DFT as a matrix-vector operation:</p>
+<div class="arithmatex">\[
+\left[\begin{array}{c}
+X_0 \\
+X_1 \\
+X_2 \\
+\vdots \\
+X_{N-1}
+\end{array}\right]=\left[\begin{array}{cccc}
+1 &amp; 1 &amp; \ldots &amp; 1 \\
+1 &amp; e^{-j \frac{2 \pi}{N}} &amp; \ldots &amp; e^{-j \frac{2 \pi}{N}(N-1)} \\
+1 &amp; e^{-j \frac{2 \pi}{N} 2} &amp; \ldots &amp; e^{-j \frac{2 \pi}{N} 2(N-1)} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; e^{-j \frac{2 \pi}{N}(N-1)} &amp; \ldots &amp; e^{-j \frac{2 \pi}{N}(N-1)^2}
+\end{array}\right]\left[\begin{array}{c}
+x_0 \\
+x_1 \\
+x_2 \\
+\vdots \\
+x_{N-1}
+\end{array}\right]
+\]</div>
+<p>Using the notation <span class="arithmatex">\(W_N=e^{-j \frac{2 \pi}{N}}\)</span>, the DFT matrix becomes a <strong>Vandermonde</strong> matrix:</p>
+<div class="arithmatex">\[
+\mathbf{F}=\left[\begin{array}{ccccc}
+1 &amp; 1 &amp; 1 &amp; \ldots &amp; 1 \\
+1 &amp; W_N &amp; W_N^2 &amp; \ldots &amp; W_N^{N-1} \\
+1 &amp; W_N^2 &amp; W_N^4 &amp; \ldots &amp; W_N^{2(N-1)} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; W_N^{N-1} &amp; W_N^{2(N-1)} &amp; \ldots &amp; W_N^{(N-1)^2}
+\end{array}\right]
+\]</div>
+<h4 id="properties-of-w_n">Properties of <span class="arithmatex">\(W_N\)</span><a class="headerlink" href="#properties-of-w_n" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[
+W_N = e^{-j\frac{2\pi}{N}}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(W_N, W_N^2, W_N^3, \ldots, W_N^{N-1} \neq 1\)</span></li>
+<li>The <span class="arithmatex">\(N\)</span>-th power of <span class="arithmatex">\(W_N\)</span> is equal to one, i.e., <span class="arithmatex">\(W_N^N=W_N^0=1\)</span></li>
+<li><span class="arithmatex">\(W_N\)</span> is called a primitive <span class="arithmatex">\(N\)</span>-th root of unity</li>
+<li>For complex numbers, primitive roots of unity exist for every <span class="arithmatex">\(N\)</span>, i.e., either <span class="arithmatex">\(e^{j \frac{2 \pi}{N}}\)</span> of <span class="arithmatex">\(e^{-j \frac{2 \pi}{N}}\)</span></li>
+</ul>
+<h4 id="cyclic-properties-of-the-powers-of-w_n">Cyclic properties of the powers of <span class="arithmatex">\(W_N\)</span><a class="headerlink" href="#cyclic-properties-of-the-powers-of-w_n" title="Permanent link">&para;</a></h4>
+<p>Any integer <span class="arithmatex">\(k\)</span> can be written as</p>
+<div class="arithmatex">\[
+k=q N+r
+\]</div>
+<p>with <span class="arithmatex">\(0 \leq r&lt;N\)</span>, where <span class="arithmatex">\(q\)</span> is called the quotient of <span class="arithmatex">\(k\)</span> when divided by <span class="arithmatex">\(N\)</span> and <span class="arithmatex">\(r\)</span> is called the remainder and denoted</p>
+<div class="arithmatex">\[
+r=R_N(k)
+\]</div>
+<p>(this is known as "Euclid's division theorem")
+We can write</p>
+<div class="arithmatex">\[
+W_N^k=W_N^{q N+r}=\left(W_N^N\right)^q \cdot W_N^r=1^q \cdot W_N^r=W_N^r
+\]</div>
+<p>Hence, we have established that
+$$
+W_N<sup R_N_k_="R_N(k)">k=W_N</sup>
+$$</p>
+<p>Hence, the DFT Vandermonde matrix can be re-written so that powers of <span class="arithmatex">\(W_N\)</span> higher than <span class="arithmatex">\(N-1\)</span> are expressed as powers between 0 and <span class="arithmatex">\(N-1\)</span>.</p>
+<h4 id="constructing-the-dft-matrix">Constructing the DFT matrix<a class="headerlink" href="#constructing-the-dft-matrix" title="Permanent link">&para;</a></h4>
+<p>The structure of the DFT matrix is as follows:</p>
+<div class="arithmatex">\[
+\mathbf{F}=\left[\begin{array}{ccl}
+1 &amp; 1 \ldots &amp; \text { (Row 0: } N \text { ones) } \\
+1 &amp; W_N \cdots &amp; \text { (Row 1: powers 0 to } N-1 \text { of } W_N \text { ) } \\
+1 &amp; W_N^2 \cdots &amp; \text { (Row 2: every 2nd element of Row 1) } \\
+1 &amp; W_N^3 \cdots &amp; \text { (Row 3: every 3rd element of Row 1) } \\
+\cdots &amp; \ldots &amp; \cdots \\
+1 &amp; W_N^{N-1} \cdots &amp; \text { (Row } N-1: \text { Row } 1 \text { cyclically backward) }
+\end{array}\right]
+\]</div>
+<p>where "every <span class="arithmatex">\(k^{\text {th }}\)</span> element" is understood cyclically, 
+e.g., if you are in position <span class="arithmatex">\(N-2\)</span> and you are writing every second element, the next element is position <span class="arithmatex">\(R_N(N-2+2)=0\)</span> which is <span class="arithmatex">\(W_N^0=1\)</span>. The last row is "every <span class="arithmatex">\((N-1)^{\text {th }}\)</span> element" which is the same as going backward from position 0.</p>
+<h3 id="4-properties-of-the-dft-matrix-mathbff">4. Properties of the DFT matrix <span class="arithmatex">\(\mathbf{F}\)</span><a class="headerlink" href="#4-properties-of-the-dft-matrix-mathbff" title="Permanent link">&para;</a></h3>
+<h4 id="sums-of-columns-of-mathbff">Sums of columns of <span class="arithmatex">\(\mathbf{F}\)</span><a class="headerlink" href="#sums-of-columns-of-mathbff" title="Permanent link">&para;</a></h4>
+<p>Note first that</p>
+<div class="arithmatex">\[
+\left(W_N^k\right)^{\star}=\left(e^{-j \frac{2 \pi}{N} k}\right)^{\star}=W_N^{-k}=W_N^{N-k}
+\]</div>
+<p>Furthermore, note that for <span class="arithmatex">\(m \neq 0\)</span>,</p>
+<div class="arithmatex">\[
+\sum_{k=0}^{N-1} W_N^{k m}=\frac{1-\left(W_N^m\right)^N}{1-W_N}=\frac{1-W_N^{R_N(m N)}}{1-W_N}=\frac{1-1}{1-W_N}=0
+\]</div>
+<p>Hence, the sum of any column of <span class="arithmatex">\(\mathbf{F}\)</span> except column 0 is zero. The sum of column 0 is</p>
+<div class="arithmatex">\[
+\sum_{k=0}^{N-1} 1=N
+\]</div>
+<h4 id="orthogonality-of-mathbff">Orthogonality of <span class="arithmatex">\(\mathbf{F}\)</span><a class="headerlink" href="#orthogonality-of-mathbff" title="Permanent link">&para;</a></h4>
+<p>Let <span class="arithmatex">\(\vec{f}_{\ell}\)</span> be the <span class="arithmatex">\(\ell\)</span>-th column of a DFT matrix <span class="arithmatex">\(\mathbf{F}\)</span>. For <span class="arithmatex">\(\ell&gt;m\)</span>,</p>
+<div class="arithmatex">\[
+\overrightarrow{f_{\ell}} \cdot \overrightarrow{f_m}=\sum_{k=0}^{N-1} W_N^{\ell k}\left(W_N^{m k}\right)^{\star}=\sum_{k=0}^{N-1} W_N^{(\ell-m) k}
+\]</div>
+<p>which is the sum of the <span class="arithmatex">\((\ell-m)\)</span>-th column of <span class="arithmatex">\(F\)</span> and hence 0 if <span class="arithmatex">\(\ell&gt;m\)</span>.
+- For <span class="arithmatex">\(\ell=m\)</span> it is the sum of column zero, and hence <span class="arithmatex">\(\vec{f}_{\ell} \cdot \vec{f}_{\ell}=N\)</span>
+- Hence, the columns of <span class="arithmatex">\(\mathbf{F}\)</span> are <strong>orthogonal</strong> and that their magnitude is <span class="arithmatex">\(\sqrt{N}\)</span>. The same applies to the rows because <span class="arithmatex">\(\mathbf{F}\)</span> is symmetric.
+- The DFT is an orthogonal basis transform! (up to a scaling factor of <span class="arithmatex">\(N\)</span> )</p>
+<h4 id="the-inverse-of-mathbff">The inverse of <span class="arithmatex">\(\mathbf{F}\)</span><a class="headerlink" href="#the-inverse-of-mathbff" title="Permanent link">&para;</a></h4>
+<p>For a complex matrix <span class="arithmatex">\(\mathbf{A}\)</span> let <span class="arithmatex">\(\mathbf{A}^{\star}\)</span> denote its conjugate (Hermitian) transpose
+The orthogonality of <span class="arithmatex">\(\mathbf{F}\)</span> makes it easy to determine its inverse:</p>
+<div class="arithmatex">\[
+\mathbf{F}^{-1}=\frac{1}{N} \mathbf{F^{\star}} \quad \text { because } \quad \frac{1}{N} \mathbf{F F}^{\star}=\mathbf{I}_N
+\]</div>
+<p>where <span class="arithmatex">\(\mathbf{I}_N\)</span> denotes the <span class="arithmatex">\(N \times N\)</span> identity matrix.
+- Since <span class="arithmatex">\(\mathbf{F}\)</span> is a symmetric matrix, we can conjugate the entries of <span class="arithmatex">\(\mathbf{F}\)</span> to get its inverse matrix, and <strong>hence the inverse DFT</strong>
+- Since <span class="arithmatex">\(\left(W_N^k\right)^{\star}=W_N^{N-k}\)</span>, the inverse matrix <span class="arithmatex">\(\mathbf{F}^{-1}=\frac{1}{N} \mathbf{F}^{\star}\)</span> has the same row 0 as <span class="arithmatex">\(\mathbf{F}\)</span> (because <span class="arithmatex">\(1^{\star}=1\)</span> ) and its rows 1 to <span class="arithmatex">\(N-1\)</span> are the corresponding rows of <span class="arithmatex">\(\mathbf{F}\)</span> <strong>in reverse order</strong> (counting down from <span class="arithmatex">\(N-1\)</span> to 1)</p>
+<h4 id="the-inverse-dft">The inverse DFT<a class="headerlink" href="#the-inverse-dft" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[
+x_k=\frac{1}{N} \sum_{n=0}^{N-1} X_n W_N^{-k n}=\frac{1}{N} \sum_{n=0}^{N-1} X_n e^{j \frac{2 \pi}{N} k n}
+\]</div>
+<h4 id="conjugate-symmetry">Conjugate symmetry<a class="headerlink" href="#conjugate-symmetry" title="Permanent link">&para;</a></h4>
+<p>In a DFT matrix <span class="arithmatex">\(\mathbf{F}\)</span>, </p>
+<div class="arithmatex">\[
+ \vec{f}_n=\vec{f}_{N-n}^*, 
+\]</div>
+<p>i.e., columns (and rows) <span class="arithmatex">\(n\)</span> with <span class="arithmatex">\(n\)</span> in range 1 to <span class="arithmatex">\(\lceil N / 2-1\rceil\)</span> come in complex conjugate pairs with columns <span class="arithmatex">\(N-n\)</span>, while column 0 is real (all ones) and column <span class="arithmatex">\(N / 2\)</span> (for even <span class="arithmatex">\(N\)</span> ) is also real (alternating 1 s and -1 s ). 
+Hence, if the input vector <span class="arithmatex">\(\vec{x}\)</span> is real, the frequency domain output vector <span class="arithmatex">\(\vec{X}\)</span> exhibits conjugate symmetry </p>
+<div class="arithmatex">\[ 
+X_n=X_{N-n}^{\star} 
+\]</div>
+<p>In other words, </p>
+<div class="arithmatex">\[ 
+\left\{\begin{array}{l} \left|X_n\right|=\left|X_{N-n}\right| \\ \angle X_n=-\angle X_{N-n} \\ X_0 \text { is real } \\ \left.X_{N / 2} \text { is real (for even } N\right) \end{array}\right. 
+\]</div>
+<p>Conversely, if an input time-domain vector obeys the conjugate symmetry property, its DFT is real.
+<strong>In summary:</strong>
+- Real time-domain vector <span class="arithmatex">\(\longrightarrow\)</span> conjugate symmetric frequency-domain vector
+- Conjugate symmetric time-domain vector <span class="arithmatex">\(\longrightarrow\)</span> real frequency-domain vector</p>
+<h3 id="5-cyclic-convolution-property-of-dft">5. Cyclic convolution property of DFT<a class="headerlink" href="#5-cyclic-convolution-property-of-dft" title="Permanent link">&para;</a></h3>
+<h4 id="circular-cyclic-convolution">Circular (cyclic) convolution<a class="headerlink" href="#circular-cyclic-convolution" title="Permanent link">&para;</a></h4>
+<p>The circular convolution of vectors <span class="arithmatex">\(\vec{x}\)</span> and <span class="arithmatex">\(\vec{y}\)</span></p>
+<div class="arithmatex">\[
+\vec{z}=\vec{x} \circledast \vec{y}
+\]</div>
+<p>is defined as </p>
+<div class="arithmatex">\[
+z_k=\sum_{m=0}^{N-1} x_m y_{R_N(k-m)}
+\]</div>
+<p>i.e., like a regular discrete convolution but the index of the second vector is taken "circularly" between 0 and <span class="arithmatex">\(N-1\)</span> by taking <span class="arithmatex">\(k-m\)</span> "modulo <span class="arithmatex">\(N\)</span> "
+Like convolution, the circular convolution is commutative</p>
+<div class="arithmatex">\[
+\vec{x} \circledast \vec{y}=\vec{y} \circledast \vec{x}
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Circular Convolution Property</p>
+<p>Circular convolution in the time domain is equivalent to point-wise multiplication in the frequency domain, and vice versa.</p>
+</div>
+<h4 id="proof-of-the-circular-convolution-property">Proof of the circular convolution property<a class="headerlink" href="#proof-of-the-circular-convolution-property" title="Permanent link">&para;</a></h4>
+<p>Let <span class="arithmatex">\(\vec{z}=\vec{x} \circledast \vec{y}\)</span> and let <span class="arithmatex">\(\vec{Z}\)</span> be the DFT of <span class="arithmatex">\(\vec{z}\)</span>. We have</p>
+<div class="arithmatex">\[
+\begin{aligned}
+Z_n &amp; =\sum_{k=0}^{N-1} z_k W_N^{k n}=\sum_{k=0}^{N-1}\left(\sum_{m=0}^{N-1} x_m y_{R_N(k-m)}\right) W_N^{k n} \\
+&amp; =\sum_{m=0}^{N-1} x_m \sum_{k=0}^{N-1} y_{R_N(k-m)} W_N^{k n} \longrightarrow k^{\prime}=R_N(k-m) \\
+&amp; =\sum_{m=0}^{N-1} x_m \sum_{k^{\prime}=0}^{N-1} y_{k^{\prime}} W_N^{n R_N\left(k^{\prime}+m\right)}=\sum_{m=0}^{N-1} x_m \sum_{k^{\prime}=0}^{N-1} y_{k^{\prime}} W_N^{n\left(k^{\prime}+m\right)} \\
+&amp; =\sum_{m=0}^{N-1} x_m W_N^{n m} \sum_{k^{\prime}=0}^{N-1} y_{k^{\prime}} W_N^{n k^{\prime}}=X_n Y_n
+\end{aligned}
+\]</div>
+<p>The proof of the reverse property follows the same lines.</p>
+<h3 id="6-time-and-frequency-shift-properties">6. Time and frequency shift properties<a class="headerlink" href="#6-time-and-frequency-shift-properties" title="Permanent link">&para;</a></h3>
+<p>For DFT, the shift properties applies to <strong>cyclic</strong> time and frequency shifts.
+Consider the input shifted by <span class="arithmatex">\(d\)</span> cyclically, i.e. <span class="arithmatex">\(x_k^{\prime}=x_{R_N(k+d)}\)</span>, the DFT is:</p>
+<div class="arithmatex">\[
+\begin{aligned} X_n^{\prime} &amp; =\sum_{k=0}^{N-1} x_k^{\prime} W_N^{k n}=\sum_{k=0}^{N-1} x_{R_N(k+d)} W_N^{k n} \longrightarrow
+ k^{\prime}=R_N(k+d) \\ &amp; =\sum_{k^{\prime}=0}^{N-1} x_{k^{\prime}} W_N^{n R_N\left(k^{\prime}-d\right)}=\sum_{k^{\prime}=0}^{N-1} x_{k^{\prime}} W_N^{k^{\prime} n-d n} \\ &amp; =W_N^{-d n} \sum_{k^{\prime}=0}^{N-1} x_{k^{\prime}} W_N^{k^{\prime}}=W_N^{-d n} X_n\end{aligned}
+ \]</div>
+<p>Similarly, if <span class="arithmatex">\(X_n^{\prime}=X_{R_N(n+d)}\)</span>, then <span class="arithmatex">\(x_k^{\prime}=W_N^{d k} x_k\)</span></p>
+<h3 id="7-parseval">7. Parseval<a class="headerlink" href="#7-parseval" title="Permanent link">&para;</a></h3>
+<p>For an orthonormal basis transform, the dot product expressed in the new set of coordinates remains unchanged.
+The DFT as we defined it is orthogonal but the new basis vectors have a magnitude of <span class="arithmatex">\(\sqrt{N}\)</span> (not normalised)
+Hence, if <span class="arithmatex">\(\vec{X}=\mathbf{F} \vec{x}\)</span> and <span class="arithmatex">\(\vec{Y}=\mathbf{F} \vec{y}\)</span>,</p>
+<div class="arithmatex">\[
+\vec{X} \cdot \vec{Y}=\sum_{n=0}^{N-1} X_n Y_n^{\star}=N \vec{x} \cdot \vec{y}=N \sum_{k=0}^{N-1} x_k y_k^{\star}
+\]</div>
+<p>In particular,</p>
+<div class="arithmatex">\[
+\|\vec{x}\|^2=\sum_{k=0}^{N-1}\left|x_k\right|^2=\frac{\|\vec{X}\|^2}{N}=\frac{1}{N} \sum_{n=0}^{N-1}\left|X_n\right|^2
+\]</div>
+<h2 id="ii-the-fast-fourier-transform-fft">II. The Fast Fourier Transform (FFT)<a class="headerlink" href="#ii-the-fast-fourier-transform-fft" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">The Fast Fourier Trasform (FFT)</p>
+<p>In a nuthsell, FFT algorithms exploit properties of the DFT matrix F to perform the DFT <span class="arithmatex">\(\mathbf{F} \vec{x}\)</span> in <span class="arithmatex">\(O(N \log N)\)</span> operations instead of the <span class="arithmatex">\(O(N^2)\)</span> normally needed for a matrix vector multiplication.</p>
+</div>
+<h3 id="1-setup-of-the-fft">1. Setup of the FFT<a class="headerlink" href="#1-setup-of-the-fft" title="Permanent link">&para;</a></h3>
+<h4 id="factorising-the-fft-length-n">Factorising the FFT length <span class="arithmatex">\(N\)</span><a class="headerlink" href="#factorising-the-fft-length-n" title="Permanent link">&para;</a></h4>
+<p>Assume that the FFT length can be factorised into two integers <span class="arithmatex">\(M\)</span> and <span class="arithmatex">\(L\)</span>: <span class="arithmatex">\(<span class="arithmatex">\(N=ML\)</span>\)</span></p>
+<h4 id="arranging-vectors-into-an-ltimes-m-array">Arranging vectors into an <span class="arithmatex">\(L\times M\)</span> array<a class="headerlink" href="#arranging-vectors-into-an-ltimes-m-array" title="Permanent link">&para;</a></h4>
+<ul>
+<li>re-consider a vector ( <span class="arithmatex">\(\vec{x}\)</span> or <span class="arithmatex">\(\vec{X}\)</span> ) as an <span class="arithmatex">\(L \times M\)</span> array with <span class="arithmatex">\(L\)</span> rows and <span class="arithmatex">\(M\)</span> columns, i.e., </li>
+</ul>
+<figure>
+<img alt="L-M-array" src="../assets/Discrete_Fourier_Transform/L-M-array.png" width="50%" />
+</figure>
+<ul>
+<li>"row major form": consecutive entries in a row are consecutive in <span class="arithmatex">\(\vec{x}\)</span> while consecutive entries in a column are <span class="arithmatex">\(M\)</span> apart in <span class="arithmatex">\(\vec{x}\)</span></li>
+</ul>
+<h4 id="indexing">Indexing<a class="headerlink" href="#indexing" title="Permanent link">&para;</a></h4>
+<ul>
+<li>index time domain vectors <span class="arithmatex">\(\vec{x}\)</span> with the index <span class="arithmatex">\(k\)</span> and frequency domain vectors with the index <span class="arithmatex">\(n\)</span></li>
+<li>we now need a 2-dimensional indexing into the array</li>
+</ul>
+<div class="arithmatex">\[
+\left\{\begin{array}{l}
+k=\ell M+s \\
+n=m L+r
+\end{array}\right.
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\ell\)</span> and <span class="arithmatex">\(r\)</span> indicate the row number</li>
+<li><span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(s\)</span> indicate the column number</li>
+</ul>
+<h4 id="rearranging-the-dft">Rearranging the DFT<a class="headerlink" href="#rearranging-the-dft" title="Permanent link">&para;</a></h4>
+<p>Using <span class="arithmatex">\(\quad\left\{\begin{array}{l}k=\ell M+s \\ n=m L+r\end{array}\right.\)</span>
+Re-arrange the DFT expression</p>
+<div class="arithmatex">\[
+\begin{aligned}
+X_n=X_{m L+r} &amp; =\sum_{k=0}^{N-1} x_k W_N^{k n}=\sum_{s=0}^{M-1} \sum_{\ell=0}^{L-1} x_{\ell M+s} W_N^{(\ell M+s)(m L+r)} \\
+&amp; =\sum_{s=0}^{M-1} \sum_{\ell=0}^{L-1} x_{\ell M+s} W_N^{\ell m L M} W_N^{r \ell M} W_N^{s m L} W_N^{s r} \\
+&amp; =\sum_{s=0}^{M-1} W_M^{s m} W_N^{s r} \sum_{\ell=0}^{L-1} x_{\ell M+s} W_L^{r \ell}
+\end{aligned}
+\]</div>
+<p>where we have used the following</p>
+<div class="arithmatex">\[
+\begin{cases}W_N^{\ell m L M} &amp; =W_N^{\ell m N}=1 \\ W_N^L &amp; =W_M \\ W_N^M &amp; =W_L\end{cases}
+\]</div>
+<p>Derived from</p>
+<div class="arithmatex">\[
+W_N^L=e^{-j \frac{2 \pi}{L} L}=e^{-j \frac{2 \pi}{M \cdot L} \cdot L}=e^{-j \frac{2 \pi}{M}} = W_M
+\]</div>
+<h3 id="2-the-2-stage-fft">2. The 2-stage FFT<a class="headerlink" href="#2-the-2-stage-fft" title="Permanent link">&para;</a></h3>
+<p>The expression we have obtained divides the <span class="arithmatex">\(N\)</span> point DFT into 3 steps</p>
+<div class="arithmatex">\[
+X_{m L+r}=\underbrace{\sum_{s=0}^{M-1} W_M^{s m} \underbrace{W_N^{s r}}_{\substack{\text { twiddle } \\ \text { factor }}} \underbrace{\sum_{\ell=0}^{L-1} x_{\ell M+s} W_L^{r \ell}}_{\text {L point DFT }}}_{M \text { point DFT }}
+\]</div>
+<ol>
+<li>Take the <span class="arithmatex">\(L\)</span> point DFT of every column</li>
+<li>Multiply every element by its twiddle factor <span class="arithmatex">\(W_N^{s r}\)</span></li>
+<li>Take the <span class="arithmatex">\(M\)</span> point DFT of every row</li>
+</ol>
+<h4 id="complexity-analysis">Complexity analysis<a class="headerlink" href="#complexity-analysis" title="Permanent link">&para;</a></h4>
+<ul>
+<li>The regular <span class="arithmatex">\(N\)</span> point DFT requires: <span class="arithmatex">\(N^2\)</span> multiplications</li>
+<li>The FFT requires:<ol>
+<li><span class="arithmatex">\(L\)</span> DFTs of columns of length <span class="arithmatex">\(M\)</span>, i.e., <span class="arithmatex">\(L M^2\)</span> multiplications</li>
+<li><span class="arithmatex">\(N=M L\)</span> twiddle factor multiplications</li>
+<li><span class="arithmatex">\(M\)</span> DFTs of columns of length <span class="arithmatex">\(L\)</span>, i.e., <span class="arithmatex">\(M L^2\)</span> multiplications</li>
+</ol>
+</li>
+<li>Total: <span class="arithmatex">\(M L+M L^2+L M^2=M L(1+M+L)\)</span> multiplications</li>
+</ul>
+<h2 id="iii-applications-of-the-dft">III. Applications of the DFT<a class="headerlink" href="#iii-applications-of-the-dft" title="Permanent link">&para;</a></h2>
+<h3 id="1-cyclic-convolution-vs-linear-convolution">1. Cyclic convolution vs linear convolution<a class="headerlink" href="#1-cyclic-convolution-vs-linear-convolution" title="Permanent link">&para;</a></h3>
+<h4 id="cyclic-convolution">Cyclic convolution<a class="headerlink" href="#cyclic-convolution" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Cyclic convolution would be suitable where a variable is the modulo addition of the other variables (see lecture notes 12 for details)</li>
+<li>The sequences are cyclic</li>
+<li>Cyclic convolution is best evaluated using an FFT <span class="arithmatex">\(\rightarrow\)</span> component-wise multiplication <span class="arithmatex">\(\rightarrow\)</span> inverse FFT</li>
+</ul>
+<h4 id="linear-convolution">Linear convolution<a class="headerlink" href="#linear-convolution" title="Permanent link">&para;</a></h4>
+<ul>
+<li>For discrete convolution between one-sided sequences</li>
+<li>Cannot in general be computed via an FFT</li>
+<li>however, consider the case of an FIR filter of length <span class="arithmatex">\(L+1\)</span></li>
+</ul>
+<div class="arithmatex">\[
+\left\{y_k\right\}_{k \geq 0}=\left\{h_k\right\}_{0 \leq k \leq L} \star\left\{x_k\right\}_{k \geq 0}, \text { i.e., } y_k=\sum_{\ell=0}^L h_{\ell} x_{k-\ell} 
+\]</div>
+<ul>
+<li>
+<ul>
+<li>if you take a block <span class="arithmatex">\(\vec{x}=x_0, \ldots, x_{N-1}\)</span> and evaluate the circular convolution <span class="arithmatex">\(\vec{y}_c=\vec{h} \circledast \vec{x}\)</span>, the first <span class="arithmatex">\(L\)</span> outputs differ from the linear convolution because they depend on the last <span class="arithmatex">\(L\)</span> entries of the input block, whereas in the linear convolution they depend on the entries <span class="arithmatex">\(x_{-L}, \ldots, x_{-1}\)</span> which are assumed to be zero </li>
+<li>assuming that <span class="arithmatex">\(N \gg L\)</span>, many outputs beyond the first <span class="arithmatex">\(L\)</span> will be identical to the linear convolution</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-overlap-and-save-method">2. Overlap and save method<a class="headerlink" href="#2-overlap-and-save-method" title="Permanent link">&para;</a></h3>
+<p>Using length <span class="arithmatex">\(N\)</span> FFT to do linear convolutions with an FIR of length <span class="arithmatex">\(L+1 \ll N\)</span></p>
+<ol>
+<li>take FFT <span class="arithmatex">\(\vec{H}^{\prime}\)</span> of <span class="arithmatex">\(\vec{h}^{\prime}=[\vec{h}, 0,0, \ldots, 0]\)</span>, i.e., <span class="arithmatex">\(\vec{h}\)</span> and <span class="arithmatex">\(N-L\)</span> zeros</li>
+<li>take FFT <span class="arithmatex">\(\vec{X}_0^{\prime}\)</span> of block <span class="arithmatex">\(\vec{x}_0^{\prime}=\left[0, \ldots, 0, x_0, x_1, \ldots, x_{N-L-1}\right]\)</span>, i.e., <span class="arithmatex">\(L\)</span> zeros followed by the first <span class="arithmatex">\(N-L\)</span> terms of <span class="arithmatex">\(\left\{x_k\right\}_{k \geq 0}\)</span></li>
+<li>multiply <span class="arithmatex">\(\vec{X}_0^{\prime}\)</span> componentwise by <span class="arithmatex">\(\vec{H}^{\prime}\)</span> to obtain <span class="arithmatex">\(\vec{Y}_0^{\prime}\)</span></li>
+<li>take the inverse FFT <span class="arithmatex">\(\vec{y}_0^{\prime}\)</span> of <span class="arithmatex">\(\vec{Y}_0^{\prime}\)</span> and discard the first <span class="arithmatex">\(L\)</span> terms of <span class="arithmatex">\(\vec{y}_0^{\prime}\)</span> to obtain <span class="arithmatex">\(\vec{y}_0\)</span>, giving the first <span class="arithmatex">\(N-L\)</span> terms of the output sequence <span class="arithmatex">\(\{y\}_{k \geq 0}\)</span>. Set <span class="arithmatex">\(n=1\)</span>.</li>
+<li>take FFT <span class="arithmatex">\(\vec{X}_n^{\prime}\)</span> of <span class="arithmatex">\(\vec{x}_n^{\prime}=\left[x_{n(N-L)-L}, \ldots, x_{n(N-L)+N-L-1}\right]^T\)</span>, i.e., the last <span class="arithmatex">\(L\)</span> symbols of <span class="arithmatex">\(\vec{x}_{n-1}^{\prime}\)</span> followed by the next <span class="arithmatex">\(N-L\)</span> symbols of <span class="arithmatex">\(\left\{x_k\right\}_{k \geq 0}\)</span></li>
+<li>multiply <span class="arithmatex">\(\vec{X}_n^{\prime}\)</span> componentwise by <span class="arithmatex">\(\vec{H}^{\prime}\)</span> to obtain <span class="arithmatex">\(\vec{Y}_n^{\prime}\)</span></li>
+<li>take the inverse FFT <span class="arithmatex">\(\vec{y}_n^{\prime}\)</span> of <span class="arithmatex">\(\vec{Y}_n^{\prime}\)</span> and discard the first <span class="arithmatex">\(L\)</span> terms of <span class="arithmatex">\(\vec{y}_n^{\prime}\)</span> to obtain <span class="arithmatex">\(\vec{y}_n\)</span>, giving the next <span class="arithmatex">\(N-L\)</span> terms of the output sequence <span class="arithmatex">\(\{y\}_{k \geq 0}\)</span>, then increment <span class="arithmatex">\(n\)</span> and go back to step 5</li>
+</ol>
+<figure>
+<img alt="overlap-and-save" src="../assets/Discrete_Fourier_Transform/overlap-and-save.png" width="50%" />
+</figure>
+<h3 id="3-interpolation-and-decimation">3. Interpolation and decimation<a class="headerlink" href="#3-interpolation-and-decimation" title="Permanent link">&para;</a></h3>
+<h4 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h4>
+<p>Signal processing systems often require a change of sampling frequency <span class="arithmatex">\(f_s\)</span> so processing can be done at 
+- a higher <span class="arithmatex">\(f_s\)</span> (e.g. for better accuracy) 
+- or lower <span class="arithmatex">\(f_s\)</span> (e.g. to reduce computations) </p>
+<h4 id="interpolation">Interpolation<a class="headerlink" href="#interpolation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>upping to a higher frequency is called "interpolation"</li>
+<li>Steps for interpolation<ol>
+<li>zero-stuffing: insert <span class="arithmatex">\(k\)</span> zeros between every two samples</li>
+<li>filtering: low-pass and scale the resulting signal</li>
+</ol>
+</li>
+<li>The zero-stuffing step generates a signal with a repeated spectrum as it is the digital equivalent to the "train of impulses" we analysed when discussing the sampling theorem. Hence, the filtering step (interpolating the signal between the non-zero samples) is a low-pass filter!</li>
+</ul>
+<h4 id="decimation">Decimation<a class="headerlink" href="#decimation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>reducing to a lower frequency is called "decimation". </li>
+<li>Essentially, you just drop samples and keep only one in every <span class="arithmatex">\(k\)</span> samples. </li>
+<li>Beware of aliasing! This can only be done when the bandwidth is less than the <span class="arithmatex">\(f_s^{\text {new }} / 2\)</span>.</li>
+</ul>
+<h4 id="interpolation-and-decimation-via-the-fft">Interpolation and decimation via the FFT<a class="headerlink" href="#interpolation-and-decimation-via-the-fft" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Advantages:<ul>
+<li>gives a "graceful" transition between frequencies</li>
+<li><span class="arithmatex">\(f_s^{\text {new }}\)</span> does not need to be a multiple or divisor of <span class="arithmatex">\(f_s^{\text {old }}\)</span></li>
+</ul>
+</li>
+<li>Pick <span class="arithmatex">\(N\)</span> and <span class="arithmatex">\(N^{\prime}\)</span> such that <span class="arithmatex">\(N^{\prime} / N=f_s^{\text {new }} / f_s^{\text {old }}\)</span><ol>
+<li>take the <span class="arithmatex">\(N\)</span> point FFT <span class="arithmatex">\(\vec{X}\)</span> of a block <span class="arithmatex">\(\vec{x}\)</span> of inputs</li>
+<li>next,<ul>
+<li>if upping <span class="arithmatex">\(f_s\)</span>, insert zeros on either side of <span class="arithmatex">\(X_{N / 2}\)</span> (if <span class="arithmatex">\(N\)</span> is even) or between <span class="arithmatex">\(X_{\lceil(N-1) / 2\rceil}\)</span> and <span class="arithmatex">\(X_{\lfloor(N+1) / 2\rfloor}\)</span> (if <span class="arithmatex">\(N\)</span> is odd)</li>
+<li>if downing <span class="arithmatex">\(f_s\)</span>, delete components symmetrically around <span class="arithmatex">\(N / 2\)</span></li>
+</ul>
+</li>
+<li>take the <span class="arithmatex">\(N^{\prime}\)</span> point inverse FFT</li>
+</ol>
+</li>
+<li>larger <span class="arithmatex">\(N\)</span> in general give better results</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1578 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Notes for Part IIA Engineering at the University of Cambridge">
+      
+      
+        <meta name="author" content="Harry Ye">
+      
+      
+      
+        <link rel="prev" href="../../3F1-Signals%20and%20Systems/4-Discrete%20and%20Continuous%20Random%20Processes/">
+      
+      
+        <link rel="next" href="../2-Random%20Processes/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>1 Probability - Harry's Part IIA Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#2960A5" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#i-definitions-in-probability" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Harry&#39;s Part IIA Notes" class="md-header__button md-logo" aria-label="Harry's Part IIA Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Harry's Part IIA Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1 Probability
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="#2960A5" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="#2960A5" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Harry&#39;s Part IIA Notes" class="md-nav__button md-logo" aria-label="Harry's Part IIA Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Harry's Part IIA Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About this site
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3F1 Signals and Systems
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            3F1 Signals and Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F1-Signals%20and%20Systems/1-Discrete-time%20Systems/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 Discrete time Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F1-Signals%20and%20Systems/2-Digital%20Filtering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 Digital Filtering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F1-Signals%20and%20Systems/3-Discrete%20Fourier%20Transform/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 Discrete Fourier Transform
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F1-Signals%20and%20Systems/4-Discrete%20and%20Continuous%20Random%20Processes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 Discrete and Continuous Random Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3F3 Statistical Signal Processing
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            3F3 Statistical Signal Processing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    1 Probability
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    1 Probability
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-definitions-in-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Definitions in probability
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-conditional-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. Conditional probability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. Conditional probability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-law-of-total-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Law of total probability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-bayes-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Bayes' rule
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-chain-rule-for-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Chain rule for probability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-independence" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Independence
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-random-variables-and-probability-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. Random variables and probability distribution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. Random variables and probability distribution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Random variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-cumulative-distribution-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The cumulative distribution function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-discrete-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Discrete random variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-continuous-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Continuous random variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-vector-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Vector random variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-independent-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Independent random variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-conditional-distributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Conditional distributions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-change-of-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. Change of variables
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. Change of variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-change-of-variables-univariate" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Change of variables (univariate)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-change-of-variables-multivariate" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Change of variables (multivariate)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      IV. Sampling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IV. Sampling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-defining-a-probability-space-from-a-density" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Defining a probability space from a density
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-inverse-transform-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Inverse transform sampling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rejection-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Rejection sampling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-more-definitions-on-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      V. More definitions on random variables
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="V. More definitions on random variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-expectation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Expectation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-moments" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Moments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-covariance" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Covariance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-covariance-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Covariance matrix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-important-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Important rules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-conditional-expectation" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Conditional expectation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-special-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      VI. Special functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VI. Special functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-generating-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Generating functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-characteristic-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Characteristic function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-multivariate-generating-and-characteristic-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Multivariate generating and characteristic function
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-Random%20Processes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 Random Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-Statistical%20Signal%20Processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 Statistical Signal Processing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-Estimation%20Theory%20and%20Inference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 Estimation Theory and Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-definitions-in-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Definitions in probability
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-conditional-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. Conditional probability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. Conditional probability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-law-of-total-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Law of total probability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-bayes-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Bayes' rule
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-chain-rule-for-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Chain rule for probability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-independence" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Independence
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-random-variables-and-probability-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. Random variables and probability distribution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. Random variables and probability distribution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Random variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-cumulative-distribution-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The cumulative distribution function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-discrete-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Discrete random variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-continuous-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Continuous random variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-vector-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Vector random variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-independent-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Independent random variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-conditional-distributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Conditional distributions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-change-of-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. Change of variables
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. Change of variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-change-of-variables-univariate" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Change of variables (univariate)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-change-of-variables-multivariate" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Change of variables (multivariate)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      IV. Sampling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IV. Sampling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-defining-a-probability-space-from-a-density" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Defining a probability space from a density
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-inverse-transform-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Inverse transform sampling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rejection-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Rejection sampling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-more-definitions-on-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      V. More definitions on random variables
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="V. More definitions on random variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-expectation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Expectation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-moments" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Moments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-covariance" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Covariance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-covariance-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Covariance matrix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-important-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Important rules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-conditional-expectation" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Conditional expectation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vi-special-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      VI. Special functions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VI. Special functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-generating-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Generating functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-characteristic-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Characteristic function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-multivariate-generating-and-characteristic-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Multivariate generating and characteristic function
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>1 Probability</h1>
+
+<h2 id="i-definitions-in-probability">I. Definitions in probability<a class="headerlink" href="#i-definitions-in-probability" title="Permanent link">&para;</a></h2>
+<p><strong>Random experiment</strong>: any situation which has a set of possible outcomes, each of which occurs with a particular probability
+<strong>Probability space:</strong> <span class="arithmatex">\((\Omega, P)\)</span></p>
+<ul>
+<li><span class="arithmatex">\(\Omega\)</span> is a <strong>sample space</strong>: the set of all possible outcomes</li>
+<li><span class="arithmatex">\(P\)</span> is a <strong>probability functions</strong>: a function from events to the unit interval <span class="arithmatex">\(P: {E} \rightarrow [0, 1]\)</span>, with the following properties<ol>
+<li><span class="arithmatex">\(P(\Omega)=1\)</span> and <span class="arithmatex">\(P(\emptyset)=0\)</span></li>
+<li>If <span class="arithmatex">\(A_1, A_2, \ldots\)</span> are disjoint events, <span class="arithmatex">\(A_i \cap A_j=\emptyset\)</span>, then
+$$
+P\left(\bigcup_{i=1}^{\infty} A_i\right)=\sum_{i=1}^{\infty} P\left(A_i\right)
+$$</li>
+</ol>
+</li>
+</ul>
+<h2 id="ii-conditional-probability">II. Conditional probability<a class="headerlink" href="#ii-conditional-probability" title="Permanent link">&para;</a></h2>
+<h3 id="1-definition">1. Definition<a class="headerlink" href="#1-definition" title="Permanent link">&para;</a></h3>
+<p>The conditional probability of <span class="arithmatex">\(A\)</span> given <span class="arithmatex">\(B\)</span> is
+$$
+P(A \mid B)=\frac{P(A \cap B)}{P(B)}
+$$</p>
+<h3 id="2-law-of-total-probability">2. Law of total probability<a class="headerlink" href="#2-law-of-total-probability" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(B_1, B_2, \ldots, B_n\)</span> be disjoint with <span class="arithmatex">\(\bigcup_i B_i=\Omega, P\left(B_i\right)&gt;0\)</span>, then $$ P(A)=\sum_{i=1}^n P\left(A \mid B_i\right) P\left(B_i\right)$$</p>
+<h3 id="3-bayes-rule">3. Bayes' rule<a class="headerlink" href="#3-bayes-rule" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[P(A\mid B) = \frac{P(B \mid A)P(A)}{P(B)}\]</div>
+<h3 id="4-chain-rule-for-probability">4. Chain rule for probability<a class="headerlink" href="#4-chain-rule-for-probability" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[P\left(\bigcap_{i=1}^n A_i\right)=P\left(A_1\right) P\left(A_2 \mid A_1\right) P\left(A_3 \mid A_2 \cap A_1\right) \ldots P\left(A_n \mid \cap_{i=1}^{n-1} A_i\right)\]</div>
+<h3 id="5-independence">5. Independence<a class="headerlink" href="#5-independence" title="Permanent link">&para;</a></h3>
+<p>Events <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> are independent if
+<span class="arithmatex">\(<span class="arithmatex">\(P(A \cap B) = P(A)P(B)\)</span>\)</span>
+If <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> are independent, <span class="arithmatex">\(P(A\mid B) = P(A)\)</span>.</p>
+<h2 id="iii-random-variables-and-probability-distribution">III. Random variables and probability distribution<a class="headerlink" href="#iii-random-variables-and-probability-distribution" title="Permanent link">&para;</a></h2>
+<h3 id="1-random-variables">1. Random variables<a class="headerlink" href="#1-random-variables" title="Permanent link">&para;</a></h3>
+<p>Given a probability space <span class="arithmatex">\((\Omega, P)\)</span>, a random variable is a function <span class="arithmatex">\(X: \Omega \rightarrow \mathbb{R}\)</span>, ie. <span class="arithmatex">\(X(\omega) \in \mathbb{R}\)</span> (mapping from sample space to real place).
+For <span class="arithmatex">\(S \subseteq \mathbb{R}\)</span> we write
+$$
+P(X \in S)=P({\omega: X(\omega) \in S})
+$$</p>
+<p>A function of a random variable is a random variable
+$$
+Y=g(X) \Longrightarrow Y(\omega)=g(X(\omega))
+$$</p>
+<h3 id="2-the-cumulative-distribution-function">2. The cumulative distribution function<a class="headerlink" href="#2-the-cumulative-distribution-function" title="Permanent link">&para;</a></h3>
+<p>The cumulative distribution function for a random variable <span class="arithmatex">\(X\)</span> is the function
+$$
+\begin{aligned}
+F_X(x) &amp; =P({\omega: X(\omega) \leq x}) \
+&amp; =P(X \leq x)
+\end{aligned}
+$$</p>
+<p>We frequently write <span class="arithmatex">\(F(x)\)</span> if its not ambiguous</p>
+<ul>
+<li><span class="arithmatex">\(0 \leq F(x) \leq 1\)</span></li>
+<li>if <span class="arithmatex">\(x&lt;y\)</span> then <span class="arithmatex">\(F(x) \leq F(y)\)</span></li>
+<li><span class="arithmatex">\(\lim _{x \rightarrow-\infty} F(x)=0, \lim _{x \rightarrow \infty} F(x)=1\)</span></li>
+<li><span class="arithmatex">\(F\)</span> is right continuous, <span class="arithmatex">\(F(x)=\lim _{t \downarrow x} F(t)\)</span></li>
+</ul>
+<h3 id="3-discrete-random-variables">3. Discrete random variables<a class="headerlink" href="#3-discrete-random-variables" title="Permanent link">&para;</a></h3>
+<p>A random variable (rv) <span class="arithmatex">\(X\)</span> is discrete if it takes values in a countable subset of <span class="arithmatex">\(\mathbb{R},\left\{x_1, x_2, \ldots\right\}\)</span>.
+Discrete rvs have a probability mass function
+$$
+p\left(x_i\right)=P\left(X=x_i\right) \in[0,1]
+$$
+A set is countable if you can list the members (either finite, or one-to-one mapping with the natural numbers)</p>
+<h3 id="4-continuous-random-variables">4. Continuous random variables<a class="headerlink" href="#4-continuous-random-variables" title="Permanent link">&para;</a></h3>
+<p>A rv <span class="arithmatex">\(X\)</span> is continuous if its distribution function can be written
+$$
+F(x)=\int_{-\infty}^x f(u) \mathrm{d} u
+$$
+for some <span class="arithmatex">\(0 \leq f(u)&lt;\infty\)</span>.
+The function <span class="arithmatex">\(f(x)\)</span> is <strong>probability density function</strong> of the rv <span class="arithmatex">\(X\)</span>.</p>
+<h3 id="5-vector-random-variables">5. Vector random variables<a class="headerlink" href="#5-vector-random-variables" title="Permanent link">&para;</a></h3>
+<p>The joint cdf of multivariate rv <span class="arithmatex">\(\mathbf{X}=\left(X_1, \ldots, X_n\right)^T\)</span> on <span class="arithmatex">\((\Omega, P)\)</span> is the function
+$$
+F_{\mathbf{X}}(\mathbf{x})=P\left(X_1 \leq x_1, X_2 \leq x_2, \ldots, X_n \leq x_n\right)
+$$</p>
+<ul>
+<li><span class="arithmatex">\(\lim _{y \rightarrow \infty} F_X\left((x, y)^T\right)\)</span></li>
+<li>for discrete, pmf <span class="arithmatex">\(p(x)=P(\mathbf{X} = \mathbf{x})\)</span></li>
+<li>for continuous, pdf <span class="arithmatex">\(f(x)=\frac{\partial^n F_X(x)}{\partial x_1 \ldots \partial x_n}\)</span></li>
+</ul>
+<h3 id="6-independent-random-variables">6. Independent random variables<a class="headerlink" href="#6-independent-random-variables" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are independent if
+$$
+F_{X,Y}(x,y)=F_X(x)F_Y(y)
+$$
+for all <span class="arithmatex">\(x,y\)</span>.
+In general,
+<span class="arithmatex">\(X_1, X_2, ..., X_n\)</span> are independent if
+$$
+F_{\mathbf{X}}(\mathbf{x})=F_{X_1}\left(x_1\right) \ldots F_{X_n}\left(x_n\right)
+$$</p>
+<h3 id="7-conditional-distributions">7. Conditional distributions<a class="headerlink" href="#7-conditional-distributions" title="Permanent link">&para;</a></h3>
+<p>the conditional pdf of <span class="arithmatex">\(Y\)</span> given <span class="arithmatex">\(X\)</span> is
+$$
+\begin{gathered}
+F_{Y \mid X}(y \mid x)=P(Y \leq y \mid X=x) \quad \text { (discrete) } \
+F_{Y \mid X}(y \mid x)=\frac{\int_{-\infty}^y f_{X, Y}(x, v) \mathrm{d} v}{f_X(x)} \quad \text { (continuous) }
+\end{gathered}
+$$
+the conditional pmf/pdf of <span class="arithmatex">\(Y\)</span> given <span class="arithmatex">\(X\)</span> is
+$$
+\frac{f_{X, Y}(x, y)}{f_X(x)}
+$$</p>
+<h2 id="iii-change-of-variables">III. Change of variables<a class="headerlink" href="#iii-change-of-variables" title="Permanent link">&para;</a></h2>
+<h3 id="1-change-of-variables-univariate">1. Change of variables (univariate)<a class="headerlink" href="#1-change-of-variables-univariate" title="Permanent link">&para;</a></h3>
+<p>If the rv <span class="arithmatex">\(Y\)</span> is a function of the rv <span class="arithmatex">\(X\)</span>, <span class="arithmatex">\(Y = g(x)\)</span>, the distribution for <span class="arithmatex">\(Y\)</span> is:
+- If <span class="arithmatex">\(g\)</span> is invertible and increasing
+$$
+f_Y(y) = f_x(g<sup -1="-1">{-1}(y))\frac{\mathrm{d}g</sup>
+$$
+- In general, if }}{\mathrm{d}x<span class="arithmatex">\(g(x_1)= ... = g(x_n)=y\)</span> then 
+$$
+f_Y(y)=\sum_{k=1}^{n}\frac{f_X{x_k}}{|g'(x_k)|}
+$$
+<strong>The goal of sampling:</strong> generate samples form the distribution with pdf <span class="arithmatex">\(h(x)\)</span></p>
+<h3 id="2-change-of-variables-multivariate">2. Change of variables (multivariate)<a class="headerlink" href="#2-change-of-variables-multivariate" title="Permanent link">&para;</a></h3>
+<p>If <span class="arithmatex">\(\mathbf{Y}=g(\mathbf{X})\)</span> and <span class="arithmatex">\(g\)</span> is invertible,
+$$
+g^{-1}(g(\mathbf{x}))=\mathbf{x}
+$$</p>
+<p>The Jacobian of <span class="arithmatex">\(g^{-1}\)</span> at <span class="arithmatex">\(y\)</span> is
+$$
+J(\mathbf{y})=\left(\begin{array}{ccc}
+\frac{d g_1^{-1}}{d y_1} &amp; \ldots &amp; \frac{d g_1^{-1}}{d y_n} \
+\vdots &amp; \ddots &amp; \vdots \
+\frac{d g_n^{-1}}{d y_1} &amp; \cdots &amp; \frac{d g_n^{-1}}{d y_n}
+\end{array}\right)
+$$
+then
+$$
+f_Y(\mathbf{y})=f_X\left(g^{-1}(\mathbf{y})\right)|\operatorname{det} J(\mathbf{y})|
+$$
+(this result is from calculus - not specific to probability).</p>
+<h2 id="iv-sampling">IV. Sampling<a class="headerlink" href="#iv-sampling" title="Permanent link">&para;</a></h2>
+<h3 id="1-defining-a-probability-space-from-a-density">1. Defining a probability space from a density<a class="headerlink" href="#1-defining-a-probability-space-from-a-density" title="Permanent link">&para;</a></h3>
+<ol>
+<li>sample space <span class="arithmatex">\(\Omega\)</span></li>
+<li>probability map <span class="arithmatex">\(P\)</span></li>
+<li>function <span class="arithmatex">\(X(\omega)\)</span></li>
+<li><span class="arithmatex">\(X\)</span> implies <span class="arithmatex">\(f_X(x)\)</span>
+Let <span class="arithmatex">\(f(x) \geq 0\)</span> and <span class="arithmatex">\(\int_{-\infty}^{\infty} f(x) \mathrm{d} x=1\)</span>
+The indicator function
+$$
+\mathbb{I}_A(x)= \begin{cases}1 &amp; \text { if } x \in A \ 0 &amp; \text { if } x \notin A\end{cases}
+$$
+then probability space <span class="arithmatex">\((\mathbb{R}, P)\)</span> where <span class="arithmatex">\(P(A)=\int_{-\infty}^{\infty} \mathbb{I}_A(x) f(x) \mathrm{d} x\)</span>.</li>
+</ol>
+<h3 id="2-inverse-transform-sampling">2. Inverse transform sampling<a class="headerlink" href="#2-inverse-transform-sampling" title="Permanent link">&para;</a></h3>
+<p>Assume we can compute the inverse to the cdf, <span class="arithmatex">\(H^{-1}(x)\)</span>
+1. Let <span class="arithmatex">\(U \sim \mathrm{Unif}(0,1)\)</span>
+2. Return <span class="arithmatex">\(H^{-1}(U)\)</span></p>
+<h3 id="3-rejection-sampling">3. Rejection sampling<a class="headerlink" href="#3-rejection-sampling" title="Permanent link">&para;</a></h3>
+<p>Assume we can sample from distribution with pdf <span class="arithmatex">\(g(x)\)</span>, and there exists a constant such that <span class="arithmatex">\(g(x)&gt;\frac{h(x)}{M}\)</span> for all <span class="arithmatex">\(x\)</span>
+1. Sample <span class="arithmatex">\(U \sim \mathrm{Unif}(0,1)\)</span> and <span class="arithmatex">\(X\)</span> from <span class="arithmatex">\(g\)</span>
+2. If <span class="arithmatex">\(U \leq \frac{h(X)}{M g(X)}\)</span> return <span class="arithmatex">\(X\)</span>, else return to step 1.</p>
+<h2 id="v-more-definitions-on-random-variables">V. More definitions on random variables<a class="headerlink" href="#v-more-definitions-on-random-variables" title="Permanent link">&para;</a></h2>
+<h3 id="1-expectation">1. Expectation<a class="headerlink" href="#1-expectation" title="Permanent link">&para;</a></h3>
+<p>The expected value of <span class="arithmatex">\(X\)</span> is</p>
+<div class="arithmatex">\[
+E[X]= \begin{cases}\sum_x x p(x) &amp; \text { discrete } \\ \int x f_x(x) d x &amp; \text { continuous }\end{cases}
+\]</div>
+<p>Law of the unconscious statistician</p>
+<div class="arithmatex">\[
+E[g(X)]= \begin{cases}\sum_x g(x) p(x) &amp; \text { discrete } \\ \int g(x) f_x(x) d x &amp; \text { continuous }\end{cases}
+\]</div>
+<h3 id="2-moments">2. Moments<a class="headerlink" href="#2-moments" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The <span class="arithmatex">\(k\)</span>th moment of <span class="arithmatex">\(X\)</span> is <span class="arithmatex">\(\mu_k = E[X^k]\)</span></li>
+<li>The variance of <span class="arithmatex">\(X\)</span> is <span class="arithmatex">\(\text{Var}[X] = E[X^2] - E[X]^2\)</span></li>
+</ul>
+<h3 id="3-covariance">3. Covariance<a class="headerlink" href="#3-covariance" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The covariance <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> is <span class="arithmatex">\(\text{Cov}[X,Y] = E[X,Y] - E[X]E[Y]\)</span></li>
+<li><span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are uncorrelated if <span class="arithmatex">\(E[X,Y] = E[X]E[Y]\)</span></li>
+<li>Independence implies uncorrelated, but uncorrelated does not imply independence</li>
+</ul>
+<h3 id="4-covariance-matrix">4. Covariance matrix<a class="headerlink" href="#4-covariance-matrix" title="Permanent link">&para;</a></h3>
+<p>For a vector rv <span class="arithmatex">\(\mathbf{X}\)</span>, the covariance matrix is
+$$
+\operatorname{Cov}\left(X_i X_j\right)=\Sigma_{i j}=E\left[X_i X_j\right]-E\left[X_i\right] E\left[X_j\right]
+$$
+in matrix notation
+$$
+\mathbf{\Sigma}=E\left[\mathbf{X} \mathbf{X}^T\right]-E[\mathbf{X}] E[\mathbf{X}]^T
+$$</p>
+<ul>
+<li><span class="arithmatex">\(\mathbf{\Sigma}\)</span> is positive semi-definite + Symmetric</li>
+<li>it has a "square root" <span class="arithmatex">\(\mathbf{\Sigma}=\mathbf{S} \mathbf{S}^T\)</span></li>
+</ul>
+<h3 id="5-important-rules">5. Important rules<a class="headerlink" href="#5-important-rules" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(X_1, X_2, \ldots\)</span> be a sequence of iid random variables with finite mean <span class="arithmatex">\(E[X]=\mu\)</span>, and let <span class="arithmatex">\(S_n=\sum_i X_i\)</span> be the partial sums.</p>
+<p><strong>Law of large numbers:</strong> Let <span class="arithmatex">\(M\)</span> be a rv that always takes value <span class="arithmatex">\(\mu\)</span>. As <span class="arithmatex">\(n \rightarrow \infty\)</span>, the distribution for the rv <span class="arithmatex">\(\frac{1}{n} S_n\)</span> approaches M.</p>
+<p><strong>Central limit theorem:</strong> Suppose also that <span class="arithmatex">\(\operatorname{Var}[X]=\sigma^2\)</span> is finite. Then <span class="arithmatex">\(\frac{S_n-n \mu}{\sqrt{n \sigma^2}} \sim N(0,1)\)</span>.</p>
+<h3 id="6-conditional-expectation">6. Conditional expectation<a class="headerlink" href="#6-conditional-expectation" title="Permanent link">&para;</a></h3>
+<p>The conditional expectation of <span class="arithmatex">\(Y\)</span> given <span class="arithmatex">\(X\)</span> is</p>
+<div class="arithmatex">\[
+E[Y \mid X] =
+\begin{cases}
+\sum_y y\, p_{Y \mid X}(y \mid x), \\
+\int_{-\infty}^{\infty} y \, f_{Y \mid X}(y \mid x) \, \mathrm{d} y.
+\end{cases}
+\]</div>
+<p>ie., it is expectation in the conditional distribution.
+The tower rule/law of iterated expectation</p>
+<div class="arithmatex">\[
+\begin{aligned}
+E[E[Y \mid X]] &amp; =E\left[\sum_y y \frac{P_{X Y}(x, y)}{P_x(x)}\right] \\
+&amp; =\sum_x\left(\sum_y y \frac{P_{XY}(x, y)}{P_x(x)}\right) P_x(x) \\
+&amp; =\sum_y y P_Y(y)\\
+&amp; =E[Y]\\
+\end{aligned}
+\]</div>
+<h2 id="vi-special-functions">VI. Special functions<a class="headerlink" href="#vi-special-functions" title="Permanent link">&para;</a></h2>
+<h3 id="1-generating-functions">1. Generating functions<a class="headerlink" href="#1-generating-functions" title="Permanent link">&para;</a></h3>
+<p>The generating function of <span class="arithmatex">\(X\)</span> is</p>
+<div class="arithmatex">\[
+G_X(z) = E\left[z^X\right] = \begin{cases} \sum_x z^xp(x) \\
+\int_{-\infty}^{\infty} z^x f(x) \mathrm{d}x
+\end{cases}
+\]</div>
+<p>For independent <span class="arithmatex">\(X, Y, G_{X+Y}(z)=G_X(z) G_Y(z)\)</span>
+s
+- <span class="arithmatex">\(G_{a X}(z)=G_X\left(z^a\right)=E\left[z^{a X}\right]=E\left[\left(z^a\right)^X\right]\)</span>
+- <span class="arithmatex">\(G_X(1)=1=E\left[1^X\right]\)</span>
+- <span class="arithmatex">\(G_X^{\prime}(1)=E[X]=E\left[X z^{x-1}\right]\)</span>
+- For discrete <span class="arithmatex">\(X, G_X^{(k)}(0)=k!p(k)\)</span></p>
+<h3 id="2-characteristic-function">2. Characteristic function<a class="headerlink" href="#2-characteristic-function" title="Permanent link">&para;</a></h3>
+<p>The characteristic function of <span class="arithmatex">\(X\)</span> is</p>
+<div class="arithmatex">\[
+\varphi_X(t)=E\left[e^{i t x}\right]=G_X\left(e^{i t}\right)
+\]</div>
+<p><span class="arithmatex">\(\varphi_x(t)=\int_{-\infty}^{\infty} e^{i t x} f(x) \mathrm{d} x \quad \leftarrow \quad\)</span> Fourier transform
+The inversion formula is</p>
+<div class="arithmatex">\[
+f(x)=\frac{1}{2 \pi} \int_{-\infty}^{\infty} e^{-i t x} \varphi_X(t) \mathrm{d} t
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\varphi_X^{(k)}(0)=i^k E\left[X^k\right]\)</span></li>
+<li><span class="arithmatex">\(\varphi_{X+a}(t)=\varphi_X(t) e^{i a t}\)</span></li>
+<li>For <span class="arithmatex">\(X, Y\)</span> independent, <span class="arithmatex">\(\varphi_{aX+bY}(t) = \varphi_X(at) \varphi_Y(bt)\)</span></li>
+<li>If <span class="arithmatex">\(\varphi_X(t)=\varphi_Y(t)\)</span>, <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> have the same distribution</li>
+</ul>
+<h3 id="3-multivariate-generating-and-characteristic-function">3. Multivariate generating and characteristic function<a class="headerlink" href="#3-multivariate-generating-and-characteristic-function" title="Permanent link">&para;</a></h3>
+<p>The generating function for multivariate rv <span class="arithmatex">\(\mathbf{X}\)</span> is</p>
+<div class="arithmatex">\[
+G_X(z)=E\left[\prod_i z_i^{X_i}\right]
+\]</div>
+<p>The characteristic function for multivariate <span class="arithmatex">\(\mathrm{rv} \mathbf{X}\)</span> is</p>
+<div class="arithmatex">\[
+\varphi_{\mathbf{x}}(\mathbf{t})=E\left[e^{i \mathbf{t} \cdot \mathbf{X}}\right]=E\left[\prod_i e^{i t_i X_i}\right]
+\]</div>
+<p>Fact:</p>
+<div class="arithmatex">\[
+\varphi_{A \mathbf{X}+\mathbf{b}}(\mathbf{t})=e^{i \mathbf{t}^T \mathbf{b}} \varphi_{\mathbf{X}}\left(A^T \mathbf{t}\right)
+\]</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

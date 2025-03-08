@@ -1,0 +1,1566 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Notes for Part IIA Engineering at the University of Cambridge">
+      
+      
+        <meta name="author" content="Harry Ye">
+      
+      
+      
+        <link rel="prev" href="../2-Random%20Processes/">
+      
+      
+        <link rel="next" href="../4-Estimation%20Theory%20and%20Inference/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>3 Statistical Signal Processing - Harry's Part IIA Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#2960A5" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#i-random-processes-revision" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Harry&#39;s Part IIA Notes" class="md-header__button md-logo" aria-label="Harry's Part IIA Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Harry's Part IIA Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3 Statistical Signal Processing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="#2960A5" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="#2960A5" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Harry&#39;s Part IIA Notes" class="md-nav__button md-logo" aria-label="Harry's Part IIA Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Harry's Part IIA Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About this site
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3F1 Signals and Systems
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            3F1 Signals and Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F1-Signals%20and%20Systems/1-Discrete-time%20Systems/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 Discrete time Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F1-Signals%20and%20Systems/2-Digital%20Filtering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 Digital Filtering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F1-Signals%20and%20Systems/3-Discrete%20Fourier%20Transform/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 Discrete Fourier Transform
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F1-Signals%20and%20Systems/4-Discrete%20and%20Continuous%20Random%20Processes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 Discrete and Continuous Random Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3F3 Statistical Signal Processing
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            3F3 Statistical Signal Processing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-Probability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 Probability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-Random%20Processes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 Random Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    3 Statistical Signal Processing
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    3 Statistical Signal Processing
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-random-processes-revision" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Random processes revision
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Random processes revision">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-discrete-time-random-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Discrete-time random process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-correlation-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Correlation functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-stationarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Stationarity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-wide-sense-stationary" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Wide sense stationary
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-power-spectrum" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Power spectrum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. White noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-linear-systems-and-random-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. Linear systems and random processes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. Linear systems and random processes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-correlation-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Correlation functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-power-spectrum" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Power spectrum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ergodic-random-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Ergodic random processes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-optimal-filtering-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. Optimal filtering theory
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. Optimal filtering theory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-wiener-filtering-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Wiener filtering problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-discrete-time-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Discrete-time Wiener filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-derivation-of-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Derivation of Wiener filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-mean-squared-value-for-the-optimal-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Mean-squared value for the optimal filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-important-special-case-uncorrelated-signal-and-noise-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Important special case: uncorrelated signal and noise processes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-the-fir-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. The FIR Wiener filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-extending-the-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Extending the Wiener filter
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-optimal-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      IV. Optimal detection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IV. Optimal detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matched-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Matched filter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Matched filter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#signal-output-energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Signal output energy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#noise-output-energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Noise output energy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snr-maximisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      SNR maximisation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-Estimation%20Theory%20and%20Inference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 Estimation Theory and Inference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-random-processes-revision" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Random processes revision
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Random processes revision">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-discrete-time-random-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Discrete-time random process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-correlation-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Correlation functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-stationarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Stationarity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-wide-sense-stationary" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Wide sense stationary
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-power-spectrum" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Power spectrum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. White noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-linear-systems-and-random-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. Linear systems and random processes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. Linear systems and random processes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-correlation-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Correlation functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-power-spectrum" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Power spectrum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ergodic-random-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Ergodic random processes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-optimal-filtering-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. Optimal filtering theory
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. Optimal filtering theory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-wiener-filtering-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Wiener filtering problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-discrete-time-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Discrete-time Wiener filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-derivation-of-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Derivation of Wiener filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-mean-squared-value-for-the-optimal-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Mean-squared value for the optimal filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-important-special-case-uncorrelated-signal-and-noise-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Important special case: uncorrelated signal and noise processes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-the-fir-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. The FIR Wiener filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-extending-the-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Extending the Wiener filter
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-optimal-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      IV. Optimal detection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IV. Optimal detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matched-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Matched filter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Matched filter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#signal-output-energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Signal output energy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#noise-output-energy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Noise output energy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snr-maximisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      SNR maximisation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>3 Statistical Signal Processing</h1>
+
+<h2 id="i-random-processes-revision">I. Random processes revision<a class="headerlink" href="#i-random-processes-revision" title="Permanent link">&para;</a></h2>
+<h3 id="1-discrete-time-random-process">1. Discrete-time random process<a class="headerlink" href="#1-discrete-time-random-process" title="Permanent link">&para;</a></h3>
+<p>A discrete time random process is defined as an ensemble of functions
+$$
+{X_n(\omega)}, \quad n = -\infty, ..., -1, 0, 1, ..., \infty
+$$
+where <span class="arithmatex">\(\omega\)</span> is a random variable having a probability density function <span class="arithmatex">\(f(\omega)\)</span>.</p>
+<h3 id="2-correlation-functions">2. Correlation functions<a class="headerlink" href="#2-correlation-functions" title="Permanent link">&para;</a></h3>
+<p>The <strong>mean</strong> of a random process <span class="arithmatex">\(\{X_n\}\)</span> is defined as <span class="arithmatex">\(E[X_n]\)</span>.
+The <strong>autocorrelation</strong> functions is defined as
+$$
+r_{XX}[n,m]=E[X_nX_m]
+$$
+The <strong>cross-correlation</strong> function between two processes <span class="arithmatex">\(\{X_n\}\)</span> and <span class="arithmatex">\(\{Y_n\}\)</span> is
+$$
+r_{XY}[n,m] =E[X_n Y_m]
+$$</p>
+<h3 id="3-stationarity">3. Stationarity<a class="headerlink" href="#3-stationarity" title="Permanent link">&para;</a></h3>
+<p>A stationary process has the same statistical characteristics irrespective of shifts along the time axis. i.e. the <strong>Nth order density</strong> for the process is unchanged with time shift, where the Nth order density function is</p>
+<div class="arithmatex">\[
+f_{X_{n_1}, X_{n_2}, ... , X_{n_N}} (X_{n_1}, X_{n_2}, ... , X_{n_N})
+\]</div>
+<p>A random process is <strong>strict-sense stationary</strong> if, for any finite <span class="arithmatex">\(c, N\)</span> and <span class="arithmatex">\(\left\{n_1, n_2, \ldots n_N\right\}\)</span> :</p>
+<div class="arithmatex">\[
+\begin{aligned}
+f_{X_{n_1}, x_{n_2}, \ldots, X_{n_N}} &amp; \left(\alpha_1, \alpha_2, \ldots, \alpha_N\right) \\
+&amp; =f_{X_{n_1+c}, X_{n_2+c}, \ldots, X_{n_N+c}}\left(\alpha_1, \alpha_2, \ldots, \alpha_N\right)
+\end{aligned}
+\]</div>
+<h3 id="4-wide-sense-stationary">4. Wide sense stationary<a class="headerlink" href="#4-wide-sense-stationary" title="Permanent link">&para;</a></h3>
+<p>A random process is wide-sense stationary (WSS) iff (if and only if)
+1. <span class="arithmatex">\(\mu_n=\mathbb{E}\left[X_n\right]=\mu\)</span>, (mean is constant)
+2. <span class="arithmatex">\(r_{X X}[n, m]=r_{X X}[m-n]\)</span>, (autocorrelation function depends only upon the difference between <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(m\)</span> ).
+3. The variance of the process is finite:</p>
+<div class="arithmatex">\[
+\mathbb{E}\left[\left(X_n-\mu\right)^2\right]&lt;\infty
+\]</div>
+<h3 id="5-power-spectrum">5. Power spectrum<a class="headerlink" href="#5-power-spectrum" title="Permanent link">&para;</a></h3>
+<p>For a wide-sense stationary random process <span class="arithmatex">\(\{X_n\}\)</span>, the power spectrum is defined as the discrete-time Fourier transform (DTFT) of the discrete autocorrelation function</p>
+<div class="arithmatex">\[
+\mathcal{S}_X\left(e^{j \Omega}\right)=\sum_{m=-\infty}^{\infty} r_{X X}[m] e^{-j m \Omega}
+\]</div>
+<p>where the normlised frequency <span class="arithmatex">\(\Omega =\omega T\)</span> is in radians per sample and <span class="arithmatex">\(T\)</span> is the sampling interval.
+The autocorrelation function can thus be found from the power spectrum by inverting the transform using DTFT</p>
+<div class="arithmatex">\[
+r_{X X}[m]=\frac{1}{2 \pi} \int_{-\pi}^\pi \mathcal{S}_X\left(e^{j \Omega}\right) e^{j m \Omega} d \Omega
+\]</div>
+<p>The power spectrum is a <strong>real, positive, even and periodic</strong> function of frequency.</p>
+<h3 id="6-white-noise">6. White noise<a class="headerlink" href="#6-white-noise" title="Permanent link">&para;</a></h3>
+<p>A wide-sense stationary process is white noise if</p>
+<div class="arithmatex">\[
+c_{X X}[m]=\mathbb{E}\left[\left(X_n-\mu\right)\left(X_{n+m}-\mu\right)\right]=\sigma_X^2 \delta[m]
+\]</div>
+<p>where <span class="arithmatex">\(\delta[m]\)</span> is the discrete impulse function:</p>
+<div class="arithmatex">\[
+\delta[m]= \begin{cases}1, &amp; m=0 \\ 0, &amp; \text { otherwise }\end{cases}
+\]</div>
+<p><span class="arithmatex">\(\sigma_X^2=\mathbb{E}\left[\left(X_n-\mu\right)^2\right]\)</span> is the variance of the process. If <span class="arithmatex">\(\mu=0\)</span> then <span class="arithmatex">\(\sigma_X^2\)</span> is the mean-squared value of the process, which we will sometimes refer to as the 'power'.
+The power spectrum of zero mean white noise is</p>
+<div class="arithmatex">\[
+\begin{aligned} \mathcal{S}_X\left(e^{j \omega T}\right) &amp; =\sum_{m=-\infty}^{\infty} r_{XX}[m] e^{-j m \Omega} \\ &amp; =\sigma_X^2\end{aligned}
+\]</div>
+<p>i.e. <strong>flat across all frequencies</strong>.</p>
+<h2 id="ii-linear-systems-and-random-processes">II. Linear systems and random processes<a class="headerlink" href="#ii-linear-systems-and-random-processes" title="Permanent link">&para;</a></h2>
+<p>When a wide-sense stationary discrete random process <span class="arithmatex">\(\left\{X_n\right\}\)</span> is passed through a stable, linear time invariant (LTI) system with digital impulse response <span class="arithmatex">\(\left\{h_n\right\}\)</span>, the output process <span class="arithmatex">\(\left\{Y_n\right\}\)</span>, i.e.</p>
+<div class="arithmatex">\[
+y_n=\sum_{k=-\infty}^{+\infty} h_k x_{n-k}=x_n * h_n
+\]</div>
+<p><strong>is also wide-sense stationary.</strong></p>
+<h3 id="1-correlation-functions">1. Correlation functions<a class="headerlink" href="#1-correlation-functions" title="Permanent link">&para;</a></h3>
+<p>We can express the output correlation functions and power spectra in terms of the input statistics and the LTI system. The cross-correlation function at the output of a LTI system is</p>
+<div class="arithmatex">\[
+\begin{aligned}
+r_{X Y}[k] &amp; =E\left[X_n Y_{n+k}\right]=E\left[X_n \sum_{l=-\infty}^{+\infty} h_l X_{n+k-l}\right] \\
+&amp; =\sum_{l=-\infty}^{\infty} h_l \, r_{X X}[k-l]=h_k * r_{X X}[k]
+\end{aligned}
+\]</div>
+<p>The autocorrelation function at the output of a LTI system is</p>
+<div class="arithmatex">\[
+\begin{aligned} r_{Y Y}[l] &amp;= E\left[Y_n Y_{n+l}\right] \\ &amp;= \sum_{k=-\infty}^{\infty} \sum_{i=-\infty}^{\infty} h_k \, h_i \, r_{X X}[l+i-k]=h_l * h_{-l} * r_{X X}[l]\end{aligned}
+\]</div>
+<p>Illustration of the correlation functions</p>
+<figure>
+<img alt="linear-system-correlations" src="../assets/Statistical-Signal-Processing/linear-system-correlations.png" width="50%" />
+</figure>
+<h3 id="2-power-spectrum">2. Power spectrum<a class="headerlink" href="#2-power-spectrum" title="Permanent link">&para;</a></h3>
+<p>Taking DTFT of both sides of the previous equation, the power spectrum at the output of a LTI system is obtained</p>
+<div class="arithmatex">\[
+\mathcal{S}_Y\left(e^{j \omega T}\right)=\left|H\left(e^{j \omega T}\right)\right|^2 \mathcal{S}_X\left(e^{j \omega T}\right)
+\]</div>
+<p>where <span class="arithmatex">\(H(e^{j\omega T}) = \sum_{n = -\infty}^{+\infty}h_n e^{-jn\omega T}\)</span> is the frequency response of the system.</p>
+<h3 id="3-ergodic-random-processes">3. Ergodic random processes<a class="headerlink" href="#3-ergodic-random-processes" title="Permanent link">&para;</a></h3>
+<p>For an Ergodic random process we can estimate expectations by performing time-averaging on a single sample function, e.g.</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\mu &amp; =\mathbb{E}\left[X_n\right]=\lim _{N \rightarrow \infty} \frac{1}{N} \sum_{n=0}^{N-1} x_n \quad \text { (Mean ergodic) } \\
+r_{X X}[k] &amp; =\lim _{N \rightarrow \infty} \frac{1}{N} \sum_{n=0}^{N-1} x_n x_{n+k} \quad \text { (Correlation ergodic) }
+\end{aligned}
+\]</div>
+<p>A <strong>necessary and sufficient</strong> condition for mean ergodicity is given by:</p>
+<div class="arithmatex">\[
+\lim _{N \rightarrow \infty} \frac{1}{N} \sum_{k=0}^{N-1} c_{X X}[k]=0
+\]</div>
+<p>where <span class="arithmatex">\(c_{X X}\)</span> is the autocovariance function:</p>
+<div class="arithmatex">\[
+c_{X X}[k]=\mathbb{E}\left[\left(X_n-\mu\right)\left(X_{n+k}-\mu\right)\right]
+\]</div>
+<p>and <span class="arithmatex">\(\mu=\mathbb{E}\left[X_n\right]\)</span>.
+A simpler <strong>sufficient</strong> condition for mean ergodicity is that <span class="arithmatex">\(c_{X X}[0]&lt;\infty\)</span> and</p>
+<div class="arithmatex">\[
+\lim _{N \rightarrow \infty} c_{X X}[N]=0
+\]</div>
+<p>Note: 
+- sufficient condition proved <span class="arithmatex">\(\rightarrow\)</span> mean ergodicity
+- sufficient condition not proved <span class="arithmatex">\(\rightarrow\)</span> prove necessary and sufficient condition
+- necessary and sufficient condition proved <span class="arithmatex">\(\rightarrow\)</span> definitely ergodic</p>
+<h2 id="iii-optimal-filtering-theory">III. Optimal filtering theory<a class="headerlink" href="#iii-optimal-filtering-theory" title="Permanent link">&para;</a></h2>
+<h3 id="1-wiener-filtering-problem">1. Wiener filtering problem<a class="headerlink" href="#1-wiener-filtering-problem" title="Permanent link">&para;</a></h3>
+<figure>
+<img alt="wiener-filtering-problem" src="../assets/Statistical-Signal-Processing/wiener-filtering-problem.png" width="50%" />
+</figure>
+<p>A desired signal <span class="arithmatex">\(d_n\)</span> is observed in noise <span class="arithmatex">\(v_n\)</span>: <span class="arithmatex">\(x_n = d_n + v_n\)</span>.</p>
+<p><strong>Goal:</strong> optimally estimate <span class="arithmatex">\(d_n\)</span> given just the noisy observation <span class="arithmatex">\(x_n\)</span> and some assumptions about the statistics of the random signal and noise processes.</p>
+<p><strong>Solution:</strong> Wiener filter.</p>
+<h3 id="2-discrete-time-wiener-filter">2. Discrete-time Wiener filter<a class="headerlink" href="#2-discrete-time-wiener-filter" title="Permanent link">&para;</a></h3>
+<figure>
+<img alt="wiener-filter" src="../assets/Statistical-Signal-Processing/wiener-filter.png" width="50%" />
+</figure>
+<p>In the most general case, we can filter the observed signal <span class="arithmatex">\(x_n\)</span> with an infinite dimensional filter, having a non-causal impulse response <span class="arithmatex">\(h_p\)</span> :</p>
+<div class="arithmatex">\[
+\left\{h_p ; \; p=-\infty, \ldots,-1,0,1,2, \ldots, \infty\right\}
+\]</div>
+<p>Estimate <span class="arithmatex">\(\hat{d}_n\)</span> of the desired signal obtained by filtering the observed noisy signal using the filter <span class="arithmatex">\(\left\{h_p\right\}\)</span>:</p>
+<div class="arithmatex">\[
+\hat{d}_n=\sum_{p=-\infty}^{\infty} h_p x_{n-p}
+\]</div>
+<p>The criterion adopted for Wiener filtering is the mean-squared error (MSE) criterion. First, form the error signal <span class="arithmatex">\(\epsilon_n\)</span> :</p>
+<div class="arithmatex">\[
+\epsilon_n=d_n-\hat{d}_n=d_n-\sum_{p=-\infty}^{\infty} h_p x_{n-p}
+\]</div>
+<p>The mean-squared error (MSE) is then defined as:</p>
+<div class="arithmatex">\[
+J=\mathbb{E}\left[\epsilon_n^2\right]
+\]</div>
+<p>where the expectation is with respect to the random signal <span class="arithmatex">\(d\)</span> and the random noise <span class="arithmatex">\(v\)</span>.
+The Wiener filter <strong>minimises <span class="arithmatex">\(J\)</span> with respect to the filter coefficients <span class="arithmatex">\(\left\{h_p\right\}\)</span>.</strong></p>
+<h3 id="3-derivation-of-wiener-filter">3. Derivation of Wiener filter<a class="headerlink" href="#3-derivation-of-wiener-filter" title="Permanent link">&para;</a></h3>
+<p>(included for completeness)</p>
+<p>The Wiener filter assumes that <span class="arithmatex">\(\{x_n\}\)</span> and <span class="arithmatex">\(\{d_n\}\)</span> are jointly wide-sense stationary <span class="arithmatex">\(\Rightarrow\)</span> all autocorrelation and cross-correlation functions depend only on the time difference <span class="arithmatex">\(m-n\)</span> between data points.</p>
+<p>In this derivation, <span class="arithmatex">\(\{d_n\}\)</span> and <span class="arithmatex">\(\{v_n\}\)</span> are assumed zero mean. i.e. <span class="arithmatex">\(E[d_n]=0, E[v_n]=0\)</span> (Non-zero mean processes can be dealt with by first subtracting the mean before filtering)</p>
+<p>The expected error <span class="arithmatex">\(J\)</span> may be minimised w.r.t the impulse response values <span class="arithmatex">\(h_q\)</span>. A sufficient condition for minimum is</p>
+<div class="arithmatex">\[
+\frac{\partial J}{\partial h_q}=\frac{\partial \mathbb{E}\left[\epsilon_n^2\right]}{\partial h_q}=\mathbb{E}\left[\frac{\partial \epsilon_n^2}{\partial h_q}\right]=\mathbb{E}\left[2 \epsilon_n \frac{\partial \epsilon_n}{\partial h_q}\right]=0
+\]</div>
+<p>simultaneously for all <span class="arithmatex">\(q \in\{-\infty, \ldots,-1,0,1,2, \ldots \infty\}\)</span>.
+The term <span class="arithmatex">\(\frac{\partial \epsilon_n}{\partial h_q}\)</span> is then calculated as:</p>
+<div class="arithmatex">\[
+\frac{\partial \epsilon_n}{\partial h_q}=\frac{\partial}{\partial h_q}\left\{d_n-\sum_{p=-\infty}^{\infty} h_p x_{n-p}\right\}=-x_{n-q}
+\]</div>
+<p>(since random terms <span class="arithmatex">\(d_n\)</span> and <span class="arithmatex">\(x_{n-p}\)</span> do not depend on <span class="arithmatex">\(h_q\)</span> and are hence treated as constant in the partial derivative)</p>
+<p>Hence the coefficients must satisfy, for all <span class="arithmatex">\(q\)</span>:</p>
+<div class="arithmatex">\[
+\mathbb{E}\left[\epsilon_n \frac{\partial \epsilon_n}{\partial h_q}\right]=-\mathbb{E}\left[\epsilon_n x_{n-q}\right]=0
+\]</div>
+<p>i.e.</p>
+<div class="arithmatex">\[
+\mathbb{E}\left[\epsilon_n x_{n-q}\right]=0 ; \quad-\infty&lt;q&lt;+\infty
+\]</div>
+<p>This is known as the <strong>orthogonality principle</strong>.</p>
+<p>Substituting for <span class="arithmatex">\(\epsilon_n\)</span> gives</p>
+<div class="arithmatex">\[
+\begin{aligned} \mathbb{E}\left[\epsilon_n x_{n-q}\right] &amp; =\mathbb{E}\left[\left(d_n-\sum_{p=-\infty}^{\infty} h_p x_{n-p}\right) x_{n-q}\right] \\ &amp;= \mathbb{E}\left[d_n x_{n-q}\right]-\sum_{p=-\infty}^{\infty} h_p \mathbb{E}\left[x_{n-q} x_{n-p}\right] \\ &amp;= r_{x d}[q]-\sum_{p=-\infty}^{\infty} h_p r_{x x}[q-p] \\ &amp;= 0\end{aligned}
+\]</div>
+<p>Hence the solution must satisfy
+$$
+\boxed{\sum_{p=-\infty}^{\infty} h_p r_{x x}[q-p]=r_{x d}[q], \quad-\infty&lt;q&lt;+\infty}
+$$
+This is known as the <strong>Wiener-Hopf</strong> equations.
+Rewrite the Wiener-Hopf equation as convolution
+$$
+h_q * r_{x x}[q]=r_{x d}[q], \quad-\infty&lt;q&lt;+\infty
+$$
+Taking discrete-time Fouxier transorms (DTFT) of both sides:</p>
+<div class="arithmatex">\[
+H\left(e^{j \Omega}\right) \mathcal{S}_x\left(e^{j \Omega}\right)=\mathcal{S}_{x d}\left(e^{j \Omega}\right)
+\]</div>
+<p>Here the term <span class="arithmatex">\(\mathcal{S}_{x d}\left(e^{j \Omega}\right)\)</span>, is defined as the the DTFT of <span class="arithmatex">\(r_{x d}[q]\)</span> and is termed the <strong>cross-power spectrum</strong> of <span class="arithmatex">\(d\)</span> and <span class="arithmatex">\(x\)</span>. It measures the <strong>coherence</strong> between two processes at a particular frequency.
+The cross power spectrum has the property</p>
+<div class="arithmatex">\[
+\mathcal{S}_{x d}\left(e^{j \Omega}\right)=\mathcal{S}_{d x}\left(e^{j \Omega}\right)^*
+\]</div>
+<p>Hence, rearranging:</p>
+<div class="arithmatex">\[
+\boxed{H\left(e^{j \Omega}\right)=\frac{\mathcal{S}_{x d}\left(e^{j \Omega}\right)}{\mathcal{S}_x\left(e^{j \Omega}\right)}}
+\]</div>
+<h3 id="4-mean-squared-value-for-the-optimal-filter">4. Mean-squared value for the optimal filter<a class="headerlink" href="#4-mean-squared-value-for-the-optimal-filter" title="Permanent link">&para;</a></h3>
+<p>Performance of the optimal filter can be assessed form the mean-squared error value of the filter</p>
+<div class="arithmatex">\[
+\begin{aligned} J=\mathbb{E}\left[\epsilon_n^2\right]&amp;=\mathbb{E}\left[\epsilon_n\left(d_n-\sum_{p=-\infty}^{\infty} h_p x_{n-p}\right)\right] \\ &amp;=\mathbb{E}\left[\epsilon_n d_n\right]-\sum_{p=-\infty}^{\infty} h_p \mathbb{E}\left[\epsilon_n x_{n-p}\right]\end{aligned}
+\]</div>
+<p>For optimal filter, the last term is zero, hence the minimum error is</p>
+<div class="arithmatex">\[
+\begin{aligned} J_{\min } &amp; =\mathbb{E}\left[\epsilon_n d_n\right] \\ &amp; =\mathbb{E}\left[\left(d_n-\sum_{p=-\infty}^{\infty} h_p x_{n-p}\right) d_n\right] \\ &amp; =r_{d d}[0]-\sum_{p=-\infty}^{\infty} h_p r_{x d}[p]\end{aligned}
+\]</div>
+<p>The minimum error can also be assessed in the frequency domain</p>
+<div class="arithmatex">\[
+J_{\min }=\frac{1}{2 \pi} \int_{-\pi}^{+\pi} \mathcal{S}_d\left(e^{j \Omega}\right)-H\left(e^{j \Omega}\right) \mathcal{S}_{x d}^*\left(e^{j \Omega}\right) d \Omega
+\]</div>
+<h3 id="5-important-special-case-uncorrelated-signal-and-noise-processes">5. Important special case: uncorrelated signal and noise processes<a class="headerlink" href="#5-important-special-case-uncorrelated-signal-and-noise-processes" title="Permanent link">&para;</a></h3>
+<p>A very typical scenario is that the desired signal processes <span class="arithmatex">\(\{d_n\}\)</span> is uncorrelated with the noise process <span class="arithmatex">\(\{v_n\}\)</span>, e.g. <span class="arithmatex">\(v\)</span> might be environmental noise that is independent of the desired signal. 
+i.e.</p>
+<div class="arithmatex">\[
+r_{d v}[k]=\mathbb{E}\left[d_n v_{n+k}\right]=0, \quad-\infty&lt;k&lt;+\infty
+\]</div>
+<p>Recall the Wiener-Hopf equations</p>
+<div class="arithmatex">\[
+\sum_{p=-\infty}^{\infty} h_p r_{x x}[q-p]=r_{x d}[q], \quad-\infty&lt;q&lt;+\infty
+\]</div>
+<p>Under this special case,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+r_{x d}[q]&amp;=\mathbb{E}\left[x_n d_{n+q}\right]=\mathbb{E}\left[\left(d_n+v_n\right) d_{n+q}\right] \\
+&amp;=\mathbb{E}\left[d_n d_{n+q}\right]+\mathbb{E}\left[v_n d_{n+q}\right]=r_{d d}[q]
+\end{aligned}
+\]</div>
+<p>since <span class="arithmatex">\(\left\{d_n\right\}\)</span> and <span class="arithmatex">\(\left\{v_n\right\}\)</span> are uncorrelated.
+Taking DTFT</p>
+<div class="arithmatex">\[
+\mathcal{S}_{x d}\left(e^{j \Omega}\right)=\mathcal{S}_d\left(e^{j \Omega}\right)
+\]</div>
+<p>For <span class="arithmatex">\(r_{XX}\)</span></p>
+<div class="arithmatex">\[
+\begin{aligned} r_{x x}[q] &amp; =\mathbb{E}\left[x_n x_{n+q}\right]=\mathbb{E}\left[\left(d_n+v_n\right)\left(d_{n+q}+v_{n+q}\right)\right] \\ &amp; =\mathbb{E}\left[d_n d_{n+q}\right]+\mathbb{E}\left[v_n v_{n+q}\right]+\mathbb{E}\left[d_n y_{n+q}\right]+\mathbb{E}\left[v_n d_{n+q}\right] \\ &amp; =\mathbb{E}\left[d_n d_{n+q}\right]+\mathbb{E}\left[v_n v_{n+q}\right]=r_{d d}[q]+r_{v v}[q]\end{aligned}
+\]</div>
+<p>Taking DTFT</p>
+<div class="arithmatex">\[
+\mathcal{S}_x\left(e^{j \Omega}\right)=\mathcal{S}_d\left(e^{j \Omega}\right) + \mathcal{S}_v\left(e^{j \Omega}\right)
+\]</div>
+<p>Thus the Wiener filter becomes</p>
+<div class="arithmatex">\[
+H\left(e^{j \Omega}\right)=\frac{\mathcal{S}_{x d}\left(e^{j \Omega}\right)}{\mathcal{S}_x\left(e^{j \Omega}\right) } = \frac{\mathcal{S}_d\left(e^{j \Omega}\right)}{\mathcal{S}_d\left(e^{j \Omega}\right) + \mathcal{S}_v\left(e^{j \Omega}\right)} = \frac{1}{1 + \frac{1}{\rho(\Omega)}} \in (0,1)
+\]</div>
+<p>where <span class="arithmatex">\(\rho(\Omega) = \mathcal{S}_d\left(e^{j \Omega}\right)/ \mathcal{S}_v\left(e^{j \Omega}\right)\)</span> is the frequency dependent signal-to-noise (SNR) power ratio.</p>
+<p><strong>Interpretations:</strong></p>
+<ul>
+<li>the gain is always non-negative and ranges between 0 and 1 <span class="arithmatex">\(\rightarrow\)</span> the filter will never boost a particular frequency component, but rather acts as an optimal attenuation rule</li>
+<li>at frequencies with large SNR, the gain of the filter tends to unity</li>
+<li>at frequencies with small SNR, the gain of the filter tends to a small value</li>
+<li>when the signal is very noisy, the best estimate the filter can make (w.r.t MSE) is zero</li>
+<li><strong>the filter can be think of as the gain of a voltage divider with load resistance <span class="arithmatex">\(\mathcal{S}_d\left(e^{j \Omega}\right)\)</span> and source resistance <span class="arithmatex">\(\mathcal{S}_v\left(e^{j \Omega}\right)\)</span>.</strong></li>
+</ul>
+<p>The minimum expected error in this case is</p>
+<div class="arithmatex">\[
+\begin{aligned} J_{\min } &amp; =\frac{1}{2 \pi} \int_{-\pi}^{+\pi} \mathcal{S}_d\left(e^{j \Omega}\right)\left(1-\frac{\mathcal{S}_d\left(e^{j \Omega}\right)}{\mathcal{S}_d\left(e^{j \Omega}\right)+\mathcal{S}_v\left(e^{j \Omega}\right)}\right) d \Omega \\ &amp; =\frac{1}{2 \pi} \int_{-\pi}^{+\pi} \mathcal{S}_d\left(e^{j \Omega}\right)\left(1-\frac{1}{1+1 / \rho(\Omega)}\right) d \Omega \\ &amp; =\frac{1}{2 \pi} \int_{-\pi}^{+\pi} \mathcal{S}_d\left(e^{j \Omega}\right)\left(\frac{1}{1+\rho(\Omega)}\right) d \Omega\end{aligned}
+\]</div>
+<h3 id="6-the-fir-wiener-filter">6. The FIR Wiener filter<a class="headerlink" href="#6-the-fir-wiener-filter" title="Permanent link">&para;</a></h3>
+<p>With a Pth order finite impulse response (FIR) Wiener filter, the signal estimate is formed as</p>
+<div class="arithmatex">\[
+\hat{d_n} = \sum_{p=0}^{P}h_p x_{n-p}
+\]</div>
+<p>As before, we need to solve for</p>
+<div class="arithmatex">\[
+\frac{\partial \epsilon_n}{\partial h_q}=\frac{\partial}{\partial h_q}\left\{d_n-\sum_{p=0}^{P} h_p x_{n-p}\right\}=-x_{n-q}
+\]</div>
+<p>leading to an orthogonality principle:</p>
+<div class="arithmatex">\[
+\mathbb{E}\left[\epsilon_n x_{n-q}\right]=0 ; \quad q=0, \ldots, P-1
+\]</div>
+<p>and Wiener-Hopf equations</p>
+<div class="arithmatex">\[
+\sum_{p=0}^P h_p r_{x x}[q-p]=r_{x d}[q], \quad q=0,1, \ldots, P
+\]</div>
+<p>The equations can be written in matrix form as</p>
+<div class="arithmatex">\[
+\mathbf{R}_x \mathbf{h}=\mathbf{r}_{x d}
+\]</div>
+<p>where</p>
+<div class="arithmatex">\[
+\mathbf{h}=\left[\begin{array}{c}h_0 \\ h_1 \\ \vdots \\ h_P\end{array}\right] \quad \mathbf{r}_{x d}=\left[\begin{array}{c}r_{x d}[0] \\ r_{x d}[1] \\ \vdots \\ r_{x d}[P]\end{array}\right]
+\]</div>
+<p>and</p>
+<div class="arithmatex">\[
+\mathbf{R}_x=\left[\begin{array}{cccc}r_{x x}[0] &amp; r_{x x}[1] &amp; \cdots &amp; r_{x x}[P] \\ r_{x x}[1] &amp; r_{x x}[0] &amp; \cdots &amp; r_{x x}[P-1] \\ \vdots &amp; \vdots &amp; &amp; \vdots \\ r_{x x}[P] &amp; r_{x x}[P-1] &amp; \cdots &amp; r_{x x}[0]\end{array}\right]
+\]</div>
+<p><span class="arithmatex">\(\mathbf{R}_x\)</span> is known as the <strong>correlation matrix</strong>.</p>
+<p>Note that <span class="arithmatex">\(r_{xx}[k] = r_{xx}[-k]\)</span> so that the correlation matrix <span class="arithmatex">\(\mathbf{R}_x\)</span> is symmetric and has constant diagonals.</p>
+<p>The coefficient vector can be found be matrix inversion:
+$$
+\mathbf{h}=\mathbf{R}<em xd="xd">x^{-1} \mathbf{r}</em>
+$$</p>
+<p>In summary, it requires a-priori knowledge of the autocorrelation matrix <span class="arithmatex">\(\mathbf{R}_x\)</span> of the input process <span class="arithmatex">\(\{x_n\}\)</span> and the cross-correlation <span class="arithmatex">\(\mathbf{r}_d\)</span> between the input <span class="arithmatex">\(\{x_n\}\)</span> and the desired signal process <span class="arithmatex">\(\{d_n\}\)</span>.</p>
+<p>The minimum MSE error is given by</p>
+<div class="arithmatex">\[
+\begin{aligned}
+J_{\min }&amp;=\mathbb{E}\left[\epsilon_n d_n\right] \\
+&amp; =\mathbb{E}\left[\left(d_n-\sum_{p=0}^P h_p x_{n-p}\right) d_n\right] \\
+&amp; =r_{d d}[0]-\sum_{p=0}^P h_p r_{x d}[p] \\
+&amp; =r_{d d}[0]-\mathbf{r}_{x d}^T \mathbf{h}=r_{d d}[0]-\mathbf{r}_{x d}^T{\mathbf{R}_x{ }^{-1} \mathbf{r}_{x d}}
+\end{aligned}
+\]</div>
+<h3 id="7-extending-the-wiener-filter">7. Extending the Wiener filter<a class="headerlink" href="#7-extending-the-wiener-filter" title="Permanent link">&para;</a></h3>
+<p>The formula for the FIR case</p>
+<div class="arithmatex">\[
+\mathbf{h}=\mathbf{R}_x^{-1} \mathbf{r}_{xd}
+\]</div>
+<p>applies to whatever the form of the desired signal and the 'noisy' signal, provided the necessary correlation functions can be calculated.</p>
+<p>Standard examples that could come up in the exam:</p>
+<ul>
+<li>Prediction of a noisy signal <span class="arithmatex">\(\{u_n\}\)</span>, the desired signal is the predicted value of the signal <span class="arithmatex">\(d_n = u_{n+p}\)</span>, where <span class="arithmatex">\(p\)</span> is the desired prediction interval.</li>
+<li>Smoothing of a noisy signal — use the current samples to get an better estimate of the signal at some point in the past: <span class="arithmatex">\(d_n = u_{n-p}\)</span>, where <span class="arithmatex">\(p\)</span> is the amount of 'lookahead' allowed.</li>
+<li>Deconvolution: extract a signal <span class="arithmatex">\(u_n\)</span> from a noisy convolved version of itself:</li>
+</ul>
+<div class="arithmatex">\[
+x_n=\sum_{q=0}^Q h_q u_{n-q}+v_n
+\]</div>
+<h2 id="iv-optimal-detection">IV. Optimal detection<a class="headerlink" href="#iv-optimal-detection" title="Permanent link">&para;</a></h2>
+<p><strong>Goal:</strong> detecting a deterministic signal <span class="arithmatex">\(s_n, n = 0, \ldots, N - 1\)</span> buried in a random noise <span class="arithmatex">\(v_n\)</span> (so that <span class="arithmatex">\(x_n = s_n + v_n\)</span>).
+<strong>Solution:</strong> matched filter.</p>
+<h3 id="matched-filter">Matched filter<a class="headerlink" href="#matched-filter" title="Permanent link">&para;</a></h3>
+<p>To formulate the problem, first 'vectorise' the equation</p>
+<div class="arithmatex">\[
+\begin{gathered}
+\mathbf{x}=\mathbf{s}+\mathbf{v} \\
+\mathbf{s}=\left[s_0, s_1, \ldots, s_{N-1}\right]^T, \mathbf{x}=\left[x_0, x_1, \ldots, x_{N-1}\right]^T
+\end{gathered}
+\]</div>
+<p>The goal is to design an optimal FIR filter for performing the detection task. Suppose the filter has coefficients <span class="arithmatex">\(h_m\)</span>, for <span class="arithmatex">\(m=0,1, \ldots, N-1\)</span>, then the output of the filter at time <span class="arithmatex">\(N-1\)</span> is:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+y_{N-1} &amp; =\sum_{m=0}^{N-1} h_m x_{N-1-m}=\mathbf{h}^T \tilde{\mathbf{x}}=\mathbf{h}^T(\tilde{\mathbf{s}}+\tilde{\mathbf{v}})=\mathbf{h}^T \tilde{\mathbf{s}}+\mathbf{h}^T \tilde{\mathbf{v}} \\
+&amp; =y_{N-1}^s+y_{N-1}^n
+\end{aligned}
+\]</div>
+<p>where <span class="arithmatex">\(\tilde{\mathbf{x}}=\left[x_{N-1}, x_{N-2}, \ldots, x_0\right]^T\)</span> is the <strong>'time-reversed'</strong> vector, and <span class="arithmatex">\(\tilde{\mathbf{s}}\)</span> defined similarly. 
+<span class="arithmatex">\(y_{N-1}^s\)</span> is defined as the output from the signal-only part and <span class="arithmatex">\(y_{N-1}^n\)</span> is the output from just the noise going through the filter.</p>
+<p>Instead of minimising the mean-squared error, we aim to <strong>maximise the signal-to-noise ratio (SNR)</strong> at the output of the filter.
+The output SNR is defined as</p>
+<div class="arithmatex">\[
+\frac{\mathbb{E}\left[\left|y_{N-1}^s\right|^2\right]}{\mathbb{E}\left[\left|y_{N-1}^n\right|^2\right]}=\frac{\mathbb{E}\left[\left|\mathbf{h}^T \tilde{\mathbf{s}}\right|^2\right]}{\mathbb{E}\left[\left|\mathbf{h}^T \tilde{\mathbf{v}}\right|^2\right]}=\frac{\left|\mathbf{h}^T \tilde{\mathbf{s}}\right|^2}{\mathbb{E}\left[\left|\mathbf{h}^T \tilde{\mathbf{v}}\right|^2\right]}
+\]</div>
+<p>(since numerator is not a random quantity).</p>
+<h4 id="signal-output-energy">Signal output energy<a class="headerlink" href="#signal-output-energy" title="Permanent link">&para;</a></h4>
+<p>The signal component at the output is <span class="arithmatex">\(y_{N-1}^s=\mathbf{h}^T \tilde{\mathbf{s}}\)</span>, with energy</p>
+<div class="arithmatex">\[
+\left|\mathbf{h}^T \tilde{\mathbf{s}}\right|^2=\left(\mathbf{h}^T \tilde{\mathbf{s}}\right)\left(\tilde{\mathbf{s}}^T \mathbf{h}\right)=\mathbf{h}^T\left(\tilde{\mathbf{s}} \tilde{\mathbf{s}}^T\right) \mathbf{h}
+\]</div>
+<p>To analyse this, consider the matrix <span class="arithmatex">\(\mathbf{M}=\tilde{\mathbf{s}} \tilde{\mathbf{s}}^T\)</span>.</p>
+<p>Recall the definition of eigenvectors (e) and eigenvalues <span class="arithmatex">\((\lambda)\)</span></p>
+<div class="arithmatex">\[
+\mathbf{M e}=\lambda \mathbf{e}
+\]</div>
+<p>Try <span class="arithmatex">\(\mathbf{e}=\tilde{\mathbf{s}}:\)</span></p>
+<div class="arithmatex">\[
+\mathbf{M} \tilde{\mathbf{s}}=\left(\tilde{\mathbf{s}} \tilde{\mathbf{s}}^T\right) \tilde{\mathbf{s}}=\tilde{\mathbf{s}}\left(\tilde{\mathbf{s}}^T \tilde{\mathbf{s}}\right)=\left(\tilde{\mathbf{s}}^T \tilde{\mathbf{s}}\right) \tilde{\mathbf{s}}
+\]</div>
+<p><strong>Hence the unit length vector <span class="arithmatex">\(\mathbf{e}_0=\tilde{\mathbf{s}} /|\tilde{\mathbf{s}}|\)</span> is an eigenvector and <span class="arithmatex">\(\lambda=\left(\tilde{\mathbf{s}}^T \tilde{\mathbf{s}}\right)\)</span> is the corresponding eigenvalue.</strong></p>
+<p>Consider any vector <span class="arithmatex">\(\mathbf{e}^{\prime}\)</span> which is orthogonal to <span class="arithmatex">\(\mathbf{e}_0\)</span> (i.e. <span class="arithmatex">\(\tilde{\mathbf{s}}^T \mathbf{e}^{\prime}=0\)</span> ):</p>
+<div class="arithmatex">\[
+\mathbf{M} \mathbf{e}^{\prime}=\tilde{\mathbf{s}} \tilde{\mathbf{s}}^T \mathbf{e}^{\prime}=0
+\]</div>
+<p><span class="arithmatex">\(\Rightarrow\)</span> any such <span class="arithmatex">\(\mathbf{e}^{\prime}\)</span> is also an eigenvector, but with eigenvalue <span class="arithmatex">\(\lambda^{\prime}=0\)</span>. 
+Since we can construct a set of <span class="arithmatex">\(N-1\)</span> orthonormal (unit length and orthogonal to each other) vectors which are orthogonal to <span class="arithmatex">\(\tilde{\mathbf{s}}\)</span>, call these <span class="arithmatex">\(\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_{N-1}\)</span>, we have now discovered all <span class="arithmatex">\(N\)</span> eigenvectors/eigenvalues of <span class="arithmatex">\(\mathbf{M}\)</span>.</p>
+<p>Since the <span class="arithmatex">\(N\)</span> eigenvectors form an orthonormal basis, we may represent any filter coefficient vector <span class="arithmatex">\(\mathbf{h}\)</span> as a linear combination of these:</p>
+<div class="arithmatex">\[
+\mathbf{h}=\alpha \mathbf{e}_0+\beta \mathbf{e}_1+\gamma \mathbf{e}_2+\ldots+\ldots \mathbf{e}_{N-1}
+\]</div>
+<p>Thus we can express </p>
+<div class="arithmatex">\[ 
+\begin{aligned} \mathbf{M h} &amp; =\mathbf{M}\left(\alpha \mathbf{e}_0+\beta \mathbf{e}_1+\gamma \mathbf{e}_2+\ldots+\ldots \mathbf{e}_{N-1}\right) \\ &amp; =\alpha \mathbf{M} \mathbf{e}_0+\beta \mathbf{M} \mathbf{e}_1+\gamma \mathbf{M} \mathbf{e}_2+\ldots+\ldots \mathbf{M} \mathbf{e}_{N-1} \\ &amp; =\alpha\left(\tilde{\mathbf{s}}^T \tilde{\mathbf{s}}\right) \mathbf{e}_0+0+0+\ldots 0 \\ &amp;=\alpha\left(\tilde{\mathbf{s}}^T \tilde{\mathbf{s}}\right) \mathbf{e}_0 \end{aligned}
+\]</div>
+<p>since all but the first eigenvalue is zero. 
+Now, consider the signal output energy again: </p>
+<div class="arithmatex">\[
+\begin{aligned} \mathbf{h}^T \tilde{\mathbf{s}} \tilde{\mathbf{s}}^T \mathbf{h} &amp; =\mathbf{h}^T \mathbf{M h} \\ &amp; =\mathbf{h}^T \alpha\left(\tilde{\mathbf{s}}^T \tilde{\mathbf{s}}\right) \mathbf{e}_0 \\ &amp; =\alpha\left(\tilde{\mathbf{s}}^T \tilde{\mathbf{s}}\right) \mathbf{h}^T \mathbf{e}_0 \\ &amp; =\left(\alpha \tilde{\mathbf{s}}^T \tilde{\mathbf{s}}\right)\left(\alpha \mathbf{e}_0+\beta \mathbf{e}_1+\gamma \mathbf{e}_2+\ldots+\ldots \mathbf{e}_{N-1}\right)^T \mathbf{e}_0 \\ &amp; =\alpha^2 \tilde{\mathbf{s}}^T \tilde{\mathbf{s}}\end{aligned}
+\]</div>
+<p>since the eigenvectors are orthonormal.</p>
+<h4 id="noise-output-energy">Noise output energy<a class="headerlink" href="#noise-output-energy" title="Permanent link">&para;</a></h4>
+<p>Now, consider the expected noise output energy, which may be simplified as follows: </p>
+<div class="arithmatex">\[ 
+\mathbb{E}\left[\left|\mathbf{h}^T \tilde{\mathbf{v}}\right|^2\right]=\mathbb{E}\left[\mathbf{h}^T \tilde{\mathbf{v}} \tilde{\mathbf{v}}^T \mathbf{h}\right]=\mathbf{h}^T \mathbb{E}\left[\tilde{\mathbf{v}} \tilde{\mathbf{v}}^T\right] \mathbf{h} 
+\]</div>
+<p>Consider the case where the noise is white and zero mean with variance <span class="arithmatex">\(\sigma_v^2\)</span>. Then, for any time indexes <span class="arithmatex">\(i=0, \ldots, N-1\)</span> and <span class="arithmatex">\(j=0, \ldots, N-1\)</span> : </p>
+<div class="arithmatex">\[ 
+\mathbb{E}\left[v_i v_j\right]= \begin{cases}\sigma_v^2, &amp; i=j \\ 0, &amp; i \neq j\end{cases} 
+\]</div>
+<p>and hence </p>
+<div class="arithmatex">\[
+\mathbb{E}\left[\tilde{\mathbf{v}} \tilde{\mathbf{v}}^T\right]=\sigma_v^2 \mathbf{I}
+\]</div>
+<p>where <span class="arithmatex">\(\mathbf{I}\)</span> is the <span class="arithmatex">\(N \times N\)</span> identity matrix (diagonal elements correspond to <span class="arithmatex">\(i=j\)</span> terms and off-diagonal to <span class="arithmatex">\(i \neq j\)</span> terms).
+Hence, the expression for the noise output energy is:</p>
+<div class="arithmatex">\[
+\mathbb{E}\left[\left|\mathbf{h}^T \tilde{\mathbf{v}}\right|^2\right]=\mathbf{h}^T \sigma_v^2 \mathbf{l} \mathbf{h}=\sigma_v^2 \mathbf{h}^T \mathbf{h}
+\]</div>
+<p>and once again expand <span class="arithmatex">\(\mathbf{h}\)</span> in terms of the eigenvectors of <span class="arithmatex">\(\mathbf{M}\)</span> :</p>
+<div class="arithmatex">\[
+\sigma_v^2 \mathbf{h}^T \mathbf{h}=\sigma_v^2\left(\alpha^2+\beta^2+\gamma^2+\ldots\right)
+\]</div>
+<p>again, since <span class="arithmatex">\(\mathbf{e}_i^T \mathbf{e}_j=\delta[i-j]\)</span> (orthonormal eigenvectors).</p>
+<h4 id="snr-maximisation">SNR maximisation<a class="headerlink" href="#snr-maximisation" title="Permanent link">&para;</a></h4>
+<p>The SNR may now be expressed as:</p>
+<div class="arithmatex">\[
+\frac{\left|\mathbf{h}^T \tilde{\mathbf{s}}\right|^2}{\mathbb{E}\left[\left|\mathbf{h}^T \tilde{\mathbf{v}}\right|^2\right]}=\frac{\alpha^2 \tilde{\mathbf{s}}^T \tilde{\mathbf{s}}}{\sigma_v^2\left(\alpha^2+\beta^2+\gamma^2+\ldots\right)}
+\]</div>
+<p>Clearly, scaling <span class="arithmatex">\(\mathbf{h}\)</span> by some factor <span class="arithmatex">\(\rho\)</span> will not change the SNR since numerator and denominator will both then scale equally by <span class="arithmatex">\(\rho^2\)</span> <span class="arithmatex">\(\Rightarrow\)</span> fix <span class="arithmatex">\(|\mathbf{h}|=1\)</span> and then maximise.
+With <span class="arithmatex">\(|\mathbf{h}|=1\)</span> we have <span class="arithmatex">\(\left(\alpha^2+\beta^2+\gamma^2+\ldots\right)=1\)</span> and the SNR becomes just equal to <span class="arithmatex">\(\alpha^2 \tilde{\mathbf{s}}^T \tilde{\mathbf{s}} /\sigma_v^2\)</span>.</p>
+<p>The largest possible value of <span class="arithmatex">\(\alpha\)</span> given that <span class="arithmatex">\(|\mathbf{h}|=1\)</span> corresponds to <span class="arithmatex">\(\alpha=1\)</span>, which implies then that <span class="arithmatex">\(\beta=\gamma=\ldots=0\)</span>, and finally we have the solution as: </p>
+<div class="arithmatex">\[ 
+\mathbf{h}^{\mathrm{opt}}=1 \times \mathbf{e}_0=\frac{\tilde{\mathbf{s}}}{|\tilde{\mathbf{s}}|}, \text { since } \mathbf{e}_0=\frac{\tilde{\mathbf{s}}}{|\tilde{\mathbf{s}}|} 
+\]</div>
+<p><strong>i.e. the optimal filter coefficients are just the (normalised) time-reversed signal</strong></p>
+<p>The SNR at the optimal filter setting is given by</p>
+<div class="arithmatex">\[
+\mathrm{SNR}^{\mathrm{opt}}=\frac{\tilde{\mathbf{s}}^T \tilde{\mathbf{s}}}{\sigma_v^2}
+\]</div>
+<p>Clearly, the performance depends (as expected) very much on the energy of the signal <span class="arithmatex">\(s\)</span> and the noise <span class="arithmatex">\(v\)</span>.</p>
+<p><strong>Note:</strong> We have only proved that the SNR is maximised at one single filter output time <span class="arithmatex">\(n = N -1\)</span>. In fact, the signal output power term for the optimal filter is always less than that computed for <span class="arithmatex">\(n = N - 1\)</span> since the deterministic correlations function of <span class="arithmatex">\(s_n\)</span> always has its maximum at lag zero (correlation function is important here since the matched filter is the time-reversed <span class="arithmatex">\(\textbf{s}\)</span>).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

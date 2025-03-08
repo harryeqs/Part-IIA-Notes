@@ -1,0 +1,1700 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Notes for Part IIA Engineering at the University of Cambridge">
+      
+      
+        <meta name="author" content="Harry Ye">
+      
+      
+      
+        <link rel="prev" href="../3-Statistical%20Signal%20Processing/">
+      
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>4 Estimation Theory and Inference - Harry's Part IIA Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#2960A5" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#i-estimation-theory" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Harry&#39;s Part IIA Notes" class="md-header__button md-logo" aria-label="Harry's Part IIA Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Harry's Part IIA Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4 Estimation Theory and Inference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="#2960A5" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="#2960A5" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Harry&#39;s Part IIA Notes" class="md-nav__button md-logo" aria-label="Harry's Part IIA Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Harry's Part IIA Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About this site
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3F1 Signals and Systems
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            3F1 Signals and Systems
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F1-Signals%20and%20Systems/1-Discrete-time%20Systems/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 Discrete time Systems
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F1-Signals%20and%20Systems/2-Digital%20Filtering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 Digital Filtering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F1-Signals%20and%20Systems/3-Discrete%20Fourier%20Transform/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 Discrete Fourier Transform
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3F1-Signals%20and%20Systems/4-Discrete%20and%20Continuous%20Random%20Processes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 Discrete and Continuous Random Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3F3 Statistical Signal Processing
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            3F3 Statistical Signal Processing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-Probability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1 Probability
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-Random%20Processes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 Random Processes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-Statistical%20Signal%20Processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 Statistical Signal Processing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    4 Estimation Theory and Inference
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    4 Estimation Theory and Inference
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-estimation-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Estimation theory
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Estimation theory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#likelihood-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Likelihood function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prior-probability-density-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prior probability density function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estimation-vs-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estimation vs Inference
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-general-linear-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The general linear model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-einstein-wiener-khinchin-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Einstein-Wiener-Khinchin Theorem
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-simple-estimators-and-linear-estimations" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. Simple estimators and linear estimations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. Simple estimators and linear estimations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-simple-estimators" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Simple estimators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ordinary-least-squares-ols-estimator" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Ordinary least squares (OLS) estimator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-properties-of-the-linear-estimator" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Properties of the linear estimator
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Properties of the linear estimator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bias-of-ols-estimator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bias of OLS estimator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#covariance-of-ols-estimator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Covariance of OLS estimator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-likelihood-based-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. Likelihood-based inference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. Likelihood-based inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-multivariate-gaussian-pdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Multivariate Gaussian PDF
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-maximum-likelihood-estimate" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Maximum likelihood estimate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-estimating-the-noise-variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Estimating the noise variance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-bayesian-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      IV. Bayesian inference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IV. Bayesian inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-bayesian-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Bayesian methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-posterior-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Posterior inference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Posterior inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#map-estimation-scheme-under-linear-gaussian-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      MAP estimation scheme (under linear Gaussian model)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-complete-posterior-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      The complete posterior distribution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mmse-estimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. MMSE estimation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-summary-of-estimators" class="md-nav__link">
+    <span class="md-ellipsis">
+      V. Summary of estimators
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="V. Summary of estimators">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#least-squares" class="md-nav__link">
+    <span class="md-ellipsis">
+      Least squares
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maximum-likelihood" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maximum likelihood
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bayesian-map-and-mmse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bayesian (MAP and MMSE)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-estimation-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Estimation theory
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Estimation theory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#likelihood-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Likelihood function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prior-probability-density-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prior probability density function
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estimation-vs-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estimation vs Inference
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-the-general-linear-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. The general linear model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-einstein-wiener-khinchin-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Einstein-Wiener-Khinchin Theorem
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-simple-estimators-and-linear-estimations" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. Simple estimators and linear estimations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="II. Simple estimators and linear estimations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-simple-estimators" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Simple estimators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ordinary-least-squares-ols-estimator" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Ordinary least squares (OLS) estimator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-properties-of-the-linear-estimator" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Properties of the linear estimator
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Properties of the linear estimator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bias-of-ols-estimator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bias of OLS estimator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#covariance-of-ols-estimator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Covariance of OLS estimator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iii-likelihood-based-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      III. Likelihood-based inference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="III. Likelihood-based inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-multivariate-gaussian-pdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Multivariate Gaussian PDF
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-maximum-likelihood-estimate" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Maximum likelihood estimate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-estimating-the-noise-variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Estimating the noise variance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iv-bayesian-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      IV. Bayesian inference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IV. Bayesian inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-bayesian-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Bayesian methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-posterior-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Posterior inference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Posterior inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#map-estimation-scheme-under-linear-gaussian-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      MAP estimation scheme (under linear Gaussian model)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-complete-posterior-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      The complete posterior distribution
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mmse-estimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. MMSE estimation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v-summary-of-estimators" class="md-nav__link">
+    <span class="md-ellipsis">
+      V. Summary of estimators
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="V. Summary of estimators">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#least-squares" class="md-nav__link">
+    <span class="md-ellipsis">
+      Least squares
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maximum-likelihood" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maximum likelihood
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bayesian-map-and-mmse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bayesian (MAP and MMSE)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>4 Estimation Theory and Inference</h1>
+
+<h2 id="i-estimation-theory">I. Estimation theory<a class="headerlink" href="#i-estimation-theory" title="Permanent link">&para;</a></h2>
+<h3 id="1-introduction">1. Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h3>
+<p>Given signal measurements <span class="arithmatex">\(\mathbf{x}\)</span></p>
+<div class="arithmatex">\[
+\mathbf{x}=\left[\begin{array}{c}
+x_0 \\
+x_1 \\
+\vdots \\
+x_{N-1}
+\end{array}\right]
+\]</div>
+<p>we wish to infer the parameters <span class="arithmatex">\(\mathbf{\theta}\)</span></p>
+<div class="arithmatex">\[
+\mathbf{\theta}=\left[\begin{array}{c}
+\theta_0 \\
+\theta_1 \\
+\vdots \\
+\theta_{P-1}
+\end{array}\right]
+\]</div>
+<p>Usually <span class="arithmatex">\(P \ll N\)</span> and we have a lot more data than parameters.</p>
+<h4 id="likelihood-function">Likelihood function<a class="headerlink" href="#likelihood-function" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[
+p(\mathbf{x}\mid\mathbf{\theta})
+\]</div>
+<p>The likelihood function forms a <strong>generative model</strong> for data — how likely different realisations of the observed data <span class="arithmatex">\(\mathbf{x}\)</span> would be given the underlying model parameters <span class="arithmatex">\(\mathbf{\theta}\)</span>.</p>
+<h4 id="prior-probability-density-function">Prior probability density function<a class="headerlink" href="#prior-probability-density-function" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[
+p(\mathbf{\theta})
+\]</div>
+<p>The prior probability density function represent prior belief about likely parameters configurations before any data have been seen.</p>
+<p>Prior can be used to <strong>regularise</strong> the inference problem.</p>
+<h4 id="estimation-vs-inference">Estimation vs Inference<a class="headerlink" href="#estimation-vs-inference" title="Permanent link">&para;</a></h4>
+<p><strong>Estimation:</strong> the task is to formulate an estimate <span class="arithmatex">\(\hat{\mathbf{\theta}}\)</span> which is close (in some sense) to the true <span class="arithmatex">\(\mathbf{\theta}\)</span>.
+<strong>Inference:</strong> the task is to study the whole probability distribution of the unknown, including the uncertainties that remain about the values of <span class="arithmatex">\(\mathbf{\theta}\)</span> once the data <span class="arithmatex">\(\mathbf{x}\)</span> have been observed.</p>
+<h3 id="2-the-general-linear-model">2. The general linear model<a class="headerlink" href="#2-the-general-linear-model" title="Permanent link">&para;</a></h3>
+<p>In the Linear Model it is assumed that the data <span class="arithmatex">\(\mathbf{x}\)</span> are generated as a linear function of the parameters <span class="arithmatex">\(\mathbf{\theta}\)</span> with an additive random modelling error term <span class="arithmatex">\(e_n\)</span> :</p>
+<div class="arithmatex">\[
+x_n=\mathbf{g}_n^T \mathbf{\theta}+e_n
+\]</div>
+<p>where <span class="arithmatex">\(\mathbf{g}_n\)</span> is a <span class="arithmatex">\(P\)</span>-dimensional column vector.
+The expression may be written for the whole vector <span class="arithmatex">\(\mathbf{x}\)</span> as</p>
+<div class="arithmatex">\[
+\mathbf{x}=\mathbf{G} \mathbf{\theta}+\mathbf{e}
+\]</div>
+<p>where</p>
+<div class="arithmatex">\[
+\mathbf{G}=\left[\begin{array}{c}
+{\mathbf{g}_0^T} \\
+\mathbf{g}_1^T \\
+\vdots \\
+\mathbf{g}_{N-1}^T
+\end{array}\right] \quad(\text{sized }N \times P)
+\]</div>
+<p>the matrix <span class="arithmatex">\(\mathbf{G}\)</span> is known as the <strong>design matrix</strong>.</p>
+<h3 id="3-einstein-wiener-khinchin-theorem">3. Einstein-Wiener-Khinchin Theorem<a class="headerlink" href="#3-einstein-wiener-khinchin-theorem" title="Permanent link">&para;</a></h3>
+<p>(This section is included for completeness, could directly jump to the conclusion).
+Take a time-windowed version of the signal <span class="arithmatex">\(x_n\)</span>, having duration <span class="arithmatex">\(2 N+\)</span> 1 samples and zero elsewhere:</p>
+<div class="arithmatex">\[
+x_n^N=w_n^N x_n
+\]</div>
+<p>where</p>
+<div class="arithmatex">\[
+w_n^N= \begin{cases}1, &amp; -N \leq n \leq N \\ 0, &amp; \text { otherwise }\end{cases}
+\]</div>
+<p>Look at its DTFT:</p>
+<div class="arithmatex">\[
+X^N\left(e^{j \Omega}\right)=\sum_{n=-\infty}^{+\infty} \overbrace{w_n^N x_n}^{x_n^N} e^{-j n \Omega}
+\]</div>
+<p>Expand its modulus squared</p>
+<div class="arithmatex">\[
+\left|X^N\left(e^{j \Omega}\right)\right|^2=X^N\left(e^{j \Omega}\right) X^N\left(e^{j \Omega}\right)^*
+\]</div>
+<p>and hence we can write the following DTFT pair:</p>
+<div class="arithmatex">\[
+\operatorname{DTFT}\left\{x_n^N * x_{-n}^N\right\}=X^N\left(e^{j \Omega}\right) X^N\left(e^{j \Omega}\right)^*=\left|X^N\left(e^{j \Omega}\right)\right|^2
+\]</div>
+<p>Now expand the time-domain convolution: </p>
+<div class="arithmatex">\[ 
+x_n^N * x_{-n}^N=\sum_{n=-\infty}^{+\infty} x_n^N x_{n-m}^N=\sum_{n=-\infty}^{+\infty} x_n w_n^N x_{n-m} w_{n-m}^N 
+\]</div>
+<p>so we have DTFT </p>
+<div class="arithmatex">\[
+\operatorname{DTFT}\left\{\sum_{n=-\infty}^{+\infty} x_n w_n x_{n-m} w_{n-m}\right\}=\left|X^N\left(e^{j \Omega}\right)\right|^2
+\]</div>
+<p>Now multiply both sides by one over the window duration <span class="arithmatex">\((2 N+1)\)</span> and take expectations on both sides:</p>
+<div class="arithmatex">\[
+\operatorname{DTFT}\left\{\mathbb{E}\left[\frac{1}{2 N+1} \sum_{n=-\infty}^{+\infty} x_n w_n^N x_{n-m} w_{n-m}^N\right]\right\}=\mathbb{E}\left[\frac{1}{2 N+1}\left|X^N\left(e^{j \Omega}\right)\right|^2\right]
+\]</div>
+<p>simplify the expectation in the DTFT</p>
+<div class="arithmatex">\[
+\begin{gathered}\mathbb{E}\left[\frac{1}{2 N+1} \sum_{n=-\infty}^{+\infty} x_n w_n^N x_{n-m} w_{n-m}^N\right]=\frac{1}{2 N+1} \sum_{n=-\infty}^{+\infty} r_{X X}[m] w_n^N w_{n-m}^N \\ =r_{X X}[m] \frac{1}{2 N+1} \sum_{n=-\infty}^{+\infty} w_n^N w_{n-m}^N=r_{X X}[m] t[m]\end{gathered}
+\]</div>
+<p>where <span class="arithmatex">\(t[m]\)</span> is the deterministic autocorrelation function of the window function <span class="arithmatex">\(w_n\)</span>.
+Hence</p>
+<div class="arithmatex">\[
+\operatorname{DTFT}\left\{r_{X X}[m] t[m]\right\}=\mathbb{E}\left[\frac{1}{2 N+1}\left|X^N\left(e^{j \Omega}\right)\right|^2\right]
+\]</div>
+<p>The DTFT of <span class="arithmatex">\(r_{X X}\)</span> is the power spectrum is <span class="arithmatex">\(\mathcal{S}_x\left(e^{j \Omega}\right)\)</span>, hence</p>
+<div class="arithmatex">\[
+\operatorname{DTFT}\left\{r_{X X}[m] t[m]\right\}=\mathcal{S}_X\left(e^{j \Omega}\right) * T\left(e^{j \Omega}\right)
+\]</div>
+<p>where <span class="arithmatex">\(T\left(e^{j \Omega}\right)\)</span> is the DTFT of <span class="arithmatex">\(t[m]\)</span>. As <span class="arithmatex">\(N\)</span> increases <span class="arithmatex">\(t[m]\)</span> gets wider and flatter, <span class="arithmatex">\(T(e^{j\Omega})\)</span> tends to a delta function.
+Thus the final limiting expression becomes</p>
+<div class="arithmatex">\[
+\begin{aligned} \lim _{N \rightarrow \infty} \operatorname{DTFT}\left\{r_{X X}[m] t[m]\right\} &amp; =\operatorname{DTFT}\left\{r_{X X}[m]\right\}=\mathcal{S}_x\left(e^{j \Omega}\right) \\ &amp; =\lim _{N \rightarrow \infty} \mathbb{E}\left[\frac{1}{2 N+1}\left|X^N\left(e^{j \Omega}\right)\right|^2\right]\end{aligned}
+\]</div>
+<p><strong>Conclusion:</strong> In the limit <span class="arithmatex">\(N \rightarrow \infty\)</span>, the power spectrum is proportional to the expected value of the DTFT-squared to the data.</p>
+<div class="arithmatex">\[
+\boxed{\lim _{N \rightarrow \infty} \mathbb{E}\left[\frac{1}{2 N+1}\left|X^N\left(e^{j \Omega}\right)\right|^2\right]=\mathcal{S}_x\left(e^{j \Omega}\right)}
+\]</div>
+<p><strong>i.e. The power spectrum is the expected value of the time-normalised DTFT-squared of the signal values.</strong></p>
+<h2 id="ii-simple-estimators-and-linear-estimations">II. Simple estimators and linear estimations<a class="headerlink" href="#ii-simple-estimators-and-linear-estimations" title="Permanent link">&para;</a></h2>
+<h3 id="1-simple-estimators">1. Simple estimators<a class="headerlink" href="#1-simple-estimators" title="Permanent link">&para;</a></h3>
+<p>An estimator is <strong>unbiased</strong> if</p>
+<div class="arithmatex">\[
+\mathbb{E}[\hat{\mu}] = \mu
+\]</div>
+<p>where the expectation is taken w.r.t. the distribution of all of the random variables <span class="arithmatex">\(X_i\)</span>.
+The standard mean estimator is unbiased:</p>
+<div class="arithmatex">\[
+\begin{aligned} \mathbb{E}[\hat{\mu}] &amp; =\mathbb{E}\left[\frac{1}{N} \sum_{i=1}^N X_i\right] \\ &amp; =\frac{1}{N} \sum_{i=1}^N \mathbb{E}\left[X_i\right]=\frac{1}{N} N \mu \\ &amp; =\mu\end{aligned}
+\]</div>
+<p>Looking at the variance of <span class="arithmatex">\(\hat{\mu}\)</span> (<span class="arithmatex">\(\mathbb{E}[\hat{\mu}]\)</span> is the sum of autocorrelations of <span class="arithmatex">\(X\)</span>):</p>
+<div class="arithmatex">\[
+\operatorname{var}(\hat{\mu})=\mathbb{E}\left[\hat{\mu}^2\right]-\mathbb{E}[\hat{\mu}]^2=\frac{\sigma^2}{N}
+\]</div>
+<p><span class="arithmatex">\(\implies\)</span> <strong>the variance tends to zero as <span class="arithmatex">\(N\)</span> tends to infinity.</strong></p>
+<p>Unbiased + var <span class="arithmatex">\(\rightarrow 0\)</span> as <span class="arithmatex">\(N \rightarrow \infty\)</span> = <strong>consistent</strong> — such estimator will get the correct answer with enough data.</p>
+<p>(estimators can be designed to have no bias and minimum variance — minimum variance unbiased (MVU) estimators)</p>
+<h3 id="2-ordinary-least-squares-ols-estimator">2. Ordinary least squares (OLS) estimator<a class="headerlink" href="#2-ordinary-least-squares-ols-estimator" title="Permanent link">&para;</a></h3>
+<p>Recall that the general linear model has the form</p>
+<div class="arithmatex">\[
+\mathbf{x}=\mathbf{G}\mathbf{\theta}+\mathbf{e}
+\]</div>
+<p>The goal is to find the model that minimises the square errors</p>
+<div class="arithmatex">\[
+J=\sum_{n=0}^{N-1} e_n^2=\mathbf{e}^T \mathbf{e}
+\]</div>
+<p>Expand this using <span class="arithmatex">\(\mathbf{e}=\mathbf{x}-\mathbf{G} \mathbf{\theta}\)</span>,</p>
+<div class="arithmatex">\[
+\mathbf{e}^T \mathbf{e}=(\mathbf{x}-\mathbf{G} \mathbf{\theta})^T(\mathbf{x}-\mathbf{G} \mathbf{\theta})=\mathbf{x}^T \mathbf{x}+\mathbf{\theta}^T \mathbf{G}^T \mathbf{G} \mathbf{\theta}-2 \mathbf{\theta}^T \mathbf{G}^T \mathbf{x}
+\]</div>
+<p>The vector gradient is defined as</p>
+<div class="arithmatex">\[
+\nabla \phi=\frac{d \phi(\mathbf{\theta})}{d \mathbf{\theta}}=\left[\begin{array}{c}\frac{\partial \phi(\mathbf{\theta})}{\partial \theta_0} \\ \frac{\partial \phi(\mathbf{\theta})}{\partial \theta_1} \\ \vdots \\ \frac{\partial \phi(\mathbf{\theta})}{\partial \theta_{P-1}}\end{array}\right]
+\]</div>
+<p>we obtain:</p>
+<div class="arithmatex">\[
+\frac{d J}{d \mathbf{\theta}}=2 \mathbf{G}^T \mathbf{G} \mathbf{\theta}-2 \mathbf{G}^T \mathbf{x}
+\]</div>
+<p>and finally, at a stationary point, setting <span class="arithmatex">\(\frac{d J}{d \theta}=\mathbf{0}\)</span>,</p>
+<div class="arithmatex">\[
+\mathbf{G}^T \mathbf{G} \mathbf{\theta}=\mathbf{G}^T \mathbf{x}
+\]</div>
+<p>or, for invertible <span class="arithmatex">\(\mathbf{G}^{T} \mathbf{G}\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\mathbf{\theta}^{O L S}=\left(\mathbf{G}^T \mathbf{G}\right)^{-1} \mathbf{G}^T \mathbf{x}}
+\]</div>
+<p>i.e. the classical Ordinary Least Squares estimate of <span class="arithmatex">\(\mathbf{\theta}\)</span>.</p>
+<h3 id="3-properties-of-the-linear-estimator">3. Properties of the linear estimator<a class="headerlink" href="#3-properties-of-the-linear-estimator" title="Permanent link">&para;</a></h3>
+<p>The OLS estimator of the general linear model is a linear estimator.</p>
+<h4 id="bias-of-ols-estimator">Bias of OLS estimator<a class="headerlink" href="#bias-of-ols-estimator" title="Permanent link">&para;</a></h4>
+<div class="arithmatex">\[
+\mathbb{E}\left[\mathbf{\theta}^{O L S}\right]=\mathbb{E}\left[\left(\mathbf{G}^T \mathbf{G}\right)^{-1} \mathbf{G}^T \mathbf{x}\right]=\left(\mathbf{G}^T \mathbf{G}\right)^{-1} \mathbf{G}^{T}(\mathbb{E}[\mathbf{x}])
+\]</div>
+<p>For the linear model <span class="arithmatex">\(\mathbf{x}=\mathbf{G} \mathbf{\theta}+\mathbf{e}\)</span>,</p>
+<div class="arithmatex">\[
+\mathbb{E}[\mathbf{x}]=\mathbf{G} \mathbf{\theta}+\mathbf{0}=\mathbf{G} \mathbf{\theta}
+\]</div>
+<p>since the noise <span class="arithmatex">\(\{e_n\}\)</span> has zero mean.</p>
+<p>Substituting back gives</p>
+<div class="arithmatex">\[
+\mathbb{E}\left[\mathbf{\theta}^{O L S}\right]=\left(\mathbf{G}^T \mathbf{G}\right)^{-1} \mathbf{G}^T \mathbf{G} \mathbf{\theta}=\left(\mathbf{G}^T \mathbf{G}\right)^{-1}\left(\mathbf{G}^T \mathbf{G}\right) \mathbf{\theta}=\mathbf{\theta}
+\]</div>
+<p><span class="arithmatex">\(\implies\)</span> the OLS is unbiased</p>
+<h4 id="covariance-of-ols-estimator">Covariance of OLS estimator<a class="headerlink" href="#covariance-of-ols-estimator" title="Permanent link">&para;</a></h4>
+<p>Define the OLS matrix term as</p>
+<div class="arithmatex">\[
+\mathbf{C}=\left(\mathbf{G}^T \mathbf{G}\right)^{-1} \mathbf{G}^T
+\]</div>
+<p>Then examine the variance of any other unbiased estimator, which we write as:</p>
+<div class="arithmatex">\[
+\hat{\mathbf{\theta}}=\mathbf{D x}
+\]</div>
+<p>where</p>
+<div class="arithmatex">\[
+\mathbf{D}=\mathbf{C}+\Delta
+\]</div>
+<p>and <span class="arithmatex">\(\Delta\)</span> is some matrix perturbation away from the OLS solution.</p>
+<p>For <span class="arithmatex">\(\mathbf{D x}\)</span> to be unbiased we require as above that</p>
+<div class="arithmatex">\[
+\mathbb{E}[\mathbf{D} \mathbf{x}]=\mathbf{\theta}
+\]</div>
+<p>i.e.</p>
+<div class="arithmatex">\[
+\mathbb{E}[(\mathbf{C}+\Delta) \mathbf{x}]=(\mathbf{C}+\mathbf{\Delta}) \mathbb{E}[\mathbf{x}]=(\mathbf{C}+\mathbf{\Delta}) \mathbf{G} \mathbf{\theta}=\mathbf{\theta}+\mathbf{\Delta} \mathbf{G} \mathbf{\theta}=\mathbf{\theta}
+\]</div>
+<p>and therefore we require</p>
+<div class="arithmatex">\[
+\Delta \mathbf{G}=\mathbf{0}
+\]</div>
+<p>since it must work for all <span class="arithmatex">\(\mathbf{\theta}\)</span>.</p>
+<p>For unbiased estimators <span class="arithmatex">\(\mathbb{E}[\hat{\mathbf{\theta}}]=\mathbf{\theta}\)</span> <span class="arithmatex">\(\implies\)</span> the covariance matrix of the estimation error is:</p>
+<div class="arithmatex">\[
+\operatorname{cov}(\hat{\mathbf{\theta}})=\mathbb{E}\left[(\hat{\mathbf{\theta}}-\mathbf{\theta})(\hat{\mathbf{\theta}}-\mathbf{\theta})^T\right]=\mathbb{E}\left[\hat{\mathbf{\theta}} \hat{\mathbf{\theta}}^T\right]-\mathbf{\theta} \mathbf{\theta}^T
+\]</div>
+<p>For the linear estimator <span class="arithmatex">\(\hat{\mathbf{\theta}}=\mathbf{D x}\)</span>, we have</p>
+<div class="arithmatex">\[
+\mathbb{E}\left[\hat{\mathbf{\theta}} \hat{\mathbf{\theta}}^T\right]=\mathbb{E}\left[\mathbf{D} \mathbf{x} \mathbf{x}^T \mathbf{D}^T\right]=\mathbf{D} \mathbb{E}\left[\mathbf{x} \mathbf{x}^T\right] \mathbf{D}^T
+\]</div>
+<p>while,</p>
+<div class="arithmatex">\[
+\mathbf{x x}^T=(\mathbf{G} \mathbf{\theta}+\mathbf{e})(\mathbf{G} \mathbf{\theta}+\mathbf{e})^T=\mathbf{G} \mathbf{\theta} \mathbf{\theta}^T \mathbf{G}^T+\mathbf{e} \mathbf{e}^T+\mathbf{e} \mathbf{\theta} \mathbf{G}^T+\mathbf{G} \mathbf{\theta} \mathbf{e}^T
+\]</div>
+<p>(the expectation of the last two terms are zero since <span class="arithmatex">\(\mathbb{E}[\mathbf{e}] = 0\)</span>)</p>
+<div class="arithmatex">\[
+\mathbb{E}\left[\mathbf{x x}^T\right]=\mathbf{G} \mathbf{\theta} \mathbf{\theta}^T \mathbf{G}^T+\sigma_e^2 \mathbf{I}
+\]</div>
+<p>since <span class="arithmatex">\(\left\{e_n\right\}\)</span> is zero mean white noise with variance <span class="arithmatex">\(\sigma_e^2\)</span>.
+Now the expectation is obtained as</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathbb{E}\left[\hat{\mathbf{\theta}} \hat{\mathbf{\theta}}^T\right] &amp; =\mathbf{D}\mathbb{E}\left[\mathbf{x} \mathbf{x}^T\right] \mathbf{D}^T \\
+&amp; =\mathbf{D}\left(\mathbf{G} \mathbf{\theta} \mathbf{\theta}^T \mathbf{G}^T+\sigma_e^2 \mathbf{I}\right) \mathbf{D}^T \\
+&amp; =\mathbf{\theta} \mathbf{\theta}^T+\sigma_e^2 \mathbf{D D}^T
+\end{aligned}
+\]</div>
+<p>(this last line is obtained by substituting for <span class="arithmatex">\(\mathbf{D}=\mathbf{C}+\Delta\)</span> and using the unbiasedness criterion, <span class="arithmatex">\(\mathbf{\Delta} \mathbf{G}=\mathbf{0}\)</span>).</p>
+<p>Hence</p>
+<div class="arithmatex">\[
+\begin{aligned}
+&amp; \operatorname{cov}(\hat{\mathbf{\theta}})=\mathbb{E}\left[\hat{\mathbf{\theta}} \hat{\mathbf{\theta}}^T\right]-\mathbf{\theta} \mathbf{\theta}^T=\sigma_e^2 \mathbf{D D}^T \\
+&amp; =\sigma_e^2(\mathbf{C}+\Delta)(\mathbf{C}+\mathbf{\Delta})^T \\
+&amp; =\sigma_e^2\left(\mathbf{C} \mathbf{C}^T+\mathbf{\Delta} \mathbf{\Delta}^T+\Delta \mathbf{C}^T+\mathbf{C} \mathbf{\Delta}^T\right) \\
+&amp; =\sigma_e^2\left(\mathbf{C C}^T+\mathbf{\Delta} \mathbf{\Delta}^T\right)\\
+&amp; =\sigma_e^2\left((\mathbf{G}^T\mathbf{G})^{-1} + \mathbf{\Delta}\mathbf{\Delta}^T\right)
+\end{aligned}
+\]</div>
+<p>Clearly with <span class="arithmatex">\(\mathbf{\Delta}=\mathbf{0}\)</span> we have the OLS estimator covariance, so</p>
+<div class="arithmatex">\[
+\operatorname{cov}(\hat{\mathbf{\theta}})=\operatorname{cov}\left(\mathbf{\theta}^{O L S}\right)+\sigma_e^2 \mathbf{\Delta} \mathbf{\Delta}^T
+\]</div>
+<p>Since <span class="arithmatex">\(\mathbf{\Delta} \mathbf{\Delta}^T \ge 0\)</span>, the <strong>OLS estimator is the minimum variances unbiased estimator</strong> — this is a <strong>best linear unbiased estimator (BLUE)</strong>.</p>
+<h2 id="iii-likelihood-based-inference">III. Likelihood-based inference<a class="headerlink" href="#iii-likelihood-based-inference" title="Permanent link">&para;</a></h2>
+<h3 id="1-multivariate-gaussian-pdf">1. Multivariate Gaussian PDF<a class="headerlink" href="#1-multivariate-gaussian-pdf" title="Permanent link">&para;</a></h3>
+<p>In this section and the next on Bayesian estimation, we will require the Multivariate Gaussian density function, for a length <span class="arithmatex">\(N\)</span> random column vector <span class="arithmatex">\(\mathbf{X}\)</span></p>
+<div class="arithmatex">\[
+f_{\mathbf{X}}(\mathbf{x})=\frac{1}{\sqrt{2 \pi}^N \operatorname{det}\left(\mathbf{C}_{\mathbf{X}}\right)^{\frac{1}{2}}} \exp \left(-\frac{1}{2}(\mathbf{x}-\mathbf{\mu})^T \mathbf{C}_{\mathbf{X}}{ }^{-1}(\mathbf{x}-\mathbf{\mu})\right)
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\mu=E[\mathbf{X}]\)</span> is the mean vector</li>
+<li><span class="arithmatex">\(\mathbf{C}_{\mathbf{x}}=E\left[(\mathbf{X}-\mathbf{\mu})(\mathbf{X}-\mathbf{\mu})^T\right]\)</span> is the Covariance Matrix</li>
+<li>Elementwise, <span class="arithmatex">\([\mathbf{C}_\mathbf{X}]_{i j}=c_{X_i X_j}\)</span> the covariance between elements <span class="arithmatex">\(X_{i-1}\)</span> and <span class="arithmatex">\(X_{j-1}\)</span>.</li>
+</ul>
+<h3 id="2-maximum-likelihood-estimate">2. Maximum likelihood estimate<a class="headerlink" href="#2-maximum-likelihood-estimate" title="Permanent link">&para;</a></h3>
+<p>The likelihood <span class="arithmatex">\(L(\mathbf{x} ; \mathbf{\theta})\)</span> is known as the p.d.f for <span class="arithmatex">\(\mathbf{x}\)</span> when the value of 
+<span class="arithmatex">\(\mathbf{\theta}\)</span> is known, defined as:</p>
+<div class="arithmatex">\[
+L(\mathbf{x} ; \mathbf{\theta})=p(\mathbf{x} \mid \mathbf{\theta})
+\]</div>
+<p>Note: it is often more convenient to maximise the <strong>log-likelihood.</strong>
+The Maximum Likelihood (ML) estimate for <span class="arithmatex">\(\mathbf{\theta}\)</span> is then that value of <span class="arithmatex">\(\mathbf{\theta}\)</span> which maximises the likelihood for given observations <span class="arithmatex">\(\mathbf{x}\)</span>: </p>
+<div class="arithmatex">\[
+\mathbf{\theta}^{ML}=\underset{\mathbf{\theta}}{\operatorname{argmax}}\{p(\mathbf{x} \mid \mathbf{\theta})\}
+\]</div>
+<p><span class="arithmatex">\(\implies\)</span> the ML solution corresponds to the parameter vector which could have generated the observed data <span class="arithmatex">\(\textbf{x}\)</span> with the highest probability.</p>
+<p>For Gauss-Markov model (aka linear Gaussian model, where the error term <span class="arithmatex">\(\mathbf{e}\)</span> is drawn from i.i.d., zero-mean Gaussian distribution), the probability of the error term <span class="arithmatex">\(p(\mathbf{e})\)</span> is</p>
+<div class="arithmatex">\[
+\begin{aligned} \prod_{n=0}^{N-1} \frac{1}{\sqrt{2 \pi \sigma_e^2}} e^{-\frac{1}{2 \sigma_e^2} e_n^2} &amp; =\frac{1}{{\sqrt{2 \pi \sigma_e^2}}^N} e^{-\frac{1}{2 \sigma_e} \sum_{n=0}^{N-1} e_n^2} \\ &amp; =\frac{1}{\sqrt{2 \pi \sigma_e^2}^N} e^{-\frac{1}{2 \sigma_e^2} \mathbf{e}^T \mathbf{e}}\end{aligned}
+\]</div>
+<p><span class="arithmatex">\(\implies\)</span> multivariate Gaussian distribution with mean zero and covariance matrix <span class="arithmatex">\(\sigma_e^2\textbf{I}\)</span>:</p>
+<div class="arithmatex">\[
+p(\mathbf{e})=\mathcal{N}\left(\mathbf{e} \mid \mathbf{0}, \sigma_e^2 \mathbf{I}\right)
+\]</div>
+<p>The likelihood <span class="arithmatex">\(p(\mathbf{x} \mid \mathbf{\theta})\)</span> can be obtained from a change of variables from <span class="arithmatex">\(\textbf{e} \rightarrow \textbf{x}\)</span> with unity Jacobian (since <span class="arithmatex">\(\mathbf{x}=\mathbf{G} \mathbf{\theta}+\mathbf{e}\)</span>)</p>
+<div class="arithmatex">\[
+L(\mathbf{x} ; \mathbf{\theta})=p(\mathbf{x} \mid \mathbf{\theta})=p_{\mathbf{e}}(\mathbf{x}-\mathbf{G} \mathbf{\theta})
+\]</div>
+<p>Expand and take log</p>
+<div class="arithmatex">\[
+\begin{aligned} \log L(\mathbf{x} ; \mathbf{\theta}) &amp; =-(N / 2) \log \left(2 \pi \sigma_e^2\right)-\frac{1}{2 \sigma_e^2}(\mathbf{x}-\mathbf{G} \mathbf{\theta})^T(\mathbf{x}-\mathbf{G} \mathbf{\theta}) \\ &amp; =-(N / 2) \log \left(2 \pi \sigma_e^2\right)-\frac{1}{2 \sigma_e^2} \sum_{n=0}^{N-1}\left(x_n-\mathbf{g}_n^T \mathbf{\theta}\right)^2 \\ &amp; =-\frac{1}{2 \sigma_e^2} \sum_{n=0}^{N-1}\left(x_n-\mathbf{g}_n^T \mathbf{\theta}\right)^2+\text { Const. }\end{aligned}
+\]</div>
+<p>Maximising the function w.r.t. <span class="arithmatex">\(\mathbf{\theta}\)</span> = minimising the sum-squared of the error sequence</p>
+<div class="arithmatex">\[
+J=\sum_{n=0}^{N-1}\left(x_n-\mathbf{g}_n^T \mathbf{\theta}\right)^2
+\]</div>
+<p><span class="arithmatex">\(\implies\)</span> the same criterion for ordinary least squares (OLS) estimation.</p>
+<p>Hence the ML estimator is the same as the OLS estimator</p>
+<div class="arithmatex">\[
+\boxed{{\mathbf{\theta}^{M L}}=\mathbf{\theta}^{O L S}=\left(\mathbf{G}^T \mathbf{G}\right)^{-1} \mathbf{G}^T \mathbf{x}}
+\]</div>
+<h3 id="3-estimating-the-noise-variance">3. Estimating the noise variance<a class="headerlink" href="#3-estimating-the-noise-variance" title="Permanent link">&para;</a></h3>
+<p>The log-likelihood function at the optimal parameter estimate <span class="arithmatex">\(\mathbf{\theta}^{ML}\)</span> can be considered as a function of <span class="arithmatex">\(\sigma_e^2\)</span></p>
+<div class="arithmatex">\[
+\begin{aligned}
+\log L\left(\mathbf{x} ; \mathbf{\theta}^{M L}, \sigma_e^2\right) &amp; =-(N / 2) \log \left(2 \pi \sigma_e^2\right) \\
+&amp; -\frac{1}{2 \sigma_e^2}\left(\mathbf{x}-\mathbf{G} \mathbf{\theta}^{M L}\right)^T\left(\mathbf{x}-\mathbf{G} \mathbf{\theta}^{M L}\right) \\
+&amp; =-(N / 2) \log \left(2 \pi \sigma_e^2\right)-\frac{1}{2 \sigma_e^2} J^{M L}
+\end{aligned}
+\]</div>
+<p>where <span class="arithmatex">\(J^{M L}\)</span> is the minimum squared error term corresponding to the ML optimisation.
+Differentiate wrt <span class="arithmatex">\(\sigma_e^2\)</span> and set to zero to get:</p>
+<div class="arithmatex">\[
+\frac{\partial \log L\left(\mathbf{x} ; \mathbf{\theta}^{M L}, \sigma_e^2\right)}{d \sigma_e^2}=-\frac{(N / 2)}{\sigma_e^2}+\frac{J^{M L}}{2\left(\sigma_e^2\right)^2}=0
+\]</div>
+<p>and hence</p>
+<div class="arithmatex">\[
+\sigma_e^2{ }^{M L}=J^{M L} / N
+\]</div>
+<p>i.e. the just mean-squared error at the ML parameter solution.</p>
+<h2 id="iv-bayesian-inference">IV. Bayesian inference<a class="headerlink" href="#iv-bayesian-inference" title="Permanent link">&para;</a></h2>
+<h3 id="1-bayesian-methods">1. Bayesian methods<a class="headerlink" href="#1-bayesian-methods" title="Permanent link">&para;</a></h3>
+<p>A <strong>prior</strong> probability density function can be included to express some highly qualitative prior knowledge (subjective information).</p>
+<p>Applying Bayes' Theorem to estimation of random parameters <span class="arithmatex">\(\mathbf{\theta}\)</span> from a random vector <span class="arithmatex">\(\mathbf{x}\)</span> of observations, gives the posterior or a posteriori probability for the parameter:</p>
+<div class="arithmatex">\[
+p(\mathbf{\theta} \mid \mathbf{x})=\frac{p(\mathbf{x} \mid \mathbf{\theta}) p(\mathbf{\theta})}{p(\mathbf{x})}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(p(\mathbf{x} \mid \mathbf{\theta})\)</span> is the likelihood</li>
+<li><span class="arithmatex">\(p(\mathbf{\theta})\)</span> is the prior or a priori distribution for the parameters</li>
+<li><span class="arithmatex">\(p(\mathbf{\theta} \mid \mathbf{x})\)</span> is the posterior or a posteriori distribution, which expresses the probability of <span class="arithmatex">\(\mathbf{\theta}\)</span> given the observed data <span class="arithmatex">\(\mathbf{x}\)</span> —this is now a true measure of how 'probable' a particular value of <span class="arithmatex">\(\mathbf{\theta}\)</span> is, given the observations <span class="arithmatex">\(\mathbf{x}\)</span> (whereas likelihood expresses how probable the observations are given the parameters)</li>
+<li><span class="arithmatex">\(p(\textbf{x})\)</span> is the marginal likelihood (aka evidence in machine learning) is a useful quantity in model selection problems and is constant for any given observation <span class="arithmatex">\(\mathbf{x}\)</span></li>
+</ul>
+<p>Since <span class="arithmatex">\(p(\textbf{x})\)</span> is constant, it may be ignored if we are only interested in the relative posterior probabilities of different parameters <span class="arithmatex">\(\mathbf{\theta}\)</span>.
+This gives Bayes' theorem in the form</p>
+<div class="arithmatex">\[
+\boxed{
+p(\mathbf{\theta} \mid \mathbf{x}) \propto p(\mathbf{x} \mid \mathbf{\theta}) \; p(\mathbf{\theta})
+}
+\]</div>
+<p><span class="arithmatex">\(p(\textbf{x})\)</span> may be calculated by integration and serves as the normalising constant for the posterior density.</p>
+<h3 id="2-posterior-inference">2. Posterior inference<a class="headerlink" href="#2-posterior-inference" title="Permanent link">&para;</a></h3>
+<p>Posterior p.d.f. with values well defined for all <span class="arithmatex">\(\mathbf{\theta}\)</span> gives a fully interpretable probability distribution rather than a single estimate of <span class="arithmatex">\(\mathbf{\theta}\)</span>.
+To find a single point estimate for <span class="arithmatex">\(\mathbf{\theta}\)</span>, it can be assessed through a cost function <span class="arithmatex">\(C(\hat\theta, \theta)\)</span>.
+A simple and intuitive way to perform Bayesian estimation is the maximum a posteriori (MAP) estimate</p>
+<div class="arithmatex">\[
+\boxed{\mathbf{\theta}^{\mathrm{MAP}}=\underset{\mathbf{\theta}}{\operatorname{argmax}}\{p(\mathbf{\theta} \mid \mathbf{x})\}}
+\]</div>
+<h4 id="map-estimation-scheme-under-linear-gaussian-model">MAP estimation scheme (under linear Gaussian model)<a class="headerlink" href="#map-estimation-scheme-under-linear-gaussian-model" title="Permanent link">&para;</a></h4>
+<p>Suppose that the prior on the parameter <span class="arithmatex">\(\mathbf{\theta}\)</span> is the multivariate Gaussian</p>
+<div class="arithmatex">\[
+\begin{aligned}
+p(\mathbf{\theta}) &amp; =\mathcal{N}\left(\mathbf{m}_{\mathbf{\theta}}, \mathbf{C}_{\mathbf{\theta}}\right) \\
+&amp; =\frac{1}{(2 \pi)^{P / 2}\left|\mathbf{C}_{\mathbf{\theta}}\right|^{1 / 2}} \exp \left(-\frac{1}{2}\left(\mathbf{\theta}-\mathbf{m}_{\mathbf{\theta}}\right)^T \mathbf{C}_{\mathbf{\theta}}^{-1}\left(\mathbf{\theta}-\mathbf{m}_{\mathbf{\theta}}\right)\right)
+\end{aligned}
+\]</div>
+<p>where <span class="arithmatex">\(\mathbf{m}_{\mathbf{\theta}}\)</span> is the prior parameter mean vector, <span class="arithmatex">\(\mathbf{C}_{\mathbf{\theta}}\)</span> is the parameter covariance matrix and <span class="arithmatex">\(P\)</span> is the number of parameters in <span class="arithmatex">\(\mathbf{\theta}\)</span>.
+The posterior distribution is:</p>
+<div class="arithmatex">\[
+\begin{aligned} p(\mathbf{\theta} \mid \mathbf{x}) \propto &amp; p(\mathbf{\theta}) p(\mathbf{x} \mid \mathbf{\theta}) \\ \propto &amp; \frac{1}{(2 \pi)^{P / 2}\left|\mathbf{C}_{\mathbf{\theta}}\right|^{1 / 2}} \exp \left(-\frac{1}{2}\left(\mathbf{\theta}-\mathbf{m}_{\mathbf{\theta}}\right)^T \mathbf{C}_{\mathbf{\theta}}^{-1}\left(\mathbf{\theta}-\mathbf{m}_{\mathbf{\theta}}\right)\right) \quad \text{[prior]}\\ &amp; \frac{1}{\left(2 \pi \sigma_e^2\right)^{N / 2}} \exp \left(-\frac{1}{2 \sigma_e^2}(\mathbf{x}-\mathbf{G} \mathbf{\theta})^T(\mathbf{x}-\mathbf{G} \mathbf{\theta})\right) \quad \text{[likelihood]} \end{aligned}
+\]</div>
+<p><span class="arithmatex">\(-2\)</span> times the log-probability:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+-2 \log (p(\mathbf{\theta} \mid \mathbf{x}))
+&amp;=\left(\mathbf{\theta}-\mathbf{m}_\theta\right)^T \mathbf{C}_{\mathbf{\theta}}^{-1}\left(\mathbf{\theta}-\mathbf{m}_{\mathbf{\theta}}\right)+\frac{1}{\sigma_e^2}(\mathbf{x}-\mathbf{G} \mathbf{\theta})^T(\mathbf{x}-\mathbf{G} \mathbf{\theta})+\text { Const } \\
+&amp;=\mathbf{\theta}^T\left(\mathbf{C}_{\mathbf{\theta}}^{-1}+\frac{\mathbf{G}^T \mathbf{G}}{\sigma_e^2}\right) \mathbf{\theta}+2 \mathbf{\theta}^T \left(-\mathbf{C}_{\mathbf{\theta}}^{-1} \mathbf{m}_{\mathbf{\theta}}-\frac{\mathbf{G}^T \mathbf{x}}{\sigma_e^2}\right)+ \text{Const}
+\end{aligned}
+\]</div>
+<p>Taking the gradient:</p>
+<div class="arithmatex">\[
+\nabla_{\mathbf{\theta}}\,\log (p(\mathbf{\theta} \mid \mathbf{x})) = 2\left(\mathbf{C}_{\mathbf{\theta}}^{-1}+\frac{\mathbf{G}^T \mathbf{G}}{\sigma_e^2}\right)\mathbf{\theta} - 2\left(\mathbf{C}_{\mathbf{\theta}}^{-1} \mathbf{m}_{\mathbf{\theta}}+\frac{\mathbf{G}^T\mathbf{x}}{\sigma_e^2}\right)
+\]</div>
+<p>Hence the MAP estimate <span class="arithmatex">\(\mathbf{\theta}^\mathrm{MAP}\)</span> is:</p>
+<div class="arithmatex">\[
+\boxed{\mathbf{\theta}^{\mathrm{MAP}}=\left(\mathbf{G}^T \mathbf{G}+\sigma_e^2 \mathbf{C}_{\mathbf{\theta}}^{-1}\right)^{-1}\left(\mathbf{G}^T \mathbf{x}+\sigma_e^2 \mathbf{C}_{\mathbf{\theta}}^{-1} \mathbf{m}_{\mathbf{\theta}}\right)}
+\]</div>
+<ul>
+<li>As the prior becomes more diffuse, i.e. the diagonal elements of <span class="arithmatex">\(\mathbf{C}_{\mathbf{\theta}}\)</span> increase both in magnitude and relative to the off-diagonal elements — we impose less prior information on the estimate</li>
+<li>In the limit the prior tends to a uniform prior with all <span class="arithmatex">\(\mathbf{\theta}\)</span> equally probable, <span class="arithmatex">\(\mathbf{C}_{\mathbf{\theta}}^{-1} = 0\)</span> and the estimate is identical to the ML estimate <span class="arithmatex">\(\implies\)</span> ML estimate = MAP estimate with a uniform prior assigned to <span class="arithmatex">\(\mathbf{\theta}\)</span>.</li>
+<li>The MAP estimate also tends to towards the ML estimate when the likelihood is strongly 'peaked' about its maximum compared with the prior</li>
+<li>As the sample size <span class="arithmatex">\(N\)</span> tends to infinity, the Bayesian solution tends to the ML solution</li>
+<li>The choice of Gaussian prior makes the Bayesian calculations straightforward and available in closed form — it is a 'conjugate' prior</li>
+</ul>
+<h4 id="the-complete-posterior-distribution">The complete posterior distribution<a class="headerlink" href="#the-complete-posterior-distribution" title="Permanent link">&para;</a></h4>
+<p>By completing the square:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+-2 \log (p(\mathbf{\theta} \mid \mathbf{x})) &amp;= \frac{1}{\sigma_e^2}(\mathbf{x}-\mathbf{G} \mathbf{\theta})^T(\mathbf{x}-\mathbf{G} \mathbf{\theta})+\left(\mathbf{\theta}-\mathbf{m}_{\mathbf{\theta}}\right)^T \mathbf{C}_{\mathbf{\theta}}{ }^{-1}\left(\mathbf{\theta}-\mathbf{m}_{\mathbf{\theta}}\right) \theta \\ &amp;=\frac{1}{\sigma_e^2}\left(\left(\mathbf{\theta}-\mathbf{\theta}^{\mathrm{MAP}}\right)^T \mathbf{\Phi}\left(\mathbf{\theta}-\mathbf{\theta}^{\mathrm{MAP}}\right)+\mathbf{x}^T \mathbf{x}+\sigma_e^2 \mathbf{m}_{\mathbf{\theta}}{ }^T \mathbf{C}_{\mathbf{\theta}}{ }^{-1} \mathbf{m}_{\mathbf{\theta}}-\mathbf{\Theta}^T \mathbf{\theta}^{\mathrm{MAP}}\right)\end{aligned}
+\]</div>
+<p>with terms defined as</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathbf{\theta}^{\mathrm{MAP}} &amp; =\mathbf{\Phi}^{-1} \mathbf{\Theta} \\
+\mathbf{\Phi} &amp; =\mathbf{G}^T \mathbf{G}+\sigma_e^2 \mathbf{C}_{\mathbf{\theta}}^{-1} \\
+\mathbf{\Theta} &amp; =\mathbf{G}^T \mathbf{x}+\sigma_e^2 \mathbf{C}_{\mathbf{\theta}}{ }^{-1} \mathbf{m}_{\mathbf{\theta}}
+\end{aligned}
+\]</div>
+<p>The first term is in the form for the exponent of a multi-variate Gaussian, with mean vector and covariance matrix as <span class="arithmatex">\(\mathbf{m}_{\mathbf{\theta}}^{\text {post }}=\mathbf{\theta}^{\mathrm{MAP}}\)</span> and <span class="arithmatex">\(\mathbf{C}_{\mathbf{\theta}}^{\text {post }}=\sigma_e^2 \mathbf{\Phi}^{-1}\)</span>.
+Since the remaining terms do not depend on <span class="arithmatex">\(\mathbf{\theta}\)</span> <span class="arithmatex">\(\implies\)</span> <strong>the posterior distribution is a multivariate Gaussian</strong></p>
+<div class="arithmatex">\[
+p(\mathbf{\theta} \mid \mathbf{x})=\mathcal{N}\left(\mathbf{\theta}^{\mathrm{MAP}}, \sigma_e^2 \mathbf{\Phi}^{-1}\right)
+\]</div>
+<h3 id="3-mmse-estimation">3. MMSE estimation<a class="headerlink" href="#3-mmse-estimation" title="Permanent link">&para;</a></h3>
+<p>The cost function <span class="arithmatex">\(C(\hat\theta,\theta)\)</span> expresses the cost of estimating the parameter as <span class="arithmatex">\(\hat\theta\)</span> when the true value is <span class="arithmatex">\(\theta\)</span>.
+We can write the expected cost over all of the unknown parameters, conditional upon the observed data <span class="arithmatex">\(\mathbf{x}\)</span> : </p>
+<div class="arithmatex">\[ 
+\mathbb{E}[C(\hat{\theta}, \theta)]=\int_\theta C(\hat{\theta}, \theta) \,p(\theta \mid \mathbf{x}) d \theta
+\]</div>
+<p>The form of the cost function will depend on the requirements of a particular problem.</p>
+<p>(Note that due to the random properties of the model, we can only calculate the expected cost of a particular estimator)</p>
+<p>A classic estimation technique related to the Wiener filtering object function is the minimum mean-squared error (MMSE) estimation method. Given some data <span class="arithmatex">\(\mathbf{x}\)</span> we attempt to find an estimator <span class="arithmatex">\(\hat{\theta}(\mathbf{x})\)</span> which has minimum squared error, on average:</p>
+<div class="arithmatex">\[
+\min _{\hat{\theta}} \mathbb{E}\left[(\hat{\theta}-\theta)^2\right]
+\]</div>
+<p>The MSE is:</p>
+<div class="arithmatex">\[
+J=\mathbb{E}\left[(\hat{\theta}-\theta)^2\right]=\int_\theta(\hat{\theta}-\theta)^2 \, p(\theta \mid \mathbf{x}) d \theta
+\]</div>
+<p>Differentiate with respect to <span class="arithmatex">\(\hat\theta\)</span>:</p>
+<div class="arithmatex">\[
+\begin{aligned} \frac{d J}{d \hat{\theta}} &amp; =\frac{d}{d \hat{\theta}} \int_\theta(\hat{\theta}-\theta)^2 p(\theta \mid \mathbf{x}) d \theta \\ &amp; =\int_\theta \frac{d}{d \hat{\theta}}(\hat{\theta}-\theta)^2 p(\theta \mid \mathbf{x}) d \theta \\ &amp; =\int_\theta 2(\hat{\theta}-\theta) p(\theta \mid \mathbf{x}) d \theta\end{aligned}
+\]</div>
+<p>Setting the gradient to zero:</p>
+<div class="arithmatex">\[
+\int_\theta \hat{\theta} p(\theta \mid \mathbf{x}) d \theta=\hat{\theta} \int_\theta p(\theta \mid \mathbf{x}) d \theta=\hat{\theta} \times 1=\int_\theta \theta p(\theta \mid \mathbf{x}) d \theta=\mathbb{E}[\theta \mid \mathbf{x}]
+\]</div>
+<p>Hence the solution is</p>
+<div class="arithmatex">\[
+\boxed{\hat{\theta}^{\mathrm{MMSE}}=\mathbb{E}[\theta \mid \mathbf{x}]=\int_\theta \theta p(\theta \mid \mathbf{x}) d \theta}
+\]</div>
+<p>For the linear Gaussian model, the posterior distribution was obtained as:</p>
+<div class="arithmatex">\[
+p(\mathbf{\theta} \mid \mathbf{x})=\mathcal{N}\left(\mathbf{\theta}^{\mathrm{MAP}}, \sigma_e^2 \mathbf{\Phi}^{-1}\right)
+\]</div>
+<p><span class="arithmatex">\(\implies\)</span> the mean value of this distribution is <span class="arithmatex">\(\mathbf{\theta}^{\mathrm{MAP}}\)</span></p>
+<p>Hence the MMSE estimator for the linear Gaussian model is:</p>
+<div class="arithmatex">\[
+\mathbf{\theta}^\textrm{MMSE} = \mathbf{\theta}^\textrm{MAP}
+\]</div>
+<h2 id="v-summary-of-estimators">V. Summary of estimators<a class="headerlink" href="#v-summary-of-estimators" title="Permanent link">&para;</a></h2>
+<h3 id="least-squares">Least squares<a class="headerlink" href="#least-squares" title="Permanent link">&para;</a></h3>
+<p>Pros:</p>
+<ul>
+<li>requires no knowledge of probability distributions</li>
+<li>usually the simplest scheme to implement</li>
+<li>guarantee of performance as BLUE estimator</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>cannot incorporate prior knowledge about the parameter probability distributions</li>
+<li>no guarantees of the performance compared to non-linear estimators</li>
+</ul>
+<h3 id="maximum-likelihood">Maximum likelihood<a class="headerlink" href="#maximum-likelihood" title="Permanent link">&para;</a></h3>
+<p>Pros:</p>
+<ul>
+<li>performance guaranteed to be optimal when the amount of data is large</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>requires knowledge of noise probability distribution</li>
+<li>cannot incorporate prior knowledge about the parameter probability distributions</li>
+<li>can be more complicated to implement than LS in the non-Gaussian case</li>
+</ul>
+<h3 id="bayesian-map-and-mmse">Bayesian (MAP and MMSE)<a class="headerlink" href="#bayesian-map-and-mmse" title="Permanent link">&para;</a></h3>
+<p>Pros:</p>
+<ul>
+<li>incorporates prior knowledge about the parameter probability distributions</li>
+<li>performance guaranteed to be optimal for any amount of data (provided prior distribution is correct)</li>
+<li>requires knowledge of noise probability distribution (because likelihood is needed to compute the posterior distribution)</li>
+<li>can be more complicated to implement than LS or ML (depending on form of likelihood and prior)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
