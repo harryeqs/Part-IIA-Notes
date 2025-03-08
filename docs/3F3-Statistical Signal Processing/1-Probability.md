@@ -85,7 +85,7 @@ for all $x,y$.
 In general,
 $X_1, X_2, ..., X_n$ are independent if
 $$
-F_{\boldsymbol{X}}(\boldsymbol{x})=F_{X_1}\left(x_1\right) \ldots F_{X_n}\left(x_n\right)
+F_{\mathbf{X}}(\mathbf{x})=F_{X_1}\left(x_1\right) \ldots F_{X_n}\left(x_n\right)
 $$
 ### 7. Conditional distributions
 the conditional pdf of $Y$ given $X$ is
@@ -119,7 +119,7 @@ $$
 
 The Jacobian of $g^{-1}$ at $y$ is
 $$
-J(\boldsymbol{y})=\left(\begin{array}{ccc}
+J(\mathbf{y})=\left(\begin{array}{ccc}
 \frac{d g_1^{-1}}{d y_1} & \ldots & \frac{d g_1^{-1}}{d y_n} \\
 \vdots & \ddots & \vdots \\
 \frac{d g_n^{-1}}{d y_1} & \cdots & \frac{d g_n^{-1}}{d y_n}
@@ -127,7 +127,7 @@ J(\boldsymbol{y})=\left(\begin{array}{ccc}
 $$
 then
 $$
-f_Y(\boldsymbol{y})=f_X\left(g^{-1}(\boldsymbol{y})\right)|\operatorname{det} J(\boldsymbol{y})|
+f_Y(\mathbf{y})=f_X\left(g^{-1}(\mathbf{y})\right)|\operatorname{det} J(\mathbf{y})|
 $$
 (this result is from calculus - not specific to probability).
 ## IV. Sampling
@@ -178,7 +178,7 @@ $$
 $$
 in matrix notation
 $$
-\boldsymbol{\Sigma}=E\left[\mathbf{X} \mathbf{X}^T\right]-E[\mathbf{X}] E[\mathbf{X}]^T
+\mathbf{\Sigma}=E\left[\mathbf{X} \mathbf{X}^T\right]-E[\mathbf{X}] E[\mathbf{X}]^T
 $$
 
 - $\mathbf{\Sigma}$ is positive semi-definite + Symmetric
