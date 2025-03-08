@@ -8,7 +8,7 @@ Hope these notes can help with your revision :)
 
 ## My Michaelmas modules
 - [3F1: Signals and systems](http://harryeqs.github.io/Part-IIA-Notes/3F1-Signals%20and%20Systems/1-Discrete-time%20Systems/)
-- [3F3: Statistical signal processing](http://harryeqs.github.io/Part-IIA-Notes/3F3-Statistical%20Signal%20Prcocessing/1-Discrete-time%20Systems/)
+- [3F3: Statistical signal processing](https://harryeqs.github.io/Part-IIA-Notes/3F3-Statistical%20Signal%20Processing/1-Probability/)
 - 3F7: Information theory and coding
 - 3C6: Vibration
 - 3E1: Business economics
