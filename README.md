@@ -1,12 +1,20 @@
 # Harry's Cambridge Engineering Part IIA Notes
-Hi there! I am an Information and Computer Engineer from Selwyn matriculated in 2022. I hope these notes can help you with your revision :)
+
+**Powered by the GOAT**
+![Obsidian](https://img.shields.io/badge/Obsidian-%23483699.svg?style=for-the-badge&logo=obsidian&logoColor=white)
+
+---
+
+Hi there! I am an Information and Computer Engineer from Selwyn matriculated in 2022. 
+
+I hope these notes can help you with your revision :)
 
 Please contact me either via my email yeqianshuo03@outlook.com or create an issue if you spot any mistakes or anything that can be improved on.
 
 If you find these notes useful, please leave this repo a star ⭐, thanks!
 
 
-## My module choices:
+## My module choices
 
 **Michaelmas Modules**
 
@@ -24,3 +32,5 @@ If you find these notes useful, please leave this repo a star ⭐, thanks!
 - 3G3: Introduction to Neuroscience
 - 3M1: Mathematical Methods
 
+## Getting started
+To get started, simply clone/download this repository and open the folder as a vault in [Obsidian](http://obsidian.md/) following [this guide](https://help.obsidian.md/manage-vaults#Create+vault+from+an+existing+folder).
