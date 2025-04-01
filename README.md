@@ -1,17 +1,20 @@
 # Harry's Cambridge Engineering Part IIA Notes
 
 **Powered by the GOAT**
+
 ![Obsidian](https://img.shields.io/badge/Obsidian-%23483699.svg?style=for-the-badge&logo=obsidian&logoColor=white)
 
----
+## Intro
 
-Hi there! I am an Information and Computer Engineer from Selwyn matriculated in 2022. 
+Hi there! I am an Information and Computer Engineer from Selwyn matriculated in 2022. I created these notes for revision for the 2025-2026 Part IIA Tripos and would like to share them to help people taking similar modules.
 
-I hope these notes can help you with your revision :)
+The F modules and Maths notes were word-processed in Markdown using Obsidian. Other modules will (hopefully) be uploaded soon, some of which may be in the form of hand-written PDFs. (As of 1 Apr. 2025)
+
+Hope these notes can help you with your revision :)
 
 Please contact me either via my email yeqianshuo03@outlook.com or create an issue if you spot any mistakes or anything that can be improved on.
 
-If you find these notes useful, please leave this repo a star ⭐, thanks!
+If you find these notes useful, please leave this repo a star ⭐, THANKS!
 
 
 ## My module choices
