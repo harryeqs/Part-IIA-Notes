@@ -8,13 +8,15 @@
 
 Hi there! I am an Information and Computer Engineer from Selwyn matriculated in 2022. I created these notes for revision for the 2025-2026 Part IIA Tripos and would like to share them to help people taking similar modules.
 
-The F modules and Maths notes were word-processed in Markdown using Obsidian. Other modules will (hopefully) be uploaded soon, some of which may be in the form of hand-written PDFs. (As of 1 Apr. 2025)
+The F modules and Maths notes were word-processed in Markdown using Obsidian. Other modules will (hopefully) be uploaded soon, some of which may be in the form of hand-written PDFs.
 
-Hope these notes can help you with your revision :)
+Hope these notes can help you with your revision.
 
 Please contact me either via my email yeqianshuo03@outlook.com or create an issue if you spot any mistakes or anything that can be improved on.
 
 If you find these notes useful, please leave this repo a star ⭐, THANKS!
+
+HAPPY REVISION :)
 
 
 ## My module choices
@@ -37,3 +39,4 @@ If you find these notes useful, please leave this repo a star ⭐, THANKS!
 
 ## Getting started
 To get started, simply clone/download this repository and open the folder as a vault in [Obsidian](http://obsidian.md/) following [this guide](https://help.obsidian.md/manage-vaults#Create+vault+from+an+existing+folder).
+
