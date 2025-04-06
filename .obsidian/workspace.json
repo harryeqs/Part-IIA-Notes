@@ -11,10 +11,14 @@
             "id": "2e6fc4bf44346298",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "3F8-Inference/Unsupervised Learning.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Unsupervised Learning"
             }
           }
         ]
@@ -166,6 +170,12 @@
   },
   "active": "2e6fc4bf44346298",
   "lastOpenFiles": [
+    "3F8-Inference/Supervised Learning.md",
+    "3F8-Inference/Sequence modelling.md",
+    "3F8-Inference/Introduction to Inference.md",
+    "3M1-Mathematical Methods/Optimization.md",
+    "3M1-Mathematical Methods/Stochastic Processes.md",
+    "3M1-Mathematical Methods/Linear Algebra.md",
     "README.md",
     "Untitled.canvas"
   ]
