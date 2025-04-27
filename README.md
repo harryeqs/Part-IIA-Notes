@@ -8,13 +8,13 @@
 
 Hi there! I am an Information and Computer Engineer from Selwyn matriculated in 2022. I created these notes for revision for the 2025-2026 Part IIA Tripos and would like to share them to help people taking similar modules.
 
-The F modules and Maths notes were word-processed in Markdown using Obsidian. Other modules will (hopefully) be uploaded soon, some of which may be in the form of hand-written PDFs.
+The Info modules, Maths, and Introduction to Neuroscience notes were word-processed in Markdown using Obsidian. The Mathematical Physiology and Vibration notes are hand-written notes in PDFs, which can be found in the asset folders of the corresponding directories.
 
-Hope these notes can help you with your revision.
+I didn't make any notes on Business Economics but you could refer to the [great notes written by Mrinank](https://github.com/MrinankSharma/IIA-Notes) a few years ago.
+
+Hope these notes can help you with your revision!
 
 Please contact me either via my email yeqianshuo03@outlook.com or create an issue if you spot any mistakes or anything that can be improved on.
-
-If you find these notes useful, please leave this repo a star ⭐, THANKS!
 
 HAPPY REVISION :)
 
